@@ -5,8 +5,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.graphics.Bitmap
 import android.provider.MediaStore
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
 import android.Manifest
@@ -18,11 +16,14 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED)
         {
             requestCameraPermission()
+        }
+        else{
+            setContentView(R.layout.activity_main)
+            setAllEvent()
         }
     }
 
@@ -46,8 +47,7 @@ class MainActivity : ComponentActivity() {
     {
         if (requestCode == REQUEST_CAMERA_PERMISSION)
         {
-            if (grantResults.size != 1 ||
-                grantResults[0] != PackageManager.PERMISSION_GRANTED)
+            if (grantResults.size != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED)
             {
                 //permessi negati
                 //bisogna gestire in qualche modo
@@ -55,14 +55,8 @@ class MainActivity : ComponentActivity() {
             else
             {
                 //permessi ok
-                setContentView(R.layout.activity_home)
-                val camera: CardView = findViewById(R.id.open_camera)
-                camera.setOnClickListener {
-                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    if(intent.resolveActivity(packageManager) != null){
-                        startActivityForResult(intent, REQUEST_CAMERA_PERMISSION)
-                    }
-                }
+                setContentView(R.layout.activity_main)
+                setAllEvent()
             }
         }
         else
@@ -75,12 +69,22 @@ class MainActivity : ComponentActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CAMERA_PERMISSION && resultCode == RESULT_OK){
-            val imageView: ImageView = findViewById(R.id.image)
             val bitmap = data?.extras?.get("data") as Bitmap
-            imageView.setImageBitmap(bitmap)
 
-            val result: TextView = findViewById(R.id.resul)
-            result.text = ClassifyImage().findImage(bitmap, applicationContext)
+            val intent = Intent(this, CameraActivity::class.java).apply {
+                putExtra("imageBitmap", bitmap)
+            }
+            startActivity(intent)
+        }
+    }
+
+    private fun setAllEvent(){
+        val camera: CardView = findViewById(R.id.open_camera)
+        camera.setOnClickListener {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            if(intent.resolveActivity(packageManager) != null){
+                startActivityForResult(intent, REQUEST_CAMERA_PERMISSION)
+            }
         }
     }
 }
