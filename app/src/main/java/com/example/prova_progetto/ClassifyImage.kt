@@ -18,34 +18,14 @@ class ClassifyImage constructor(){
             "patata dolce", "pomodoro", "rapa", "anguria"
         )
 
-        val fruitAndVegetableArray2 = arrayOf(
-            "Apple Braeburn", "Apple Crimson Snow", "Apple Golden 1", "Apple Golden 2", "Apple Golden 3",
-            "Apple Granny Smith", "Apple Pink Lady", "Apple Red 1", "Apple Red 2", "Apple Red 3", "Apple Red Delicious",
-            "Apple Red Yellow 1", "Apple Red Yellow 2", "Apricot", "Avocado", "Avocado ripe", "Banana", "Banana Lady Finger",
-            "Banana Red", "Beetroot", "Blueberry", "Cactus fruit", "Cantaloupe 1", "Cantaloupe 2", "Carambula", "Cauliflower",
-            "Cherry 1", "Cherry 2", "Cherry Rainier", "Cherry Wax Black", "Cherry Wax Red", "Cherry Wax Yellow", "Chestnut",
-            "Clementine", "Cocos", "Corn", "Corn Husk", "Cucumber Ripe", "Cucumber Ripe 2", "Dates", "Eggplant", "Fig",
-            "Ginger Root", "Granadilla", "Grape Blue", "Grape Pink", "Grape White", "Grape White 2", "Grape White 3", "Grape White 4",
-            "Grapefruit Pink", "Grapefruit White", "Guava", "Hazelnut", "Huckleberry", "Kaki", "Kiwi", "Kohlrabi", "Kumquats",
-            "Lemon", "Lemon Meyer", "Limes", "Lychee", "Mandarine", "Mango", "Mango Red", "Mangostan", "Maracuja",
-            "Melon Piel de Sapo", "Mulberry", "Nectarine", "Nectarine Flat", "Nut Forest", "Nut Pecan", "Onion Red", "Onion Red Peeled",
-            "Onion White", "Orange", "Papaya", "Passion Fruit", "Peach", "Peach 2", "Peach Flat", "Pear", "Pear 2", "Pear Abate",
-            "Pear Forelle", "Pear Kaiser", "Pear Monster", "Pear Red", "Pear Stone", "Pear Williams", "Pepino", "Pepper Green",
-            "Pepper Orange", "Pepper Red", "Pepper Yellow", "Physalis", "Physalis with Husk", "Pineapple", "Pineapple mine",
-            "Pitahaya Red", "Plum", "Plum 2", "Plum 3", "Pomegranate", "Pomelo Sweetie", "Potato Red", "Potato Red Washed", "Potato Sweet",
-            "Potato White", "Quince", "Rambutan", "Raspberry", "Redcurrant", "Salak", "Strawberry", "Strawberry Wedge", "Tamarillo",
-            "Tangelo", "Tomato 1", "Tomato 2", "Tomato 3", "Tomato 4", "Tomato Cherry Red", "Tomato Heart", "Tomato Marron",
-            "Tomato Yellow", "Tomato not Ripened", "Walnut", "Watermelon"
-        )
-
-        val interpreter = loadModelFile(context, "my_model_2.0.tflite")?.let { Interpreter(it) }
+        val interpreter = loadModelFile(context, "model.tflite")?.let { Interpreter(it) }
 
         if (interpreter != null && image != null) {
-            val output = Array(1) { FloatArray(131) } // Correggi la forma dell'array di output
+            val output = Array(1) { FloatArray(fruitAndVegetableArray.size) } // Correggi la forma dell'array di output
             val input = preprocessBitmap(image)
             interpreter.run(input, output)
             val maxIndex = output[0].indices.maxByOrNull { output[0][it] } ?: -1
-            return "Prediction: ${fruitAndVegetableArray2[maxIndex]}, Confidence: ${output[0][maxIndex]}"
+            return "Prediction: ${fruitAndVegetableArray[maxIndex]}, Confidence: ${output[0][maxIndex]}"
         }
         return "Error"
     }
