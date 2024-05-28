@@ -76,4 +76,5 @@ dependencies {
     debugImplementation libs.androidx.ui.test.manifest
 
     implementation 'org.tensorflow:tensorflow-lite:+'
+    implementation 'androidx.cardview:cardview:1.0.0'
 }

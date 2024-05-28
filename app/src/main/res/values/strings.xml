@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Prova_progetto</string>
+    <string name="errore">Errore</string>
+    <string name="photo">Scatta una foto di un frutto</string>
+    <string name="search">Cerca un frutto</string>
+    <string name="list">Lista della spesa</string>
+    <string name="remove_list">Rimuovi una lista della spesa</string>
+    <string name="add_list">Crea una nuova lista della spesa</string>
+    <string name="nutritional">Valori nutrizionali</string>
+    <string name="title">FRUTTA E VERDURA</string>
 </resources>

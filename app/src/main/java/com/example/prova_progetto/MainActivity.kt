@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
 import android.Manifest
+import androidx.cardview.widget.CardView
 
 class MainActivity : ComponentActivity() {
 
@@ -17,6 +18,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home)
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED)
         {
@@ -30,17 +32,10 @@ class MainActivity : ComponentActivity() {
                 Manifest.permission.CAMERA
             )
         ) { }
-            ActivityCompat.requestPermissions(
-                this, arrayOf(Manifest.permission.CAMERA),
-                REQUEST_CAMERA_PERMISSION
-            )
-    }
-
-    fun openCamera(){
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if(intent.resolveActivity(packageManager) != null){
-            startActivityForResult(intent, REQUEST_CAMERA_PERMISSION)
-        }
+        ActivityCompat.requestPermissions(
+            this, arrayOf(Manifest.permission.CAMERA),
+            REQUEST_CAMERA_PERMISSION
+        )
     }
 
     override fun onRequestPermissionsResult(
@@ -55,11 +50,19 @@ class MainActivity : ComponentActivity() {
                 grantResults[0] != PackageManager.PERMISSION_GRANTED)
             {
                 //permessi negati
+                //bisogna gestire in qualche modo
             }
             else
             {
                 //permessi ok
-                setContentView(R.layout.activity_main)
+                setContentView(R.layout.activity_home)
+                val camera: CardView = findViewById(R.id.open_camera)
+                camera.setOnClickListener {
+                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    if(intent.resolveActivity(packageManager) != null){
+                        startActivityForResult(intent, REQUEST_CAMERA_PERMISSION)
+                    }
+                }
             }
         }
         else
