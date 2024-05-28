@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.graphics.Bitmap
 import android.provider.MediaStore
 import android.widget.ImageView
-import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
@@ -37,7 +36,7 @@ class MainActivity : ComponentActivity() {
             )
     }
 
-    fun openCamera(view: View){
+    fun openCamera(){
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if(intent.resolveActivity(packageManager) != null){
             startActivityForResult(intent, REQUEST_CAMERA_PERMISSION)
