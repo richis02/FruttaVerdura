@@ -3,9 +3,28 @@
     <string name="errore">Errore</string>
     <string name="photo">Scatta una foto di un frutto</string>
     <string name="search">Cerca un frutto</string>
-    <string name="list">Lista della spesa</string>
-    <string name="remove_list">Rimuovi una lista della spesa</string>
+    <string name="list">Liste della spesa</string>
     <string name="add_list">Crea una nuova lista della spesa</string>
-    <string name="nutritional">Valori nutrizionali</string>
     <string name="title">FRUTTA E VERDURA</string>
+
+    <string-array name="flower_array">
+        <item>Lily</item>
+        <item>Poppy</item>
+        <item>Sunflower</item>
+        <item>Freesia</item>
+        <item>Daisy</item>
+        <item>Rose</item>
+        <item>Daffodil</item>
+        <item>Lavender</item>
+        <item>Peony</item>
+        <item>Lilac</item>
+        <item>Dahlia</item>
+        <item>Tulip</item>
+        <item>Dandelion</item>
+        <item>Hydrangea</item>
+        <item>Daisy</item>
+        <item>Azalea</item>
+        <item>Calendula</item>
+        <item>Buttercup</item>
+    </string-array>
 </resources>

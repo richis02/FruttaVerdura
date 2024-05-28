@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
 import android.Manifest
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 
 class MainActivity : ComponentActivity() {
@@ -85,6 +86,12 @@ class MainActivity : ComponentActivity() {
             if(intent.resolveActivity(packageManager) != null){
                 startActivityForResult(intent, REQUEST_CAMERA_PERMISSION)
             }
+        }
+
+        val list: CardView = findViewById(R.id.all_list)
+        list.setOnClickListener {v ->
+            val intent = Intent(v.context, AllListActivity::class.java)
+            v.context.startActivity(intent)
         }
     }
 }
