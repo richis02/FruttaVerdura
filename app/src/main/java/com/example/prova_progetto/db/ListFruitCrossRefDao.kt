@@ -7,18 +7,15 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 @Dao
 interface ListFruitCrossRefDao {
-    @Query("SELECT fruitId, quantity FROM listFruitCrossRef WHERE listId= :listId")
-    fun getFruitInfo(listId: Long): Flow<List<FruitQuantity>>
+    @Query("SELECT * FROM list_fruit_cross_ref WHERE list_id= :listId")
+    fun getFruitInfoByListId(listId: Long): Flow<List<ListFruitsCrossRef>>
 
-    //TODO: gestire inserimento con il viewmodel
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertFruitListCrossRef(listCrossRef: ListFruitsCrossRef)
 
-    @Query("DELETE FROM listFruitCrossRef WHERE fruitId = :fruitId AND listId = :listId")
+    @Query("DELETE FROM list_fruit_cross_ref WHERE fruit_id = :fruitId AND list_id = :listId")
     suspend fun deleteFruitListCrossRef(fruitId: String, listId: Long)
-}
 
-data class FruitQuantity(
-    val fruitId: Int,
-    val quantity: Int
-)
+    @Query("DELETE FROM list_fruit_cross_ref")
+    suspend fun deleteAllFruitListCrossRef()
+}

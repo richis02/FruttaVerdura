@@ -1,6 +1,8 @@
 package com.example.prova_progetto.db
 
 import android.content.Context
+import android.util.Log
+import android.util.Log.VERBOSE
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -10,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.reflect.KParameter
 
-@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 1, exportSchema = false)
+@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 2, exportSchema = false)
 public abstract class FruitListRoomDatabase: RoomDatabase() {
     abstract fun fruitVegDao() : FruitVegetableDao
     abstract fun itemsListDao() : ItemsListDao
@@ -26,7 +28,8 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
                     context.applicationContext,
                     FruitListRoomDatabase::class.java,
                     "fruitList_database"
-                ).fallbackToDestructiveMigration()
+                )
+                    .fallbackToDestructiveMigration()
                     .addCallback(FruitVegDatabaseCallback(scope))
                     .build()
 
@@ -57,16 +60,28 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
 
             //TODO: EVITARE DI AGGUINGERE OGNI VOLTA
 
+            itemsListDao.deleteAllLists()
+
             val list1 = ItemsList(listTitle = "LaPrimaListaTest")
             val list2 = ItemsList(listTitle = "LaSecondaListaTest")
             val list3 = ItemsList(listTitle = "LaTerzaListaTest")
             val list4 = ItemsList(listTitle = "LaQuartaListaTest")
+            val list5 = ItemsList(listTitle = "LaQuintaListaTest")
 
             itemsListDao.insertList(list1)
             itemsListDao.insertList(list2)
             itemsListDao.insertList(list3)
             itemsListDao.insertList(list4)
 
+        }
+
+        //TODO: VERIFICARE SE SERVE
+        fun repopulateDatabase(scope: CoroutineScope) {
+            INSTANCE?.let { database ->
+                scope.launch(Dispatchers.IO) {
+                    populateDatabase(database.fruitVegDao(), database.itemsListDao(), database.listFruitCrossRefDao())
+                }
+            }
         }
 
     }

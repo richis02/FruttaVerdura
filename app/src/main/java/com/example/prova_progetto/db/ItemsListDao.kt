@@ -8,13 +8,16 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemsListDao {
-    @Query("SELECT * FROM itemsList")
+    @Query("SELECT * FROM items_list")
     fun getLists(): Flow<List<ItemsList>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertList(list: ItemsList)
 
     // La chiave esterna è CASCADE quindi elimina entry dalla cross table
-    @Query("DELETE FROM itemsList WHERE id = :id")
-    suspend fun deleteList(id: Long)
+    @Query("DELETE FROM items_list WHERE items_list_id = :itemsListId")
+    suspend fun deleteListById(itemsListId: Long)
+
+    @Query("DELETE FROM items_list")
+    suspend fun deleteAllLists()
 }

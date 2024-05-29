@@ -9,16 +9,16 @@ class FruitListRepository(
     private val listFruitCrossRefDao: ListFruitCrossRefDao
 ) {
 
-    val allFruitVegNames: Flow<List<String>> = fruitVegDao.getFruitNames()
+    val allFruitVeg: Flow<List<FruitVegetable>> = fruitVegDao.getAllFruitVeg()
 
-    val allListTitles: Flow<List<ItemsList>> = itemsListDao.getLists()
+    val allList: Flow<List<ItemsList>> = itemsListDao.getLists()
 
-    fun getFruitVegInfoByFruitName(fruitVegKey : String): Flow<FruitVegetable> {
-        return fruitVegDao.getFruitInfo(fruitVegKey)
+    fun getFruitVegById(fruitVegId : Long): Flow<FruitVegetable> {
+        return fruitVegDao.getFruitvegById(fruitVegId)
     }
 
-    fun getFruitQuantitiesByListId(listId: Long): Flow<List<FruitQuantity>> {
-        return listFruitCrossRefDao.getFruitInfo(listId)
+    fun getFruitVegByListId(listId: Long): Flow<List<ListFruitsCrossRef>> {
+        return listFruitCrossRefDao.getFruitInfoByListId(listId)
     }
 
     @WorkerThread
@@ -32,17 +32,32 @@ class FruitListRepository(
     }
 
     @WorkerThread
-    suspend fun deleteFruitVegInfoByFruitName(fruitVegName : String) {
-        fruitVegDao.deleteFruitVeg(fruitVegName)
+    suspend fun deleteFruitVegById(fruitVegId : Long) {
+        fruitVegDao.deleteFruitVegById(fruitVegId)
     }
 
     @WorkerThread
     suspend fun deleteItemsListById(itemsListId: Long){
-        itemsListDao.deleteList(itemsListId)
+        itemsListDao.deleteListById(itemsListId)
     }
 
     @WorkerThread
     suspend fun deleteFruitListCrossRefByIds(fruitId: String, listId: Long){
         listFruitCrossRefDao.deleteFruitListCrossRef(fruitId, listId)
+    }
+
+    @WorkerThread
+    suspend fun deleteAllItemsList(){
+        itemsListDao.deleteAllLists()
+    }
+
+    @WorkerThread
+    suspend fun deleteAllFruitVeg(){
+        fruitVegDao.deleteAllFruitVeg()
+    }
+
+    @WorkerThread
+    suspend fun deleteAlListFruitCrossRef(){
+        listFruitCrossRefDao.deleteAllFruitListCrossRef()
     }
 }

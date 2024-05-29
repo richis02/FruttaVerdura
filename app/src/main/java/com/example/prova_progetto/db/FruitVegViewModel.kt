@@ -12,16 +12,16 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
 
     // Variabili membro LiveData fanno da cache e vengono aggiornate in caso di cambiamento
 
-    val allFruitVegNames: LiveData<List<String>> = repository.allFruitVegNames.asLiveData()
+    val allFruitVeg: LiveData<List<FruitVegetable>> = repository.allFruitVeg.asLiveData()
 
-    val allListTitles: LiveData<List<ItemsList>> = repository.allListTitles.asLiveData()
+    val allList: LiveData<List<ItemsList>> = repository.allList.asLiveData()
 
-    fun getFruitVegInfo(fruitVegName : String): LiveData<FruitVegetable> {
-        return repository.getFruitVegInfoByFruitName(fruitVegName).asLiveData()
+    fun getFruitVeg(fruitVegId : Long): LiveData<FruitVegetable> {
+        return repository.getFruitVegById(fruitVegId).asLiveData()
     }
 
-    fun getFruitQuantities(listId : Long): LiveData<List<FruitQuantity>> {
-        return repository.getFruitQuantitiesByListId(listId).asLiveData()
+    fun getAllFruitsVegOfList(listId : Long): LiveData<List<ListFruitsCrossRef>> {
+        return repository.getFruitVegByListId(listId).asLiveData()
     }
 
     fun insertList(itemsList: ItemsList) = viewModelScope.launch {
@@ -32,8 +32,8 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
         repository.insertFruitListCrossRef(listCrossRef)
     }
 
-    fun deleteFruitVegInfo(fruitVegName : String) = viewModelScope.launch {
-        repository.deleteFruitVegInfoByFruitName(fruitVegName)
+    fun deleteFruitVeg(fruitVegId : Long) = viewModelScope.launch {
+        repository.deleteFruitVegById(fruitVegId)
     }
 
     fun deleteItemList(itemsListId: Long) = viewModelScope.launch {
@@ -42,6 +42,18 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
 
     fun deleteFruitListCrossRef(fruitId: String, listId: Long) = viewModelScope.launch {
         repository.deleteFruitListCrossRefByIds(fruitId, listId)
+    }
+
+    fun deleteAllFruitVeg() = viewModelScope.launch {
+        repository.deleteAllFruitVeg()
+    }
+
+    fun deleteAllItemList() = viewModelScope.launch {
+        repository.deleteAllItemsList()
+    }
+
+    fun deleteAllFruitListCrossRef() = viewModelScope.launch {
+        repository.deleteAlListFruitCrossRef()
     }
 }
 

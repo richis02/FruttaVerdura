@@ -1,5 +1,6 @@
 package com.example.prova_progetto
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +53,7 @@ class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHol
             }
 
             override fun areContentsTheSame(oldItem: ItemsList, newItem: ItemsList): Boolean {
-                return oldItem.listTitle == newItem.listTitle
+                return oldItem.listTitle == newItem.listTitle //TODO: QUESTO SARA' DA MODIFICARE MI SA
             }
         }
     }
