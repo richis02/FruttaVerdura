@@ -9,8 +9,12 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.reflect.KParameter
+import com.opencsv.CSVReader
+import java.io.InputStreamReader
+
 
 @Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 2, exportSchema = false)
 public abstract class FruitListRoomDatabase: RoomDatabase() {
@@ -73,6 +77,27 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
             itemsListDao.insertList(list3)
             itemsListDao.insertList(list4)
 
+        }
+
+
+        private suspend fun populateDatabaseFromCSV(context: Context, fruitVegDao: FruitVegetableDao) {
+            try {
+                val inputStream = context.assets.open("fruit_vegetables.csv")
+                val reader = CSVReader(InputStreamReader(inputStream))
+                var nextLine: Array<String>?
+
+                while (reader.readNext().also { nextLine = it } != null) {
+                    val entity = FruitVegetable(
+                        id = nextLine!![0].toInt(),
+                        name = nextLine!![1],
+                        type = nextLine!![2]
+                    )
+                    fruitVegDao.insert(entity)
+                }
+                reader.close()
+            } catch (e: Exception) {
+                Log.e("Database", "Error reading CSV", e)
+            }
         }
 
         //TODO: VERIFICARE SE SERVE
