@@ -32,10 +32,9 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     FruitListRoomDatabase::class.java,
-                    "fruitList_database"
-                )
-                    .fallbackToDestructiveMigration()
-                    .addCallback(FruitVegDatabaseCallback(scope))
+                    "items_list"
+                ).fallbackToDestructiveMigration()
+                    .addCallback(FruitVegDatabaseCallback(scope, context))
                     .build()
 
                 INSTANCE = instance
@@ -45,7 +44,8 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
         }
 
         private class FruitVegDatabaseCallback(
-            private val scope: CoroutineScope
+            private val scope: CoroutineScope,
+            private val context: Context
         ) : RoomDatabase.Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
@@ -54,6 +54,7 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
                         populateDatabase(database.fruitVegDao(), database.itemsListDao(), database.listFruitCrossRefDao())
+                        populateDatabaseFromCSV(context, database.fruitVegDao())
                     }
                 }
             }
