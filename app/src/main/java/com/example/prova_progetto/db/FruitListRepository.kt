@@ -22,6 +22,11 @@ class FruitListRepository(
     }
 
     @WorkerThread
+    suspend fun insertFruitVeg(fruitVeg: FruitVegetable){
+        fruitVegDao.insertFruitVeg(fruitVeg)
+    }
+
+    @WorkerThread
     suspend fun insertList(itemsList: ItemsList){
         itemsListDao.insertList(itemsList)
     }

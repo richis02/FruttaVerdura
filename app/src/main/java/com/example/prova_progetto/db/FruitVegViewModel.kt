@@ -24,6 +24,10 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
         return repository.getFruitVegByListId(listId).asLiveData()
     }
 
+    fun insertFruitVeg(fruitVeg: FruitVegetable) = viewModelScope.launch {
+        repository.insertFruitVeg(fruitVeg)
+    }
+
     fun insertList(itemsList: ItemsList) = viewModelScope.launch {
         repository.insertList(itemsList)
     }

@@ -13,10 +13,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.reflect.KParameter
 import com.opencsv.CSVReader
+import com.opencsv.CSVReaderBuilder
 import java.io.InputStreamReader
 
 
-@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 2, exportSchema = false)
+@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 3, exportSchema = false)
 public abstract class FruitListRoomDatabase: RoomDatabase() {
     abstract fun fruitVegDao() : FruitVegetableDao
     abstract fun itemsListDao() : ItemsListDao
@@ -70,7 +71,6 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
             val list2 = ItemsList(listTitle = "LaSecondaListaTest")
             val list3 = ItemsList(listTitle = "LaTerzaListaTest")
             val list4 = ItemsList(listTitle = "LaQuartaListaTest")
-            val list5 = ItemsList(listTitle = "LaQuintaListaTest")
 
             itemsListDao.insertList(list1)
             itemsListDao.insertList(list2)
@@ -79,20 +79,30 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
 
         }
 
-
-        private suspend fun populateDatabaseFromCSV(context: Context, fruitVegDao: FruitVegetableDao) {
+        //TODO: RENDERLO PRIVATO E POPOLARE SOLO ALLA CREAZIONE
+        public suspend fun populateDatabaseFromCSV(context: Context, fruitVegDao: FruitVegetableDao) {
             try {
-                val inputStream = context.assets.open("fruit_vegetables.csv")
-                val reader = CSVReader(InputStreamReader(inputStream))
+                val inputStream = context.assets.open("dataset-frutta.CSV")
+                val reader = CSVReaderBuilder(InputStreamReader(inputStream))
+                    .withSkipLines(1) // Salta la prima riga (intestazione)
+                    .withCSVParser(com.opencsv.CSVParserBuilder().withSeparator(';').build()) // Specifica il separatore
+                    .build()
+
                 var nextLine: Array<String>?
 
                 while (reader.readNext().also { nextLine = it } != null) {
+                    Log.d("ggg",nextLine!![0])
+
                     val entity = FruitVegetable(
-                        id = nextLine!![0].toInt(),
-                        name = nextLine!![1],
-                        type = nextLine!![2]
+                        fruitName = nextLine!![0],
+                        energyJoule = nextLine!![1].toDouble(),
+                        energyCal = nextLine!![2].toDouble(),
+                        proteins = nextLine!![3].toDouble(),
+                        carbohydrates = nextLine!![4].toDouble(),
+                        lipids = nextLine!![5].toDouble(),
+                        fibre = nextLine!![6].toDouble()
                     )
-                    fruitVegDao.insert(entity)
+                    fruitVegDao.insertFruitVeg(entity)
                 }
                 reader.close()
             } catch (e: Exception) {

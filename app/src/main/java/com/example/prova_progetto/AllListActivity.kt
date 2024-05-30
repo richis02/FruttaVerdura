@@ -2,6 +2,7 @@ package com.example.prova_progetto
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -13,10 +14,15 @@ import com.example.prova_progetto.db.FruitListRoomDatabase
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
-
+import com.example.prova_progetto.db.FruitVegetableDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class AllListActivity: ComponentActivity() {
+
+//TODO    private val applicationScope = CoroutineScope(Dispatchers.Default)
 
     private val newListActivityRequestCode = 1
 
@@ -27,6 +33,12 @@ class AllListActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_list)
 
+//TODO        val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
+
+//TODO        applicationScope.launch(Dispatchers.IO) {
+//           FruitListRoomDatabase.populateDatabaseFromCSV(this@AllListActivity, database.fruitVegDao())
+//        }
+
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         val adapter = ItemsListAdapter()
@@ -34,7 +46,7 @@ class AllListActivity: ComponentActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
-        fruitVegViewModel.allList.observe(this, Observer { lists ->
+        fruitVegViewModel.allFruitVeg.observe(this, Observer { lists ->
             // Aggiornamento copia cached
             lists?.let { adapter.submitList(it) }
         })

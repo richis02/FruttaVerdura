@@ -8,9 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prova_progetto.db.FruitVegetable
 import com.example.prova_progetto.db.ItemsList
 
-class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHolder>(ITEMSLISTS_COMPARATOR) {
+class ItemsListAdapter : ListAdapter<FruitVegetable, ItemsListAdapter.ItemListViewHolder>(ITEMSLISTS_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
 
@@ -25,7 +26,7 @@ class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHol
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current.listTitle)
+        holder.bind(current.fruitName)
     }
 
     // Binda un testo con una textview
@@ -47,13 +48,13 @@ class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHol
 
     companion object {
         // Come controllare se due titoli sono uguali o se due contents sono uguali
-        private val ITEMSLISTS_COMPARATOR = object : DiffUtil.ItemCallback<ItemsList>() {
-            override fun areItemsTheSame(oldItem: ItemsList, newItem: ItemsList): Boolean {
+        private val ITEMSLISTS_COMPARATOR = object : DiffUtil.ItemCallback<FruitVegetable>() {
+            override fun areItemsTheSame(oldItem: FruitVegetable, newItem: FruitVegetable): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: ItemsList, newItem: ItemsList): Boolean {
-                return oldItem.listTitle == newItem.listTitle //TODO: QUESTO SARA' DA MODIFICARE MI SA
+            override fun areContentsTheSame(oldItem: FruitVegetable, newItem: FruitVegetable): Boolean {
+                return oldItem.fruitVegId == newItem.fruitVegId //TODO: QUESTO SARA' DA MODIFICARE MI SA
             }
         }
     }
