@@ -93,5 +93,11 @@ class MainActivity : ComponentActivity() {
             val intent = Intent(v.context, AllListActivity::class.java)
             v.context.startActivity(intent)
         }
+
+        val search: CardView = findViewById(R.id.search)
+        search.setOnClickListener {v ->
+            val intent = Intent(v.context, SearchActivity::class.java)
+            v.context.startActivity(intent)
+        }
     }
 }

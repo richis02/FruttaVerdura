@@ -21,6 +21,10 @@ class FruitListRepository(
         return listFruitCrossRefDao.getFruitInfoByListId(listId)
     }
 
+    fun getFruitVegName(): Flow<List<String>> {
+        return fruitVegDao.getAllFruitVegNames()
+    }
+
     @WorkerThread
     suspend fun insertFruitVeg(fruitVeg: FruitVegetable){
         fruitVegDao.insertFruitVeg(fruitVeg)
