@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemsListDao {
-    @Query("SELECT * FROM items_list")
+    @Query("SELECT * FROM items_list ORDER BY creation_date DESC")
     fun getLists(): Flow<List<ItemsList>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

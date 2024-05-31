@@ -30,10 +30,11 @@ class AllListActivity: ComponentActivity() {
         val listTitletv: EditText = findViewById(R.id.fruit_list_name)
 
         val addList: ImageView = findViewById(R.id.add_list)
-        addList.setOnClickListener { v->
-            //bisogna fare la query per aggiungere una nuova lista
-            val newList = ItemsList(listTitle = listTitletv.text.toString())
-            fruitVegViewModel.insertList(newList)
+        addList.setOnClickListener {
+            if(listTitletv.text.toString() != "") {
+                val newList = ItemsList(listTitle = listTitletv.text.toString())
+                fruitVegViewModel.insertList(newList)
+            }
         }
 
 //TODO        val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
