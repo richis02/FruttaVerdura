@@ -6,26 +6,5 @@
     <string name="list">Liste della spesa</string>
     <string name="add_list">Crea una nuova lista della spesa</string>
     <string name="title">FRUTTA E VERDURA</string>
-
-
-    <string-array name="flower_array">
-        <item>Lily</item>
-        <item>Poppy</item>
-        <item>Sunflower</item>
-        <item>Freesia</item>
-        <item>Daisy</item>
-        <item>Rose</item>
-        <item>Daffodil</item>
-        <item>Lavender</item>
-        <item>Peony</item>
-        <item>Lilac</item>
-        <item>Dahlia</item>
-        <item>Tulip</item>
-        <item>Dandelion</item>
-        <item>Hydrangea</item>
-        <item>Daisy</item>
-        <item>Azalea</item>
-        <item>Calendula</item>
-        <item>Buttercup</item>
-    </string-array>
+    <string name="add_new_list">Titolo nuova lista</string>
 </resources>

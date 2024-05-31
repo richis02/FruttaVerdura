@@ -32,6 +32,7 @@
         <activity android:name=".AllListActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".FruitDetailsActivity" />
+        <activity android:name=".FruitListActivity" />
     </application>
 
 </manifest>

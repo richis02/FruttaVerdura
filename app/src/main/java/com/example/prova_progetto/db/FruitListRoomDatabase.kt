@@ -2,17 +2,13 @@ package com.example.prova_progetto.db
 
 import android.content.Context
 import android.util.Log
-import android.util.Log.VERBOSE
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlin.reflect.KParameter
-import com.opencsv.CSVReader
 import com.opencsv.CSVReaderBuilder
 import java.io.InputStreamReader
 
@@ -67,17 +63,6 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
             //TODO: EVITARE DI AGGUINGERE OGNI VOLTA
 
             itemsListDao.deleteAllLists()
-
-            val list1 = ItemsList(listTitle = "LaPrimaListaTest")
-            val list2 = ItemsList(listTitle = "LaSecondaListaTest")
-            val list3 = ItemsList(listTitle = "LaTerzaListaTest")
-            val list4 = ItemsList(listTitle = "LaQuartaListaTest")
-
-            itemsListDao.insertList(list1)
-            itemsListDao.insertList(list2)
-            itemsListDao.insertList(list3)
-            itemsListDao.insertList(list4)
-
         }
 
         //TODO: RENDERLO PRIVATO E POPOLARE SOLO ALLA CREAZIONE
