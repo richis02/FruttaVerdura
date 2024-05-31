@@ -10,4 +10,15 @@
     <color name="blue">#3F51B5</color>
     <color name="gray">#d6cfba</color>
     <color name="light_blue">#329ba8</color>
+
+    <color name="green_0">#053007</color>
+    <color name="green_1">#0B4C0E</color>
+    <color name="green_2">#0E6E12</color>
+
+    <color name="green_3">#318135</color>
+    <color name="green_4">#6DAE70</color>
+    <color name="green_5">#4F7A51</color>
+
+    <color name="yellow_green">#AEC38D</color>
+    <color name="grey_green">#6F8268</color>
 </resources>
