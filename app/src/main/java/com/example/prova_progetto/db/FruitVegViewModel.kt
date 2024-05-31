@@ -28,6 +28,7 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
     fun getAllFruitsVegOfList(listId : Long): LiveData<List<ListFruitsCrossRef>> {
         return repository.getFruitVegByListId(listId).asLiveData()
     }
+
     private val _filterText = MutableLiveData<String>()
     private val filteredFruitVeg: LiveData<List<FruitVegetable>> = _filterText.switchMap { text ->
         repository.getFilteredFruitVeg(text).asLiveData()

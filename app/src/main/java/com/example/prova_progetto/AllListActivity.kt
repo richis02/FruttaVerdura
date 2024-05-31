@@ -15,6 +15,7 @@ import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
 import com.example.prova_progetto.db.FruitVegetableDao
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,6 +45,11 @@ class AllListActivity: ComponentActivity() {
         val adapter = ItemsListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+//        val fab = findViewById<FloatingActionButton>(R.id.fab)
+//        fab.setOnClickListener {
+            //something
+//        }
 
 
         fruitVegViewModel.allList.observe(this, Observer { lists ->
