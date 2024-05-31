@@ -3,6 +3,7 @@ package com.example.prova_progetto
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -34,6 +35,11 @@ class AllListActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_list)
 
+        val addList: ImageView = findViewById(R.id.add_list)
+        addList.setOnClickListener { v->
+            //bisogna fare la query per aggiungere una nuova lista
+        }
+
 //TODO        val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
 
 //TODO        applicationScope.launch(Dispatchers.IO) {
@@ -41,7 +47,7 @@ class AllListActivity: ComponentActivity() {
 //        }
 
 
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        val recyclerView: RecyclerView = findViewById(R.id.recycler_list)
         val adapter = ItemsListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
