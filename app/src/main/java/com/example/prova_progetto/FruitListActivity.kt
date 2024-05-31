@@ -7,7 +7,7 @@ class FruitListActivity : ComponentActivity(){
 
     override fun onCreate (savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fruit_list)
+        //setContentView(R.layout.activity_fruit_list)
 
     }
 }
