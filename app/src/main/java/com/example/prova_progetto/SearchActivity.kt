@@ -33,6 +33,7 @@ class SearchActivity : ComponentActivity() {
         recyclerView.adapter = adapter
 
         fruitVegViewModel.getFilteredFruitVeg("").observe(this, Observer { lists ->
+            // Metodo da eseguire quando c'è un cambiamento
             lists?.let { adapter.submitList(it) }
         })
 

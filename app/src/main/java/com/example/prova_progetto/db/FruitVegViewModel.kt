@@ -17,16 +17,14 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
 
     val allList: LiveData<List<ItemsList>> = repository.allList.asLiveData()
 
+    val allFruitVegNames: LiveData<List<String>> = repository.allFruitVegNames.asLiveData()
+
     fun getFruitVeg(fruitVegId : Long): LiveData<FruitVegetable> {
         return repository.getFruitVegById(fruitVegId).asLiveData()
     }
 
     fun getAllFruitsVegOfList(listId : Long): LiveData<List<ListFruitsCrossRef>> {
         return repository.getFruitVegByListId(listId).asLiveData()
-    }
-
-    fun getFruitVegNames(): LiveData<List<String>> {
-        return repository.getFruitVegNames().asLiveData()
     }
 
     fun getFilteredFruitVeg(text: String) : LiveData<List<FruitVegetable>> {

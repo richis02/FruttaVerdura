@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">Prova_progetto</string>
+    <string name="app_name">DeepFruitRecognizer</string>
     <string name="errore">Errore</string>
     <string name="photo">Scatta una foto di un frutto</string>
     <string name="search">Cerca un frutto</string>
     <string name="list">Liste della spesa</string>
     <string name="add_list">Crea una nuova lista della spesa</string>
     <string name="title">FRUTTA E VERDURA</string>
+
 
     <string-array name="flower_array">
         <item>Lily</item>

@@ -5,8 +5,18 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.activity.viewModels
+import com.example.prova_progetto.db.FruitVegApplication
+import com.example.prova_progetto.db.FruitVegViewModel
+import com.example.prova_progetto.db.FruitVegViewModelFactory
+import androidx.lifecycle.Observer
+
 
 class CameraActivity: ComponentActivity(){
+
+    private val fruitVegViewModel: FruitVegViewModel by viewModels {
+        FruitVegViewModelFactory((application as FruitVegApplication).repository)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
@@ -17,7 +27,12 @@ class CameraActivity: ComponentActivity(){
 
         imageV.setImageBitmap(bitmap)
         if (bitmap != null) {
-            result.text = ClassifyImage().findImage(bitmap, this.applicationContext)
+            fruitVegViewModel.allFruitVegNames.observe(this, Observer { fruitVegNames ->
+                // Controlla se fruitVegNames non è nullo prima di chiamare findImage
+                fruitVegNames?.let {
+                    result.text = ClassifyImage().findImage(bitmap, this.applicationContext, it)
+                }
+            })
         }
     }
 }

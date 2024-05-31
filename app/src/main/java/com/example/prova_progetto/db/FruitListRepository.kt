@@ -11,7 +11,10 @@ class FruitListRepository(
 
     val allFruitVeg: Flow<List<FruitVegetable>> = fruitVegDao.getAllFruitVeg()
 
+    val allFruitVegNames: Flow<List<String>> = fruitVegDao.getAllFruitVegNames()
+
     val allList: Flow<List<ItemsList>> = itemsListDao.getLists()
+
 
     fun getFruitVegById(fruitVegId : Long): Flow<FruitVegetable> {
         return fruitVegDao.getFruitvegById(fruitVegId)

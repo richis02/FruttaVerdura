@@ -9,14 +9,10 @@ import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 
 class ClassifyImage constructor(){
-    fun findImage(image: Bitmap, context: Context): String{
-        val fruitAndVegetableArray = arrayOf(
-            "mela", "banana", "barbabietola", "peperone", "cavolo", "capsico", "carota", "cavolfiore",
-            "peperoncino", "mais", "cetriolo", "melanzana", "aglio", "zenzero", "uva", "jalepeno",
-            "kiwi", "limone", "lattuga", "mango", "cipolla", "arancia", "paprika", "pera", "piselli",
-            "ananas", "melograno", "patate", "raddish", "fagioli di soia", "spinaci", "mais dolce",
-            "patata dolce", "pomodoro", "rapa", "anguria"
-        )
+
+    //TODO: VERIDFFICARE LA CORRETTEZA DELL'ARRAY PASSATO IN QUESTO MODO
+    // --> CONTROLLARE CHE L'ORDINE DEGLI ELEMENTI SIA CORRETTO!!!!!
+    fun findImage(image: Bitmap, context: Context, fruitAndVegetableArray: List<String>): String{
 
         val interpreter = loadModelFile(context, "model.tflite")?.let { Interpreter(it) }
 
