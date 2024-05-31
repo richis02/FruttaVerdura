@@ -26,10 +26,7 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
     fun getAllFruitsVegOfList(listId : Long): LiveData<List<ListFruitsCrossRef>> {
         return repository.getFruitVegByListId(listId).asLiveData()
     }
-
-    fun getFilteredFruitVeg(text: String) : LiveData<List<FruitVegetable>> {
-        return repository.getFilteredFruitVeg(text).asLiveData()
-    }
+    
 
     fun insertFruitVeg(fruitVeg: FruitVegetable) = viewModelScope.launch {
         repository.insertFruitVeg(fruitVeg)
