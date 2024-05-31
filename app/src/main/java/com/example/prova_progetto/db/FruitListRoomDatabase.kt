@@ -13,7 +13,7 @@ import com.opencsv.CSVReaderBuilder
 import java.io.InputStreamReader
 
 
-@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 4, exportSchema = false)
+@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 5, exportSchema = false)
 public abstract class FruitListRoomDatabase: RoomDatabase() {
     abstract fun fruitVegDao() : FruitVegetableDao
     abstract fun itemsListDao() : ItemsListDao
@@ -80,7 +80,7 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
                     Log.d("ggg",nextLine!![0])
 
                     val entity = FruitVegetable(
-                        fruitName = nextLine!![0],
+                        fruitVegId = nextLine!![0],
                         energyJoule = nextLine!![1].toDouble(),
                         energyCal = nextLine!![2].toDouble(),
                         proteins = nextLine!![3].toDouble(),

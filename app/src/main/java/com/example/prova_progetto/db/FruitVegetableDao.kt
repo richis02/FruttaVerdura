@@ -18,10 +18,10 @@ interface FruitVegetableDao {
     @Query("SELECT * FROM fruit_veg")
     fun getAllFruitVeg(): Flow<List<FruitVegetable>>
 
-    @Query("SELECT fruit_name FROM fruit_veg")
+    @Query("SELECT fruit_veg_id FROM fruit_veg")
     fun getAllFruitVegNames(): Flow<List<String>>
 
-    @Query("SELECT * FROM fruit_veg WHERE fruit_name LIKE :text || '%'")
+    @Query("SELECT * FROM fruit_veg WHERE fruit_veg_id LIKE :text || '%'")
     fun getFilteredFruitVeg(text: String) : Flow<List<FruitVegetable>>
 
     // La chiave esterna è CASCADE quindi elimina entry dalla cross table

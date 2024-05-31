@@ -16,9 +16,6 @@ import com.example.prova_progetto.db.ItemsList
 
 class AllListActivity: ComponentActivity() {
 
-//TODO    private val applicationScope = CoroutineScope(Dispatchers.Default)
-
-    private val newListActivityRequestCode = 1
 
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
         FruitVegViewModelFactory((application as FruitVegApplication).repository)
@@ -27,27 +24,23 @@ class AllListActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_list)
 
-        val listTitletv: EditText = findViewById(R.id.fruit_list_name)
+        val listTitleTv: EditText = findViewById(R.id.fruit_list_name)
 
         val addList: ImageView = findViewById(R.id.add_list)
         addList.setOnClickListener {
-            if(listTitletv.text.toString() != "") {
-                val newList = ItemsList(listTitle = listTitletv.text.toString())
+            if(listTitleTv.text.toString() != "") {
+                val newList = ItemsList(listTitle = listTitleTv.text.toString())
                 fruitVegViewModel.insertList(newList)
             }
         }
-
-//TODO        val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
-
-//TODO        applicationScope.launch(Dispatchers.IO) {
-//           FruitListRoomDatabase.populateDatabaseFromCSV(this@AllListActivity, database.fruitVegDao())
-//        }
-
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_list)
         val adapter = ItemsListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        //it è una convenzione di Kotlin per il nome di variabile implicito quando
+        // si usa una lambda con un singolo parametro. È usato per brevità e leggibilità.
 
         fruitVegViewModel.allList.observe(this, Observer { lists ->
             // Aggiornamento copia cached
@@ -58,3 +51,12 @@ class AllListActivity: ComponentActivity() {
 
     //TODO: IMPLEMENTARE AGGIUNTA LISTA VEDI CODELAB
 }
+
+
+//TODO    private val applicationScope = CoroutineScope(Dispatchers.Default)
+
+//TODO        val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
+
+//TODO        applicationScope.launch(Dispatchers.IO) {
+//           FruitListRoomDatabase.populateDatabaseFromCSV(this@AllListActivity, database.fruitVegDao())
+//        }

@@ -1,6 +1,6 @@
 package com.example.prova_progetto
 
-import FruitSearchAdapter
+import FruitVegAdapter
 import android.os.Bundle
 import android.widget.SearchView
 import androidx.activity.ComponentActivity
@@ -15,7 +15,7 @@ import com.example.prova_progetto.db.FruitVegViewModelFactory
 class SearchActivity : ComponentActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: FruitSearchAdapter
+    private lateinit var adapter: FruitVegAdapter
 
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
         FruitVegViewModelFactory((application as FruitVegApplication).repository)
@@ -29,7 +29,7 @@ class SearchActivity : ComponentActivity() {
         recyclerView = findViewById(R.id.recycler_search)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        adapter = FruitSearchAdapter()
+        adapter = FruitVegAdapter()
         recyclerView.adapter = adapter
 
         fruitVegViewModel.getFilteredFruitVeg("").observe(this, Observer { lists ->

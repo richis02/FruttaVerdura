@@ -10,7 +10,7 @@ import com.example.prova_progetto.FruitDetailsActivity
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegetable
 
-class FruitSearchAdapter : ListAdapter<FruitVegetable, FruitSearchAdapter.ItemListViewHolder>(ITEMSLISTS_COMPARATOR) {
+class FruitVegAdapter : ListAdapter<FruitVegetable, FruitVegAdapter.ItemListViewHolder>(ITEMSLISTS_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         return ItemListViewHolder.create(parent)
@@ -27,7 +27,7 @@ class FruitSearchAdapter : ListAdapter<FruitVegetable, FruitSearchAdapter.ItemLi
         fun bind(fruitVeg: FruitVegetable?) {
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
-                listItemView.text = fruitVeg.fruitName
+                listItemView.text = fruitVeg.fruitVegId
                 listItemView.setOnClickListener {   v ->
                     val intent = Intent(v.context, FruitDetailsActivity::class.java)
                     intent.putExtra(FRUIT_KEY, fruitVeg.fruitVegId)
