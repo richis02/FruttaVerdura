@@ -7,6 +7,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
 
     <application
+        android:name=".db.FruitVegApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -27,8 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CameraActivity"></activity>
-        <activity android:name=".AllListActivity"></activity>
+        <activity android:name=".CameraActivity" />
+        <activity android:name=".AllListActivity" />
+        <activity android:name=".SearchActivity" />
     </application>
 
 </manifest>
