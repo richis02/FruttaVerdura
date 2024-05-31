@@ -46,7 +46,7 @@ class AllListActivity: ComponentActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
 
-        fruitVegViewModel.allFruitVeg.observe(this, Observer { lists ->
+        fruitVegViewModel.allList.observe(this, Observer { lists ->
             // Aggiornamento copia cached
             lists?.let { adapter.submitList(it) }
         })
