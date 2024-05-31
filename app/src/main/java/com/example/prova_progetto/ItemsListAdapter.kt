@@ -1,5 +1,6 @@
 package com.example.prova_progetto
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,15 +27,23 @@ class ItemsListAdapter : ListAdapter<FruitVegetable, ItemsListAdapter.ItemListVi
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current.fruitName)
+        holder.bind(current)
     }
+
 
     // Binda un testo con una textview
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.list_item)
 
-        fun bind(text: String?) {
-            listItemView.text = text
+
+        fun bind(itemList: ItemsList?) {
+            listItemView.text = itemList!!.listTitle
+            listItemView.setOnClickListener {v ->
+                val intent = Intent(v.context, FruitListActivity::class.java)
+                intent.putExtra(LIST_KEY, itemList.itemsListId)
+
+                v.context.startActivity(intent)
+            }
         }
 
         companion object {
@@ -43,6 +52,8 @@ class ItemsListAdapter : ListAdapter<FruitVegetable, ItemsListAdapter.ItemListVi
                     .inflate(R.layout.list_layout, parent, false)
                 return ItemListViewHolder(view)
             }
+
+            val LIST_KEY = "list_key"
         }
     }
 
