@@ -43,7 +43,7 @@ class SearchActivity : ComponentActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                fruitVegViewModel.getFilteredFruitVeg(newText ?: "")
+                fruitVegViewModel.setFilterText(newText ?: "")
                 return true
             }
         })

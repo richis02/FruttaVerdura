@@ -1,9 +1,11 @@
 package com.example.prova_progetto.db
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -26,7 +28,19 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
     fun getAllFruitsVegOfList(listId : Long): LiveData<List<ListFruitsCrossRef>> {
         return repository.getFruitVegByListId(listId).asLiveData()
     }
-    
+    private val _filterText = MutableLiveData<String>()
+    private val filteredFruitVeg: LiveData<List<FruitVegetable>> = _filterText.switchMap { text ->
+        repository.getFilteredFruitVeg(text).asLiveData()
+    }
+
+    fun setFilterText(text: String) {
+        _filterText.value = text
+    }
+
+    fun getFilteredFruitVeg(text: String): LiveData<List<FruitVegetable>> {
+        setFilterText(text)
+        return filteredFruitVeg
+    }
 
     fun insertFruitVeg(fruitVeg: FruitVegetable) = viewModelScope.launch {
         repository.insertFruitVeg(fruitVeg)

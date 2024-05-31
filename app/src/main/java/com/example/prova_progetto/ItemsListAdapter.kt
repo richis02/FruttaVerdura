@@ -37,13 +37,17 @@ class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHol
 
 
         fun bind(itemList: ItemsList?) {
-            listItemView.text = itemList!!.listTitle
-            listItemView.setOnClickListener {v ->
-                val intent = Intent(v.context, FruitListActivity::class.java)
-                intent.putExtra(LIST_KEY, itemList.itemsListId)
+            // Con let si gestisce il caso itemList = null
+            itemList?.let{
+                listItemView.text = itemList.listTitle
+                listItemView.setOnClickListener {v ->
+                    val intent = Intent(v.context, FruitListActivity::class.java)
+                    intent.putExtra(LIST_KEY, itemList.itemsListId)
 
-                v.context.startActivity(intent)
+                    v.context.startActivity(intent)
+                }
             }
+
         }
 
         companion object {
@@ -53,7 +57,7 @@ class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHol
                 return ItemListViewHolder(view)
             }
 
-            val LIST_KEY = "list_key"
+            const val LIST_KEY = "list_key"
         }
     }
 

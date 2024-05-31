@@ -31,6 +31,7 @@
         <activity android:name=".CameraActivity" />
         <activity android:name=".AllListActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".FruitDetailsActivity" />
     </application>
 
 </manifest>
