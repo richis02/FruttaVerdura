@@ -7,6 +7,16 @@
     <string name="add_list">Crea una nuova lista della spesa</string>
     <string name="title">FRUTTA E VERDURA</string>
 
+
+    <string name="all_list">Tutte le liste</string>
+    <string name="search_item">Cerca frutto</string>
+    <string name="take_photo">Scatta una foto</string>
+    <string name="new_list">Nuova lista</string>
+    <string name="main_word">bentornato</string>
+
+    <string name="contentDescription">Caricamento</string>
+
+
     <string-array name="flower_array">
         <item>Lily</item>
         <item>Poppy</item>
