@@ -1,45 +1,49 @@
-package com.example.prova_progetto
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import java.util.Locale
+import com.example.prova_progetto.R
+import com.example.prova_progetto.db.FruitVegetable
 
-class FruitSearchAdapter(private var fullList: List<String>) : RecyclerView.Adapter<FruitSearchAdapter.FruitViewHolder>() {
+class FruitSearchAdapter : ListAdapter<FruitVegetable, FruitSearchAdapter.ItemListViewHolder>(ITEMSLISTS_COMPARATOR) {
 
-    private var filteredList = ArrayList(fullList)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FruitViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_layout, parent, false)
-        return FruitViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
+        return ItemListViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: FruitViewHolder, position: Int) {
-        holder.textView.text = filteredList[position]
+    override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
+        val current = getItem(position)
+        holder.bind(current.fruitName)
     }
 
-    override fun getItemCount(): Int {
-        return filteredList.size
-    }
+    class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val listItemView: TextView = itemView.findViewById(R.id.search_result)
 
-    fun filter(text: String) {
-        filteredList.clear()
-        if (text.isEmpty()) {
-            filteredList.addAll(fullList)
-        } else {
-            val searchText = text.toLowerCase(Locale.getDefault())
-            for (item in fullList) {
-                if (item.toLowerCase(Locale.getDefault()).contains(searchText)) {
-                    filteredList.add(item)
-                }
+        fun bind(text: String?) {
+            listItemView.text = text
+        }
+
+        companion object {
+            fun create(parent: ViewGroup): ItemListViewHolder {
+                val view: View = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.search_layout, parent, false)
+                return ItemListViewHolder(view)
             }
         }
-        notifyDataSetChanged()
     }
 
-    class FruitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textView: TextView = itemView.findViewById(R.id.search_result)
+    companion object {
+        private val ITEMSLISTS_COMPARATOR = object : DiffUtil.ItemCallback<FruitVegetable>() {
+            override fun areItemsTheSame(oldItem: FruitVegetable, newItem: FruitVegetable): Boolean {
+                return oldItem === newItem
+            }
+
+            override fun areContentsTheSame(oldItem: FruitVegetable, newItem: FruitVegetable): Boolean {
+                return oldItem.fruitVegId == newItem.fruitVegId
+            }
+        }
     }
 }

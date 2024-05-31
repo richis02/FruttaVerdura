@@ -21,6 +21,9 @@ interface FruitVegetableDao {
     @Query("SELECT fruit_name FROM fruit_veg")
     fun getAllFruitVegNames(): Flow<List<String>>
 
+    @Query("SELECT * FROM fruit_veg WHERE fruit_name LIKE :text || '%'")
+    fun getFilteredFruitVeg(text: String) : Flow<List<FruitVegetable>>
+
     // La chiave esterna è CASCADE quindi elimina entry dalla cross table
     @Query("DELETE FROM fruit_veg WHERE fruit_veg_id = :fruitVegId")
     suspend fun deleteFruitVegById(fruitVegId: Long)

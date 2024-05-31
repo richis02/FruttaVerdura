@@ -21,8 +21,12 @@ class FruitListRepository(
         return listFruitCrossRefDao.getFruitInfoByListId(listId)
     }
 
-    fun getFruitVegName(): Flow<List<String>> {
+    fun getFruitVegNames(): Flow<List<String>> {
         return fruitVegDao.getAllFruitVegNames()
+    }
+
+    fun getFilteredFruitVeg(text: String) : Flow<List<FruitVegetable>>{
+        return fruitVegDao.getFilteredFruitVeg(text)
     }
 
     @WorkerThread

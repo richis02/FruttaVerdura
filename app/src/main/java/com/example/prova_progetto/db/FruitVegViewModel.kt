@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
@@ -25,7 +26,11 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
     }
 
     fun getFruitVegNames(): LiveData<List<String>> {
-        return repository.getFruitVegName().asLiveData()
+        return repository.getFruitVegNames().asLiveData()
+    }
+
+    fun getFilteredFruitVeg(text: String) : LiveData<List<FruitVegetable>> {
+        return repository.getFilteredFruitVeg(text).asLiveData()
     }
 
     fun insertFruitVeg(fruitVeg: FruitVegetable) = viewModelScope.launch {

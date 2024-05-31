@@ -1,9 +1,11 @@
 package com.example.prova_progetto
 
+import FruitSearchAdapter
 import android.os.Bundle
 import android.widget.SearchView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.prova_progetto.db.FruitVegApplication
@@ -14,7 +16,6 @@ class SearchActivity : ComponentActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FruitSearchAdapter
-    private lateinit var dataList: List<String>
 
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
         FruitVegViewModelFactory((application as FruitVegApplication).repository)
@@ -28,20 +29,12 @@ class SearchActivity : ComponentActivity() {
         recyclerView = findViewById(R.id.recycler_search)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        //dataList = fruitVegViewModel.getFruitVegNames()
-
-        val adapter = ItemsListAdapter()
+        adapter = FruitSearchAdapter()
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
 
-
-        fruitVegViewModel.allFruitVeg.observe(this, Observer { lists ->
-            // Aggiornamento copia cached
+        fruitVegViewModel.getFilteredFruitVeg("").observe(this, Observer { lists ->
             lists?.let { adapter.submitList(it) }
         })
-
-        adapter = FruitSearchAdapter(dataList)
-        recyclerView.adapter = adapter
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -49,7 +42,7 @@ class SearchActivity : ComponentActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                adapter.filter(newText ?: "")
+                fruitVegViewModel.getFilteredFruitVeg(newText ?: "")
                 return true
             }
         })
