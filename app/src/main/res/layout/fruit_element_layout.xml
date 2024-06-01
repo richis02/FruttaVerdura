@@ -12,7 +12,7 @@
 
 
     <ImageView
-    android:id="@+id/list_image"
+    android:id="@+id/list_image1"
     android:layout_width="60dp"
     android:layout_height="match_parent"
     app:layout_constraintRight_toRightOf="parent"
@@ -29,21 +29,21 @@
         android:textSize="50sp" />
 
     <ImageView
-        android:id="@+id/list_image"
+        android:id="@+id/ist_image2"
         android:layout_width="60dp"
         android:layout_height="match_parent"
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/baseline_delete_24" />
 
     <ImageView
-        android:id="@+id/list_image"
+        android:id="@+id/list_image3"
         android:layout_width="60dp"
         android:layout_height="match_parent"
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/baseline_delete_24" />
 
     <ImageView
-        android:id="@+id/list_image"
+        android:id="@+id/list_image4"
         android:layout_width="60dp"
         android:layout_height="match_parent"
         app:layout_constraintRight_toRightOf="parent"
