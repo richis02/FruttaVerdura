@@ -7,16 +7,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.prova_progetto.FruitDetailsActivity
+import com.example.prova_progetto.OnItemClickListener
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegetable
 
-class FruitVegSearchAdapter : ListAdapter<FruitVegetable, FruitVegSearchAdapter.ItemListViewHolder>(ITEMSLISTS_COMPARATOR) {
+class FruitVegSearchAdapter (private val listener: OnItemClickListener) : ListAdapter<FruitVegetable, FruitVegSearchAdapter.ItemListViewHolder>(ITEMSLISTS_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         return ItemListViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
+        holder.itemView.setOnClickListener { listener.onItemClick(position) }
         val current = getItem(position)
         holder.bind(current)
     }
@@ -29,9 +31,7 @@ class FruitVegSearchAdapter : ListAdapter<FruitVegetable, FruitVegSearchAdapter.
             fruitVeg?.let {
                 listItemView.text = fruitVeg.fruitVegId
                 listItemView.setOnClickListener {   v ->
-                    val intent = Intent(v.context, FruitDetailsActivity::class.java)
-                    intent.putExtra(FRUIT_KEY, fruitVeg.fruitVegId)
-                    v.context.startActivity(intent)
+
                 }
 
             }

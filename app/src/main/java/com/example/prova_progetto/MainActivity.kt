@@ -8,7 +8,6 @@ import android.provider.MediaStore
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
 import android.Manifest
-import android.widget.TextView
 import androidx.cardview.widget.CardView
 
 class MainActivity : ComponentActivity() {
@@ -96,7 +95,7 @@ class MainActivity : ComponentActivity() {
 
         val search: CardView = findViewById(R.id.search)
         search.setOnClickListener {v ->
-            val intent = Intent(v.context, SearchActivity::class.java)
+            val intent = Intent(v.context, FruitVegSearchActivity::class.java)
             v.context.startActivity(intent)
         }
     }
