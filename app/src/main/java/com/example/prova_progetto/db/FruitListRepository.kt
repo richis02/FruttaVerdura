@@ -20,7 +20,7 @@ class FruitListRepository(
         return fruitVegDao.getFruitvegById(fruitVegId)
     }
 
-    fun getFruitVegByListId(listId: Long): Flow<List<ListFruitsCrossRef>> {
+    fun getFruitVegByListId(listId: Long): Flow<List<FruitVegInfo>> {
         return listFruitCrossRefDao.getFruitInfoByListId(listId)
     }
 

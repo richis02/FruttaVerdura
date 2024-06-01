@@ -25,7 +25,7 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
         return repository.getFruitVegById(fruitVegId).asLiveData()
     }
 
-    fun getAllFruitsVegOfList(listId : Long): LiveData<List<ListFruitsCrossRef>> {
+    fun getAllFruitsVegOfList(listId : Long): LiveData<List<FruitVegInfo>> {
         return repository.getFruitVegByListId(listId).asLiveData()
     }
 

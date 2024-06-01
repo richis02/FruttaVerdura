@@ -1,6 +1,7 @@
 package com.example.prova_progetto
 
-import FruitVegAdapter
+import FruitVegOfListAdapter
+import FruitVegSearchAdapter
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -33,7 +34,7 @@ class FruitListActivity : ComponentActivity(){
         }
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_fruit_of_list)
-        val adapter = FruitVegAdapter()
+        val adapter = FruitVegOfListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 

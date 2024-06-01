@@ -1,6 +1,7 @@
 package com.example.prova_progetto.db
 
 import androidx.room.Dao
+import androidx.room.Embedded
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface ListFruitCrossRefDao {
 
     //TODO: finire e sistemare
-    @Query("SELECT * FROM list_fruit_cross_ref as lfc JOIN FRUIT_VEG AS fv ON lfc.fruit_id = fv.fruit_veg_id WHERE list_id= :listId")
+    @Query("SELECT fv.*, quantity, list_id FROM list_fruit_cross_ref as lfc JOIN fruit_veg AS fv ON lfc.fruit_id = fv.fruit_veg_id WHERE list_id= :listId")
     fun getFruitInfoByListId(listId: Long): Flow<List<FruitVegInfo>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -23,7 +24,7 @@ interface ListFruitCrossRefDao {
 }
 
 data class FruitVegInfo (
-    val fruitVeg : FruitVegetable,
+    @Embedded val fruitVeg : FruitVegetable,
     val quantity : Int
 )
 
