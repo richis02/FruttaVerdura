@@ -55,7 +55,7 @@ class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHol
         companion object {
             fun create(parent: ViewGroup): ItemListViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.list_layout, parent, false)
+                    .inflate(R.layout.all_list_item, parent, false)
                 return ItemListViewHolder(view)
             }
 

@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
 import android.Manifest
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.prova_progetto.R
 
 class MainActivity : ComponentActivity() {
@@ -80,7 +81,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun setAllEvent(){
-        val camera: CardView = findViewById(R.id.open_camera)
+        val camera: ConstraintLayout = findViewById(R.id.open_camera)
         camera.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if(intent.resolveActivity(packageManager) != null){
@@ -88,13 +89,13 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        val list: CardView = findViewById(R.id.all_list)
+        val list: ConstraintLayout = findViewById(R.id.all_list)
         list.setOnClickListener {v ->
             val intent = Intent(v.context, AllListActivity::class.java)
             v.context.startActivity(intent)
         }
 
-        val search: CardView = findViewById(R.id.search)
+        val search: ConstraintLayout = findViewById(R.id.search)
         search.setOnClickListener {v ->
             val intent = Intent(v.context, FruitVegSearchActivity::class.java)
             v.context.startActivity(intent)
