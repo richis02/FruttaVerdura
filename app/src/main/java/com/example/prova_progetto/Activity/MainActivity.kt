@@ -1,4 +1,4 @@
-package com.example.prova_progetto
+package com.example.prova_progetto.Activity
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,7 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
 import android.Manifest
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.prova_progetto.R
 
 class MainActivity : ComponentActivity() {
 

@@ -1,7 +1,6 @@
-package com.example.prova_progetto
+package com.example.prova_progetto.Adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prova_progetto.db.FruitVegetable
+import com.example.prova_progetto.Activity.AllFruitVegActivity
+import com.example.prova_progetto.R
 import com.example.prova_progetto.db.ItemsList
 
-class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHolder>(ITEMSLISTS_COMPARATOR) {
+class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHolder>(
+    ITEMSLISTS_COMPARATOR
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
 
@@ -41,7 +43,7 @@ class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHol
             itemList?.let{
                 listItemView.text = itemList.listTitle
                 listItemView.setOnClickListener {v ->
-                    val intent = Intent(v.context, FruitListActivity::class.java)
+                    val intent = Intent(v.context, AllFruitVegActivity::class.java)
                     intent.putExtra(LIST_KEY, itemList.itemsListId)
 
                     v.context.startActivity(intent)

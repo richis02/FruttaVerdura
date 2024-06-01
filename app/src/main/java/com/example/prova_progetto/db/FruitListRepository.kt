@@ -43,8 +43,8 @@ class FruitListRepository(
     }
 
     @WorkerThread
-    suspend fun insertFruitListCrossRef(listCrossRef: ListFruitsCrossRef){
-        listFruitCrossRefDao.insertFruitListCrossRef(listCrossRef)
+    suspend fun insertOrUpdateListFruitCrossRef(listCrossRef: ListFruitsCrossRef){
+        listFruitCrossRefDao.insertOrUpdateFruitListCrossRef(listCrossRef)
     }
 
     @WorkerThread

@@ -1,6 +1,6 @@
-package com.example.prova_progetto
+package com.example.prova_progetto.Activity
 
-import FruitVegOfListAdapter
+import com.example.prova_progetto.Adapter.FruitVegOfListAdapter
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -14,9 +14,10 @@ import com.example.prova_progetto.db.FruitVegViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prova_progetto.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class FruitListActivity : ComponentActivity(){
+class AllFruitVegActivity : ComponentActivity(){
 
     private val REQUEST_CAMERA_PERMISSION: Int = 123
 

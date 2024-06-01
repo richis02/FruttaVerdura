@@ -1,4 +1,5 @@
-import android.content.Intent
+package com.example.prova_progetto.Adapter
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -6,12 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prova_progetto.FruitDetailsActivity
+import com.example.prova_progetto.OnItemClickListener
 import com.example.prova_progetto.R
-import com.example.prova_progetto.db.FruitVegInfo
 import com.example.prova_progetto.db.FruitVegetable
 
-class FruitVegOfListAdapter : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.ItemListViewHolder>(ITEMSLISTS_COMPARATOR) {
+class FruitVegSearchAdapter (private val listener: OnItemClickListener) : ListAdapter<FruitVegetable, FruitVegSearchAdapter.ItemListViewHolder>(
+    ITEMSLISTS_COMPARATOR
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         return ItemListViewHolder.create(parent)
@@ -19,21 +21,19 @@ class FruitVegOfListAdapter : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.It
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
+        holder.itemView.setOnClickListener { listener.onItemClick(current.fruitVegId) }
         holder.bind(current)
     }
 
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.search_result)
 
-        fun bind(fruitVeg: FruitVegInfo?) {
+        fun bind(fruitVeg: FruitVegetable?) {
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
-                listItemView.text = fruitVeg.fruitVeg.fruitVegId
-                //TODO QUANTITA
+                listItemView.text = fruitVeg.fruitVegId
                 listItemView.setOnClickListener {   v ->
-                    val intent = Intent(v.context, FruitDetailsActivity::class.java)
-                    intent.putExtra(FRUIT_KEY, fruitVeg.fruitVeg.fruitVegId)
-                    v.context.startActivity(intent)
+
                 }
 
             }
@@ -51,14 +51,13 @@ class FruitVegOfListAdapter : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.It
     }
 
     companion object {
-        private val ITEMSLISTS_COMPARATOR = object : DiffUtil.ItemCallback<FruitVegInfo>() {
-            override fun areItemsTheSame(oldItem: FruitVegInfo, newItem: FruitVegInfo): Boolean {
+        private val ITEMSLISTS_COMPARATOR = object : DiffUtil.ItemCallback<FruitVegetable>() {
+            override fun areItemsTheSame(oldItem: FruitVegetable, newItem: FruitVegetable): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: FruitVegInfo, newItem: FruitVegInfo): Boolean {
-                //TODO: testare come fare ad aggiornare in caso di cambio della quantità
-                return oldItem.fruitVeg.fruitVegId == newItem.fruitVeg.fruitVegId
+            override fun areContentsTheSame(oldItem: FruitVegetable, newItem: FruitVegetable): Boolean {
+                return oldItem.fruitVegId == newItem.fruitVegId
             }
         }
     }

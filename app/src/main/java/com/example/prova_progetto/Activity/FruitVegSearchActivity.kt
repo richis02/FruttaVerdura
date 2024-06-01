@@ -1,7 +1,8 @@
-package com.example.prova_progetto
+package com.example.prova_progetto.Activity
 
-import FruitVegSearchAdapter
+import com.example.prova_progetto.Adapter.FruitVegSearchAdapter
 import android.os.Bundle
+import android.util.Log
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
@@ -10,9 +11,12 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prova_progetto.OnItemClickListener
+import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
+import com.example.prova_progetto.db.ListFruitsCrossRef
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class FruitVegSearchActivity : ComponentActivity(), OnItemClickListener {
@@ -29,6 +33,7 @@ class FruitVegSearchActivity : ComponentActivity(), OnItemClickListener {
         setContentView(R.layout.activity_search)
 
         //TODO: aggiungere TV nome lista se serve
+        val listId: Long? = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
 
         val searchView: SearchView = findViewById(R.id.search)
         recyclerView = findViewById(R.id.recycler_search)
@@ -72,8 +77,13 @@ class FruitVegSearchActivity : ComponentActivity(), OnItemClickListener {
         })
     }
 
-    override fun onItemClick(position: Int) {
-        // Gestisci il clic dell'elemento qui
-        Toast.makeText(this, "Elemento cliccato alla posizione: $position", Toast.LENGTH_SHORT).show()
+    override fun onItemClick(id: String) {
+        val listId: Long? = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
+        listId?.let{
+            val listFruitCrossRef = ListFruitsCrossRef(listId = it, fruitId = id)
+            // In caso di frutto già presente viene aggiornata la quantità
+            fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef)
+            Toast.makeText(this, "Quantità aggiornata o elemento aggiunto", Toast.LENGTH_SHORT).show()
+        }
     }
 }

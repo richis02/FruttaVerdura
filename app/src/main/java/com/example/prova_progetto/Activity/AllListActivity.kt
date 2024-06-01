@@ -1,4 +1,4 @@
-package com.example.prova_progetto
+package com.example.prova_progetto.Activity
 
 import android.os.Bundle
 import android.widget.EditText
@@ -8,6 +8,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prova_progetto.Adapter.ItemsListAdapter
+import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory

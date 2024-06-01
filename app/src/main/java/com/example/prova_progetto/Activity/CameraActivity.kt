@@ -1,4 +1,4 @@
-package com.example.prova_progetto
+package com.example.prova_progetto.Activity
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -10,6 +10,8 @@ import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
 import androidx.lifecycle.Observer
+import com.example.prova_progetto.ClassifyImage
+import com.example.prova_progetto.R
 
 
 class CameraActivity: ComponentActivity(){
