@@ -22,11 +22,32 @@
         android:id="@+id/list_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50sp"
         android:layout_marginEnd="20sp"
-        android:text = "frutto"
         android:fontFamily="@font/montserratThin"
-        android:textColor="@color/green_1"/>
+        android:text="@string/nth_list_name"
+        android:textColor="@color/green_text_icons"
+        android:textSize="50sp" />
+
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/baseline_delete_24" />
+
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/baseline_delete_24" />
+
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/baseline_delete_24" />
 
 
 </LinearLayout>
