@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -27,13 +28,14 @@ class FruitVegSearchAdapter (private val listener: OnItemClickListener) : ListAd
 
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.search_result)
+        //todo: da fare la grafica e recuperare ConstraintLayout
 
         fun bind(fruitVeg: FruitVegetable?) {
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
                 listItemView.text = fruitVeg.fruitVegId
                 listItemView.setOnClickListener {   v ->
-
+                    //todo...
                 }
 
             }

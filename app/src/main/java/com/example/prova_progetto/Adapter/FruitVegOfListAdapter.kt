@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -26,14 +27,15 @@ class FruitVegOfListAdapter : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.It
     }
 
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val listItemView: TextView = itemView.findViewById(R.id.search_result)
+        private val listItemView: TextView = itemView.findViewById(R.id.text_view)
+        private val fruitOfListItem: ConstraintLayout = itemView.findViewById(R.id.fruit_of_list_item)
 
         fun bind(fruitVeg: FruitVegInfo?) {
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
                 listItemView.text = fruitVeg.fruitVeg.fruitVegId
                 //TODO QUANTITA
-                listItemView.setOnClickListener {   v ->
+                fruitOfListItem.setOnClickListener {   v ->
                     val intent = Intent(v.context, FruitDetailsActivity::class.java)
                     intent.putExtra(FRUIT_KEY, fruitVeg.fruitVeg.fruitVegId)
                     v.context.startActivity(intent)
@@ -45,7 +47,7 @@ class FruitVegOfListAdapter : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.It
         companion object {
             fun create(parent: ViewGroup): ItemListViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.search_layout, parent, false)
+                    .inflate(R.layout.fruit_veg_of_list_item, parent, false)
                 return ItemListViewHolder(view)
             }
 

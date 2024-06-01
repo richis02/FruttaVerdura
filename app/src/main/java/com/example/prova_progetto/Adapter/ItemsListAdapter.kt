@@ -4,7 +4,9 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,14 +37,14 @@ class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHol
 
     // Binda un testo con una textview
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val listItemView: TextView = itemView.findViewById(R.id.list_item)
-
+        private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
+        private val listItem: LinearLayout = itemView.findViewById(R.id.list_item)
 
         fun bind(itemList: ItemsList?) {
             // Con let si gestisce il caso itemList = null
             itemList?.let{
                 listItemView.text = itemList.listTitle
-                listItemView.setOnClickListener {v ->
+                listItem.setOnClickListener {v ->
                     val intent = Intent(v.context, AllFruitVegActivity::class.java)
                     intent.putExtra(LIST_KEY, itemList.itemsListId)
 
