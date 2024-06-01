@@ -34,7 +34,8 @@ class AllListActivity: ComponentActivity() {
             }
         }
 
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_list)
+
+        val recyclerView: RecyclerView = findViewById(R.id.lists_recycler_view)
         val adapter = ItemsListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)

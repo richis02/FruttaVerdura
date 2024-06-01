@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dashed_border"
+    android:layout_marginTop="4dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="4dp">
+
+
+    <ImageView
+    android:id="@+id/list_image1"
+    android:layout_width="60dp"
+    android:layout_height="match_parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:src="@drawable/baseline_delete_24" />
+
+    <TextView
+        android:id="@+id/list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20sp"
+        android:fontFamily="@font/montserratThin"
+        android:text="@string/nth_list_name"
+        android:textColor="@color/green_text_icons"
+        android:textSize="50sp" />
+
+    <ImageView
+        android:id="@+id/ist_image2"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/baseline_delete_24" />
+
+    <ImageView
+        android:id="@+id/list_image3"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/baseline_delete_24" />
+
+    <ImageView
+        android:id="@+id/list_image4"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/baseline_delete_24" />
+
+
+</LinearLayout>
