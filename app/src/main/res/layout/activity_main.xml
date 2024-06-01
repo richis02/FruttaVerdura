@@ -1,382 +1,185 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/blue" >
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.04"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.09"
-        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05">
-
-        <ImageView
-            android:id="@+id/app_image"
-            android:layout_width="51dp"
-            android:layout_height="51dp"
-            android:contentDescription="@string/app_name"
-            android:padding="5dp"
-            android:src="@drawable/icon"
-            app:layout_constraintStart_toStartOf="parent" />
-
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="16dp" >
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/app_image"
-            android:fontFamily="@font/montserratBold"
-            android:padding="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="@string/title"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
 
-            android:text="@string/app_name"
-            android:textColor="@color/green_text_icons"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@id/app_image" />
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/title"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="16dp"
+            android:src="@drawable/icon"
+            android:contentDescription="@string/errore" />
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserratExtrabold"
-        android:text="@string/main_word"
-        android:textColor="@color/green_text_icons"
-        android:textSize="45sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_0.09" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginVertical="7dp"
-        android:weightSum="3"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.72"
-        app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.95"
-        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
-        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.60"
-        android:baselineAligned="false">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linear_layout_new_list"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="7dp"
-            android:layout_weight="2"
-            android:background="@drawable/white_dashed_border"
-            android:orientation="horizontal"
-            android:padding="5dp">
-
-
-            <ImageView
-                android:id="@+id/all_list_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/contentDescription"
-                android:src="@drawable/baseline_list_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/all_list"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/all_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratBold"
-                android:gravity="center_vertical"
-                android:text="@string/all_list"
-                android:textColor="@color/green_text_icons"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/all_list_image"
-                app:layout_constraintEnd_toStartOf="@id/all_list_arrow" />
-
-            <ImageView
-                android:id="@+id/all_list_arrow"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="@string/contentDescription"
-                android:src="@drawable/baseline_arrow_forward_ios_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/all_list"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="7dp"
-            android:layout_weight="1"
-            android:background="@drawable/white_dashed_border"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/new_list_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:contentDescription="@string/contentDescription"
-                android:src="@drawable/baseline_playlist_add_24"
-                app:layout_constraintBottom_toTopOf="@id/new_list"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/new_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratBold"
-                android:gravity="center_vertical"
-                android:text="@string/new_list"
-                android:textColor="@color/green_text_icons"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/new_list_image" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginVertical="7dp"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.90"
-        app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.95"
-        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
-        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.72"
-        android:baselineAligned="false">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="7dp"
-            android:layout_weight="1.3"
-            android:background="@drawable/green_background"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:contentDescription="@string/contentDescription"
-                android:src="@drawable/baseline_add_a_photo_24"
-                app:layout_constraintBottom_toTopOf="@+id/textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/montserratBold"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/take_photo"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="7dp"
-            android:layout_weight="1.7"
-            android:background="@drawable/dashed_border"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/lente"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/contentDescription"
-                android:src="@drawable/baseline_search_24"
-                app:layout_constraintBottom_toTopOf="@id/cerca"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/cerca"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratBold"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/search_item"
-                android:textColor="@color/green_text_icons"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lente" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </LinearLayout>
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.04" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.09"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.09" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.60"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.60" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.72"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.72" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.90"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.05"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.95"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.40" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.66"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-<!--
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    >
-
-    <LinearLayout
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
-        app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.95"
-        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.07"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.90">
+        android:padding="40dp"
+        android:background="@drawable/rounded_border"
+        android:layout_marginTop="16dp"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:orientation="horizontal">
 
-    </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/open_camera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/baseline_add_a_photo_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/photo"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/baseline_search_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/search"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/all_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/baseline_list_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/list"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
 
 
 
 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.07"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.07" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/baseline_playlist_add_24" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.65"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/add_list"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.76"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.76" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.90"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90" />
+    </GridLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.05"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.95"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.40" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.66"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
--->
+</LinearLayout>
