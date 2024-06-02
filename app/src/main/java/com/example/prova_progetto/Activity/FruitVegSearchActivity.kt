@@ -1,8 +1,11 @@
 package com.example.prova_progetto.Activity
 
+import android.app.AlertDialog
+import android.content.Intent
 import com.example.prova_progetto.Adapter.FruitVegSearchAdapter
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +27,9 @@ class FruitVegSearchActivity : ComponentActivity(), OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FruitVegSearchAdapter
 
+    //TODO: CAPIRE SE VA MODIFICATO
+    private var listId: Long? = null
+
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
         FruitVegViewModelFactory((application as FruitVegApplication).repository)
     }
@@ -32,30 +38,11 @@ class FruitVegSearchActivity : ComponentActivity(), OnItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        //TODO: aggiungere TV nome lista se serve
-        val listId: Long? = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
+        listId = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
 
         val searchView: SearchView = findViewById(R.id.search)
         recyclerView = findViewById(R.id.recycler_search)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-        val piuButton : FloatingActionButton = findViewById(R.id.fab_piu)
-        val menoButton : FloatingActionButton = findViewById(R.id.fab_meno)
-        val qttTv : TextView = findViewById(R.id.tv_quantita)
-
-
-
-        piuButton.setOnClickListener {
-            val qtt : Int = qttTv.text.toString().toInt()
-            qttTv.text = (qtt + 1).toString()
-        }
-
-        menoButton.setOnClickListener {
-            val qtt : Int = qttTv.text.toString().toInt()
-            if(qtt != 0)
-                qttTv.text = (qtt - 1).toString()
-        }
-
 
         adapter = FruitVegSearchAdapter(this)
         recyclerView.adapter = adapter
@@ -78,12 +65,49 @@ class FruitVegSearchActivity : ComponentActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(id: String) {
-        val listId: Long? = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
-        listId?.let{
-            val listFruitCrossRef = ListFruitsCrossRef(listId = it, fruitId = id)
-            // In caso di frutto già presente viene aggiornata la quantità
-            fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef)
-            Toast.makeText(this, "Quantità aggiornata o elemento aggiunto", Toast.LENGTH_SHORT).show()
+        if(listId != null) {
+            //siamo certi che listId sia diverso da null
+            showCustomDialog(id)
         }
+        else {
+            val intent = Intent(this, FruitDetailsActivity::class.java)
+            intent.putExtra(FruitVegSearchAdapter.ItemListViewHolder.FRUIT_KEY, id)
+            this.startActivity(intent)
+        }
+    }
+
+    private fun showCustomDialog(id: String) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_custom, null)
+        val tvQuantity: TextView = dialogView.findViewById(R.id.tv_quantity)
+        val btnIncrease: Button = dialogView.findViewById(R.id.btn_increase)
+        val btnDecrease: Button = dialogView.findViewById(R.id.btn_decrease)
+
+        var quantity = 0
+
+        btnIncrease.setOnClickListener {
+            quantity++
+            tvQuantity.text = quantity.toString()
+        }
+
+        btnDecrease.setOnClickListener {
+            if (quantity > 0) {
+                quantity--
+                tvQuantity.text = quantity.toString()
+            }
+        }
+
+        val builder = AlertDialog.Builder(this)
+            .setTitle("Modifica Quantità")
+            .setView(dialogView)
+            .setPositiveButton("Conferma") { dialog, which ->
+                val listFruitCrossRef = ListFruitsCrossRef(listId = listId!!, fruitId = id, quantity = quantity)
+                // In caso di frutto già presente viene aggiornata la quantità
+                fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef, quantity)
+            }
+            .setNegativeButton("Annulla") { dialog, which ->
+                dialog.dismiss()
+            }
+
+        builder.create().show()
     }
 }

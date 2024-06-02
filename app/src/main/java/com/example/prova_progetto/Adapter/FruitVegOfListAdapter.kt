@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
@@ -27,13 +28,15 @@ class FruitVegOfListAdapter : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.It
     }
 
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val listItemView: TextView = itemView.findViewById(R.id.text_view)
-        private val fruitOfListItem: ConstraintLayout = itemView.findViewById(R.id.fruit_of_list_item)
+        private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
+        private val fruitOfListItem: LinearLayout = itemView.findViewById(R.id.list_item)
+        private val quantityView: TextView = itemView.findViewById(R.id.quantity)
 
         fun bind(fruitVeg: FruitVegInfo?) {
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
                 listItemView.text = fruitVeg.fruitVeg.fruitVegId
+                quantityView.text = fruitVeg.quantity.toString()
                 //TODO QUANTITA
                 fruitOfListItem.setOnClickListener {   v ->
                     val intent = Intent(v.context, FruitDetailsActivity::class.java)

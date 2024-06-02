@@ -26,10 +26,10 @@ interface ListFruitCrossRefDao {
     suspend fun deleteAllFruitListCrossRef()
 
     // Custom function per gestire l'aumento della quantità
-    suspend fun insertOrUpdateFruitListCrossRef(listCrossRef: ListFruitsCrossRef) {
+    suspend fun insertOrUpdateFruitListCrossRef(listCrossRef: ListFruitsCrossRef, new_quantity: Int) {
         val id = insertFruitListCrossRef(listCrossRef)
         if (id == -1L) { // Conflict occurred, update the quantity
-            updateQuantity(listCrossRef.fruitId, listCrossRef.listId, listCrossRef.quantity)
+            updateQuantity(listCrossRef.fruitId, listCrossRef.listId, new_quantity)
         }
     }
 }

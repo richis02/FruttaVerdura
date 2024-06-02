@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface FruitVegetableDao {
     //TODO: FILTRO SULLA DATA
     @Query("SELECT * FROM fruit_veg WHERE fruit_veg_id = :fruitVegId") //TODO: FORSE HA SENSO FARLO RISPETTO ALL'ID
-    fun getFruitvegById(fruitVegId: Long): Flow<FruitVegetable>
+    fun getFruitvegById(fruitVegId: String): Flow<FruitVegetable>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertFruitVeg(fruitVeg: FruitVegetable)
@@ -26,7 +26,7 @@ interface FruitVegetableDao {
 
     // La chiave esterna è CASCADE quindi elimina entry dalla cross table
     @Query("DELETE FROM fruit_veg WHERE fruit_veg_id = :fruitVegId")
-    suspend fun deleteFruitVegById(fruitVegId: Long)
+    suspend fun deleteFruitVegById(fruitVegId: String)
 
     @Query("DELETE FROM fruit_veg")
     suspend fun deleteAllFruitVeg()

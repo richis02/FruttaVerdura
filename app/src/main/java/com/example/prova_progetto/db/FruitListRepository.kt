@@ -16,7 +16,7 @@ class FruitListRepository(
     val allList: Flow<List<ItemsList>> = itemsListDao.getLists()
 
 
-    fun getFruitVegById(fruitVegId : Long): Flow<FruitVegetable> {
+    fun getFruitVegById(fruitVegId : String): Flow<FruitVegetable> {
         return fruitVegDao.getFruitvegById(fruitVegId)
     }
 
@@ -43,12 +43,12 @@ class FruitListRepository(
     }
 
     @WorkerThread
-    suspend fun insertOrUpdateListFruitCrossRef(listCrossRef: ListFruitsCrossRef){
-        listFruitCrossRefDao.insertOrUpdateFruitListCrossRef(listCrossRef)
+    suspend fun insertOrUpdateListFruitCrossRef(listCrossRef: ListFruitsCrossRef, quantity: Int){
+        listFruitCrossRefDao.insertOrUpdateFruitListCrossRef(listCrossRef, quantity)
     }
 
     @WorkerThread
-    suspend fun deleteFruitVegById(fruitVegId : Long) {
+    suspend fun deleteFruitVegById(fruitVegId : String) {
         fruitVegDao.deleteFruitVegById(fruitVegId)
     }
 

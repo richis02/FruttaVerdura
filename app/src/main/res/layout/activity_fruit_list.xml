@@ -6,17 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".Activity.AllFruitVegActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv"
-        tools:ignore="MissingConstraints" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_fruit_of_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tv"/>
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_mostra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_cerca"
