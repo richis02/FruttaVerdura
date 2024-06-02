@@ -79,7 +79,7 @@
                 android:contentDescription="@string/contentDescription"
                 android:src="@drawable/baseline_list_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/all_list"
+                app:layout_constraintEnd_toStartOf="@+id/all_list_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,7 +105,7 @@
                 android:src="@drawable/baseline_arrow_forward_ios_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/all_list"
+                app:layout_constraintStart_toEndOf="@+id/all_list_title"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

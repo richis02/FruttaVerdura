@@ -1,11 +1,17 @@
 package com.example.prova_progetto.Activity
 
+import android.app.AlertDialog
+import android.app.Dialog
 import com.example.prova_progetto.Adapter.FruitVegOfListAdapter
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -16,12 +22,19 @@ import com.example.prova_progetto.db.FruitVegViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prova_progetto.Adapter.ItemsListAdapter
+import com.example.prova_progetto.OnFruitVegClickListener
 import com.example.prova_progetto.R
+import com.example.prova_progetto.db.ListFruitsCrossRef
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class AllFruitVegOfListActivity : ComponentActivity(){
+class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
 
     private val REQUEST_CAMERA_PERMISSION: Int = 123
+
+    private var isDeleting: Boolean = false
+    private val indexesToDelete: MutableList<String> = mutableListOf()
+    private var listId: Long? = null
 
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
         FruitVegViewModelFactory((application as FruitVegApplication).repository)
@@ -30,10 +43,10 @@ class AllFruitVegOfListActivity : ComponentActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fruit_list)
 
-        val listId: Long? = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
+        listId = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_fruit_of_list)
-        val adapter = FruitVegOfListAdapter()
+        val adapter = FruitVegOfListAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -41,6 +54,8 @@ class AllFruitVegOfListActivity : ComponentActivity(){
         val cercaButton : FloatingActionButton = findViewById(R.id.fab_cerca)
         val mostraButton: FloatingActionButton = findViewById(R.id.fab_mostra)
         val rimuoviButton: FloatingActionButton = findViewById(R.id.fab_rimuovi)
+
+        val eliminaButton: Button = findViewById(R.id.btn_elimina)
 
         mostraButton.setOnClickListener{
             if(cameraButton.isVisible){
@@ -55,6 +70,23 @@ class AllFruitVegOfListActivity : ComponentActivity(){
                 rimuoviButton.visibility = View.VISIBLE
                 mostraButton.setImageResource(R.drawable.baseline_more_vert_24)
             }
+        }
+
+        rimuoviButton.setOnClickListener {
+            isDeleting = !isDeleting
+            eliminaButton.visibility = View.VISIBLE
+            cercaButton.visibility = View.GONE
+            cameraButton.visibility = View.GONE
+            rimuoviButton.visibility = View.GONE
+            mostraButton.setImageResource(R.drawable.baseline_more_horiz_24)
+        }
+
+        eliminaButton.setOnClickListener {
+            for(index in indexesToDelete)
+                fruitVegViewModel.deleteFruitListCrossRef(index, listId!!)
+            //listId non può essere nullo
+            eliminaButton.visibility = View.GONE
+            isDeleting = false
         }
 
         cameraButton.setOnClickListener {
@@ -73,7 +105,7 @@ class AllFruitVegOfListActivity : ComponentActivity(){
 
 
         listId?.let {
-            fruitVegViewModel.getAllFruitsVegOfList(listId).observe(this, Observer {fruits ->
+            fruitVegViewModel.getAllFruitsVegOfList(listId!!).observe(this, Observer {fruits ->
                 fruits?.let{
                     adapter.submitList(it)
                 }
@@ -99,10 +131,59 @@ class AllFruitVegOfListActivity : ComponentActivity(){
         }
     }
 
-}
+    override fun onItemClick(id: String, quantity: Int?) {
+        if(!isDeleting) {
+            showCustomDialog(id, quantity!!)
+        } else
+        {
+            val index = indexesToDelete.indexOf(id)
+            if(index != -1) {
+                indexesToDelete.removeAt(index)
+            }
+            else {
+                indexesToDelete.add(id)
+            }
+        }
+    }
 
-//        if (listId != null) {
-//            tv.text = getString(R.string.list_id_text, listId)
-//        } else {
-//            tv.text = getString(R.string.list_id_unavailable)
-//        }
+    private fun showCustomDialog(id: String, qnt: Int?) {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_custom)
+
+        var quantity: Int = qnt!!
+
+        val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
+        annullaButton.setOnClickListener { dialog.dismiss() }
+
+        val confermaButton: Button = dialog.findViewById(R.id.btn_conferma)
+        confermaButton.setOnClickListener {
+            // In caso di frutto già presente viene aggiornata la quantità
+            fruitVegViewModel.updateQuantity(id, listId!!, quantity)
+        }
+
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val tvQuantity: TextView = dialog.findViewById(R.id.tv_quantity)
+        tvQuantity.text = quantity.toString()
+        val btnIncrease: Button = dialog.findViewById(R.id.btn_increase)
+        val btnDecrease: Button = dialog.findViewById(R.id.btn_decrease)
+
+        val tvMessage: TextView = dialog.findViewById(R.id.message)
+        tvMessage.text = getString(R.string.message_modify)
+
+        btnIncrease.setOnClickListener {
+            quantity++
+            tvQuantity.text = quantity.toString()
+        }
+
+        btnDecrease.setOnClickListener {
+            if (quantity > 1) {
+                quantity--
+                tvQuantity.text = quantity.toString()
+            }
+        }
+        dialog.show()
+    }
+
+}

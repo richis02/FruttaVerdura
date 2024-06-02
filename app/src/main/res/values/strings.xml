@@ -8,6 +8,9 @@
     <string name="title">FRUTTA E VERDURA</string>
     <string name="add_new_list">Titolo nuova lista</string>
 
+    <string name="message_add">Seleziona la quantità da aggiungere</string>
+    <string name="message_modify">Modifica la quantità</string>
+
     <string name="all_list">Tutte le liste</string>
     <string name="search_item">Cerca Articolo</string>
     <string name="take_photo">Scatta una foto</string>

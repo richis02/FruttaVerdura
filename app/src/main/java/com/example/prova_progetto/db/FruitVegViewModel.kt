@@ -78,6 +78,10 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
     fun deleteAllFruitListCrossRef() = viewModelScope.launch {
         repository.deleteAlListFruitCrossRef()
     }
+
+    fun updateQuantity(fruitId: String, listId: Long, quantity: Int) = viewModelScope.launch {
+        repository.updateQuantity(fruitId, listId, quantity)
+    }
 }
 
 class FruitVegViewModelFactory(private val repository: FruitListRepository) : ViewModelProvider.Factory {

@@ -18,10 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20sp"
+        android:layout_marginStart="20sp"
         android:fontFamily="@font/montserratthin"
         android:text="@string/nth_list_name"
         android:textColor="@color/green_text_icons"
-        android:textSize="50sp" />
+        android:textSize="30sp" />
 
 
 </LinearLayout>

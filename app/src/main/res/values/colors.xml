@@ -10,6 +10,7 @@
     <color name="blue">#3F51B5</color>
     <color name="gray">#d6cfba</color>
     <color name="light_blue">#329ba8</color>
+    <color name="light_gray">#ACACAC</color>
 
     <color name="green_text_icons">#0B4C0E</color>
     <color name="green_background">#398863</color>

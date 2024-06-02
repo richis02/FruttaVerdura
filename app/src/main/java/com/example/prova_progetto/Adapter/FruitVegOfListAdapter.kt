@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.prova_progetto.Activity.FruitDetailsActivity
+import com.example.prova_progetto.OnFruitVegClickListener
+import com.example.prova_progetto.OnItemsListClickListener
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegInfo
 
-class FruitVegOfListAdapter : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.ItemListViewHolder>(
+class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.ItemListViewHolder>(
     ITEMSLISTS_COMPARATOR
 ) {
 
@@ -24,6 +26,9 @@ class FruitVegOfListAdapter : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.It
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(current.fruitVeg.fruitVegId, current.quantity)
+        }
         holder.bind(current)
     }
 
@@ -37,13 +42,6 @@ class FruitVegOfListAdapter : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.It
             fruitVeg?.let {
                 listItemView.text = fruitVeg.fruitVeg.fruitVegId
                 quantityView.text = fruitVeg.quantity.toString()
-                //TODO QUANTITA
-                fruitOfListItem.setOnClickListener {   v ->
-                    val intent = Intent(v.context, FruitDetailsActivity::class.java)
-                    intent.putExtra(FRUIT_KEY, fruitVeg.fruitVeg.fruitVegId)
-                    v.context.startActivity(intent)
-                }
-
             }
         }
 

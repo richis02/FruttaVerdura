@@ -76,4 +76,9 @@ class FruitListRepository(
     suspend fun deleteAlListFruitCrossRef(){
         listFruitCrossRefDao.deleteAllFruitListCrossRef()
     }
+
+    @WorkerThread
+    suspend fun updateQuantity(fruitId: String, listId: Long, quantity: Int){
+        listFruitCrossRefDao.updateQuantity(fruitId, listId, quantity)
+    }
 }

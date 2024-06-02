@@ -21,7 +21,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
-        holder.itemView.setOnClickListener { listener.onItemClick(current.fruitVegId) }
+        holder.itemView.setOnClickListener { listener.onItemClick(current.fruitVegId, null) }
         holder.bind(current)
     }
 
@@ -39,7 +39,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
         companion object {
             fun create(parent: ViewGroup): ItemListViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.search_layout, parent, false)
+                    .inflate(R.layout.all_list_item, parent, false)
                 return ItemListViewHolder(view)
             }
 

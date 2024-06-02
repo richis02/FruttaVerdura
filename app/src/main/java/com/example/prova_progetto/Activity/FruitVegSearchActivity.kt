@@ -1,9 +1,13 @@
 package com.example.prova_progetto.Activity
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
-import com.example.prova_progetto.Adapter.FruitVegSearchAdapter
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.View
+import android.view.Window
 import android.widget.Button
 import android.widget.SearchView
 import android.widget.TextView
@@ -12,12 +16,14 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prova_progetto.Adapter.FruitVegSearchAdapter
 import com.example.prova_progetto.OnFruitVegClickListener
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
 import com.example.prova_progetto.db.ListFruitsCrossRef
+
 
 class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
 
@@ -61,7 +67,7 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         })
     }
 
-    override fun onItemClick(id: String) {
+    override fun onItemClick(id: String, quantity: Int?) {
         if(listId != null) {
             //siamo certi che listId sia diverso da null
             showCustomDialog(id)
@@ -74,12 +80,30 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
     }
 
     private fun showCustomDialog(id: String) {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_custom, null)
-        val tvQuantity: TextView = dialogView.findViewById(R.id.tv_quantity)
-        val btnIncrease: Button = dialogView.findViewById(R.id.btn_increase)
-        val btnDecrease: Button = dialogView.findViewById(R.id.btn_decrease)
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_custom)
 
-        var quantity = 0
+        var quantity = 1
+        
+        val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
+        annullaButton.setOnClickListener { dialog.dismiss() }
+        
+        val confermaButton: Button = dialog.findViewById(R.id.btn_conferma)
+        confermaButton.setOnClickListener {
+            val listFruitCrossRef = ListFruitsCrossRef(listId = listId!!, fruitId = id, quantity = quantity)
+            // In caso di frutto già presente viene aggiornata la quantità
+            fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef, quantity)
+        }
+        
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val tvQuantity: TextView = dialog.findViewById(R.id.tv_quantity)
+        val btnIncrease: Button = dialog.findViewById(R.id.btn_increase)
+        val btnDecrease: Button = dialog.findViewById(R.id.btn_decrease)
+
+        val tvMessage: TextView = dialog.findViewById(R.id.message)
+        tvMessage.text = getString(R.string.message_add)
 
         btnIncrease.setOnClickListener {
             quantity++
@@ -87,24 +111,11 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         }
 
         btnDecrease.setOnClickListener {
-            if (quantity > 0) {
+            if (quantity > 1) {
                 quantity--
                 tvQuantity.text = quantity.toString()
             }
         }
-
-        val builder = AlertDialog.Builder(this)
-            .setTitle("Modifica Quantità")
-            .setView(dialogView)
-            .setPositiveButton("Conferma") { dialog, which ->
-                val listFruitCrossRef = ListFruitsCrossRef(listId = listId!!, fruitId = id, quantity = quantity)
-                // In caso di frutto già presente viene aggiornata la quantità
-                fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef, quantity)
-            }
-            .setNegativeButton("Annulla") { dialog, which ->
-                dialog.dismiss()
-            }
-
-        builder.create().show()
+        dialog.show()
     }
 }
