@@ -5,8 +5,11 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
@@ -27,7 +30,6 @@ class AllFruitVegOfListActivity : ComponentActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fruit_list)
 
-        // TODO: non dovrebbe mai succedere che l'id non esiste quindi riscrivere riga sotto correttamente
         val listId: Long? = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_fruit_of_list)
@@ -37,6 +39,23 @@ class AllFruitVegOfListActivity : ComponentActivity(){
 
         val cameraButton : FloatingActionButton = findViewById(R.id.fab_camera)
         val cercaButton : FloatingActionButton = findViewById(R.id.fab_cerca)
+        val mostraButton: FloatingActionButton = findViewById(R.id.fab_mostra)
+        val rimuoviButton: FloatingActionButton = findViewById(R.id.fab_rimuovi)
+
+        mostraButton.setOnClickListener{
+            if(cameraButton.isVisible){
+                cercaButton.visibility = View.GONE
+                cameraButton.visibility = View.GONE
+                rimuoviButton.visibility = View.GONE
+                mostraButton.setImageResource(R.drawable.baseline_more_horiz_24)
+            }
+            else{
+                cercaButton.visibility = View.VISIBLE
+                cameraButton.visibility = View.VISIBLE
+                rimuoviButton.visibility = View.VISIBLE
+                mostraButton.setImageResource(R.drawable.baseline_more_vert_24)
+            }
+        }
 
         cameraButton.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
