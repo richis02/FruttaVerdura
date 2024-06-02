@@ -1,21 +1,17 @@
 package com.example.prova_progetto.Adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prova_progetto.Activity.AllListActivity
-import com.example.prova_progetto.Activity.FruitDetailsActivity
-import com.example.prova_progetto.OnItemClickListener
+import com.example.prova_progetto.OnFruitVegClickListener
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegetable
 
-class FruitVegSearchAdapter (private val listener: OnItemClickListener) : ListAdapter<FruitVegetable, FruitVegSearchAdapter.ItemListViewHolder>(
+class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : ListAdapter<FruitVegetable, FruitVegSearchAdapter.ItemListViewHolder>(
     ITEMSLISTS_COMPARATOR
 ) {
 

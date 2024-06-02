@@ -1,5 +1,5 @@
 package com.example.prova_progetto
 
-interface OnItemClickListener {
+interface OnFruitVegClickListener {
     fun onItemClick(id: String)
 }

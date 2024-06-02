@@ -1,36 +1,30 @@
 package com.example.prova_progetto.Adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prova_progetto.Activity.AllFruitVegActivity
+import com.example.prova_progetto.OnItemsListClickListener
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.ItemsList
 
-class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHolder>(
+class ItemsListAdapter(private val listener: OnItemsListClickListener) : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHolder>(
     ITEMSLISTS_COMPARATOR
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
-
-        //val view = LayoutInflater.from(parent.context)
-        //    .inflate(R.layout.list_layout, parent, false)
-
-        //val tv : TextView = view.findViewById(R.id.list_item)
-        //tv.setOnClickListener(onClickListener)
-
         return ItemListViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(current.itemsListId)
+        }
         holder.bind(current)
     }
 
@@ -38,18 +32,11 @@ class ItemsListAdapter : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHol
     // Binda un testo con una textview
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
-        private val listItem: LinearLayout = itemView.findViewById(R.id.list_item)
 
         fun bind(itemList: ItemsList?) {
             // Con let si gestisce il caso itemList = null
             itemList?.let{
                 listItemView.text = itemList.listTitle
-                listItem.setOnClickListener {v ->
-                    val intent = Intent(v.context, AllFruitVegActivity::class.java)
-                    intent.putExtra(LIST_KEY, itemList.itemsListId)
-
-                    v.context.startActivity(intent)
-                }
             }
 
         }

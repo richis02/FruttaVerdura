@@ -32,7 +32,7 @@
         <activity android:name=".Activity.AllListActivity" />
         <activity android:name=".Activity.FruitVegSearchActivity" />
         <activity android:name=".Activity.FruitDetailsActivity" />
-        <activity android:name=".Activity.AllFruitVegActivity" />
+        <activity android:name=".Activity.AllFruitVegOfListActivity" />
     </application>
 
 </manifest>

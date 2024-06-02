@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import com.example.prova_progetto.db.FruitVegApplication
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.prova_progetto.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class AllFruitVegActivity : ComponentActivity(){
+class AllFruitVegOfListActivity : ComponentActivity(){
 
     private val REQUEST_CAMERA_PERMISSION: Int = 123
 
@@ -30,15 +29,6 @@ class AllFruitVegActivity : ComponentActivity(){
 
         // TODO: non dovrebbe mai succedere che l'id non esiste quindi riscrivere riga sotto correttamente
         val listId: Long? = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
-
-
-        val tv: TextView = findViewById(R.id.tv)
-
-        if (listId != null) {
-            tv.text = "Lista id: $listId"
-        } else {
-            tv.text = "Lista id non disponibile"
-        }
 
         val recyclerView: RecyclerView = findViewById(R.id.recycler_fruit_of_list)
         val adapter = FruitVegOfListAdapter()

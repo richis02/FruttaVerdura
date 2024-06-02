@@ -4,25 +4,22 @@ import android.app.AlertDialog
 import android.content.Intent
 import com.example.prova_progetto.Adapter.FruitVegSearchAdapter
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.SearchView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prova_progetto.OnItemClickListener
+import com.example.prova_progetto.OnFruitVegClickListener
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
 import com.example.prova_progetto.db.ListFruitsCrossRef
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class FruitVegSearchActivity : ComponentActivity(), OnItemClickListener {
+class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FruitVegSearchAdapter
