@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -27,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/app_image"
+            android:layout_toEndOf="@id/app_image"
             android:fontFamily="@font/montserratbold"
             android:padding="5dp"
 
@@ -38,16 +39,20 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserratextrabold"
+        android:fontFamily="@font/montserratbold"
         android:text="@string/main_word"
         android:textColor="@color/green_text_icons"
         android:textSize="45sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_0.09" />
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.09"
+        app:layout_constraintVertical_bias="0.109" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -74,12 +79,12 @@
 
             <ImageView
                 android:id="@+id/all_list_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:contentDescription="@string/contentDescription"
-                android:src="@drawable/baseline_list_24"
+                android:src="@drawable/list_items"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/all_list_title"
+                app:layout_constraintEnd_toStartOf="@id/all_list_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,7 +92,7 @@
                 android:id="@+id/all_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratbold"
+                android:fontFamily="@font/montserratmedium"
                 android:gravity="center_vertical"
                 android:text="@string/all_list"
                 android:textColor="@color/green_text_icons"
@@ -105,7 +110,7 @@
                 android:src="@drawable/baseline_arrow_forward_ios_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/all_list_title"
+                app:layout_constraintStart_toEndOf="@id/all_list_title"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -133,7 +138,7 @@
                 android:id="@+id/new_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratbold"
+                android:fontFamily="@font/montserratmedium"
                 android:gravity="center_vertical"
                 android:text="@string/new_list"
                 android:textColor="@color/green_text_icons"
@@ -141,7 +146,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/new_list_image" />
+                app:layout_constraintTop_toBottomOf="@id/new_list_image" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
@@ -169,12 +174,12 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="71dp"
+                android:layout_height="71dp"
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="@string/contentDescription"
-                android:src="@drawable/baseline_add_a_photo_24"
-                app:layout_constraintBottom_toTopOf="@+id/textView"
+                android:src="@drawable/artificial_intelligence"
+                app:layout_constraintBottom_toTopOf="@id/textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -184,7 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/montserratbold"
+                android:fontFamily="@font/montserratmedium"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/take_photo"
                 android:textColor="@color/white"
@@ -192,7 +197,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@id/imageView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -220,7 +225,7 @@
                 android:id="@+id/cerca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratbold"
+                android:fontFamily="@font/montserratmedium"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="@string/search_item"
                 android:textColor="@color/green_text_icons"
@@ -296,5 +301,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.66" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="254dp"
+        android:layout_height="256dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/webinar_bro"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.757"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

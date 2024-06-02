@@ -160,6 +160,7 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         confermaButton.setOnClickListener {
             // In caso di frutto già presente viene aggiornata la quantità
             fruitVegViewModel.updateQuantity(id, listId!!, quantity)
+            dialog.dismiss()
         }
 
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

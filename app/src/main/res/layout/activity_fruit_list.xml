@@ -21,7 +21,8 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/baseline_more_horiz_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/green_background"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_cerca"
@@ -32,7 +33,8 @@
         android:src="@drawable/baseline_search_24"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/fab_mostra"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/green_background"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_camera"
@@ -43,7 +45,8 @@
         android:src="@drawable/camera"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/fab_cerca"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/green_background"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_rimuovi"
@@ -54,7 +57,8 @@
         android:src="@drawable/baseline_delete_24"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/fab_camera"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/green_background"/>
 
     <Button
         android:id="@+id/btn_elimina"

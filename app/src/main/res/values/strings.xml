@@ -11,11 +11,11 @@
     <string name="message_add">Seleziona la quantità da aggiungere</string>
     <string name="message_modify">Modifica la quantità</string>
 
-    <string name="all_list">Tutte le liste</string>
-    <string name="search_item">Cerca Articolo</string>
-    <string name="take_photo">Scatta una foto</string>
-    <string name="new_list">Nuova lista</string>
-    <string name="main_word">bentornato</string>
+    <string name="all_list">Liste</string>
+    <string name="search_item">Cerca</string>
+    <string name="take_photo">Foto</string>
+    <string name="new_list">Nuova</string>
+    <string name="main_word">Bentornato</string>
 
     <string name="contentDescription">Caricamento</string>
 

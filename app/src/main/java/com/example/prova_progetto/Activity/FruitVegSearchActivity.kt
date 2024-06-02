@@ -94,6 +94,7 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
             val listFruitCrossRef = ListFruitsCrossRef(listId = listId!!, fruitId = id, quantity = quantity)
             // In caso di frutto già presente viene aggiornata la quantità
             fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef, quantity)
+            dialog.dismiss()
         }
         
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
