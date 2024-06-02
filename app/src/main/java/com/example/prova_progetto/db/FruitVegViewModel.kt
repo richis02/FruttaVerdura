@@ -21,7 +21,7 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
 
     val allFruitVegNames: LiveData<List<String>> = repository.allFruitVegNames.asLiveData()
 
-    fun getFruitVeg(fruitVegId : Long): LiveData<FruitVegetable> {
+    fun getFruitVeg(fruitVegId : String): LiveData<FruitVegetable> {
         return repository.getFruitVegById(fruitVegId).asLiveData()
     }
 
@@ -51,11 +51,11 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
         repository.insertList(itemsList)
     }
 
-    fun insertFruitListCrossRef(listCrossRef: ListFruitsCrossRef) = viewModelScope.launch {
-        repository.insertOrUpdateListFruitCrossRef(listCrossRef)
+    fun insertFruitListCrossRef(listCrossRef: ListFruitsCrossRef, quantity: Int) = viewModelScope.launch {
+        repository.insertOrUpdateListFruitCrossRef(listCrossRef, quantity)
     }
 
-    fun deleteFruitVeg(fruitVegId : Long) = viewModelScope.launch {
+    fun deleteFruitVeg(fruitVegId : String) = viewModelScope.launch {
         repository.deleteFruitVegById(fruitVegId)
     }
 

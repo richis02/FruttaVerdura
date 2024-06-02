@@ -19,46 +19,4 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_piu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_add_24"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="32dp"
-            android:enabled="false"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_meno"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_add_24"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="32dp"
-            android:enabled="false"/>
-
-        <TextView
-            android:id="@+id/tv_quantita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="0"
-            android:textSize="16sp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_altro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon"
-            android:layout_below="@id/tv_quantita"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:enabled="false"/>
-    </RelativeLayout>
-
 </LinearLayout>
