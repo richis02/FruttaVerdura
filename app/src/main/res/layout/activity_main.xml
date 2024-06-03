@@ -68,14 +68,15 @@
 
         <ImageView
             android:id="@+id/all_list_image"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="104dp"
+            android:layout_height="61dp"
             android:contentDescription="@string/contentDescription"
-            android:src="@drawable/list_items"
+            android:src="@drawable/to_do_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/all_list_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.44" />
 
         <TextView
             android:id="@+id/all_list_title"
@@ -127,17 +128,31 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="99dp"
-                android:layout_height="101dp"
+                android:layout_width="43dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
                 android:contentDescription="@string/contentDescription"
-                android:src="@drawable/lens"
+                android:src="@drawable/camera"
                 app:layout_constraintBottom_toTopOf="@id/textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/montserratmedium"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="@string/take_photo"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -205,14 +220,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.72" />
+        app:layout_constraintGuide_percent="0.75" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal_0.90"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90" />
+        app:layout_constraintGuide_percent="0.89" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_0.05"
