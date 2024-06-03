@@ -30,7 +30,6 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FruitVegSearchAdapter
 
-    //TODO: CAPIRE SE VA MODIFICATO
     private var listId: Long? = null
 
     private val fruitVegViewModel: FruitVegViewModel by viewModels {

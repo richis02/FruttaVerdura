@@ -12,10 +12,10 @@ import com.example.prova_progetto.OnItemsListClickListener
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.ItemsList
 
-class ItemsListAdapter(private val listener: OnItemsListClickListener) : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHolder>(
+class ItemsListAdapter(private val listener: OnItemsListClickListener)
+    : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHolder>(
     ITEMSLISTS_COMPARATOR
 ) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         return ItemListViewHolder.create(parent)
     }
@@ -27,7 +27,6 @@ class ItemsListAdapter(private val listener: OnItemsListClickListener) : ListAda
         }
         holder.bind(current)
     }
-
 
     // Binda un testo con una textview
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
