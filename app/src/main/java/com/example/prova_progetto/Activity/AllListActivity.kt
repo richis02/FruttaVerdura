@@ -26,7 +26,6 @@ import kotlinx.coroutines.launch
 
 class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
-
     private var isDeleting: Boolean = false
     private val indexesToDelete: MutableList<Long> = mutableListOf()
 
@@ -71,7 +70,9 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
         fruitVegViewModel.allList.observe(this, Observer { lists ->
             // Aggiornamento copia cached
-            lists?.let { adapter.submitList(it) }
+            lists?.let {
+                adapter.submitList(it)
+            }
         })
 
     }
