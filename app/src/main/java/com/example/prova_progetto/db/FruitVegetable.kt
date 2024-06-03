@@ -14,5 +14,5 @@ data class FruitVegetable(
     @ColumnInfo(name = "carbohydrates") val carbohydrates : Double,
     @ColumnInfo(name = "lipids") val lipids : Double,
     @ColumnInfo(name = "fibre") val fibre:Double,
-    //TODO: AGGUINGERE IMMAGINE
-)
+    @ColumnInfo(name = "img") val img:String
+    )

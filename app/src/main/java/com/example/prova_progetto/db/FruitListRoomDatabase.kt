@@ -13,7 +13,7 @@ import com.opencsv.CSVReaderBuilder
 import java.io.InputStreamReader
 
 
-@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 12, exportSchema = false)
+@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 13, exportSchema = false)
 public abstract class FruitListRoomDatabase: RoomDatabase() {
     abstract fun fruitVegDao() : FruitVegetableDao
     abstract fun itemsListDao() : ItemsListDao
@@ -90,7 +90,8 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
                         proteins = nextLine!![3].toDouble(),
                         carbohydrates = nextLine!![4].toDouble(),
                         lipids = nextLine!![5].toDouble(),
-                        fibre = nextLine!![6].toDouble()
+                        fibre = nextLine!![6].toDouble(),
+                        img = nextLine!![7]
                     )
                     fruitVegDao.insertFruitVeg(entity)
                 }
