@@ -71,11 +71,11 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
     }
 
-    override fun onItemClick(id: Long) {
+    override fun onItemClick(id: Long, name: String) {
         if(!isDeleting) {
             val intent = Intent(this, AllFruitVegOfListActivity::class.java)
-            intent.putExtra(ItemsListAdapter.ItemListViewHolder.LIST_KEY, id)
-
+            intent.putExtra(LIST_KEY, id)
+            intent.putExtra(LIST_NAME, name)
             startActivity(intent)
         } else
         {
@@ -89,6 +89,10 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         }
     }
 
+    companion object{
+        const val LIST_KEY = "list_key"
+        const val LIST_NAME = "list_name"
+    }
     //TODO: IMPLEMENTARE AGGIUNTA LISTA VEDI CODELAB
 }
 
