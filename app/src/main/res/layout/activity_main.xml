@@ -127,30 +127,17 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="71dp"
-                android:layout_height="71dp"
+                android:layout_width="99dp"
+                android:layout_height="101dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
                 android:contentDescription="@string/contentDescription"
-                android:src="@drawable/artificial_intelligence"
+                android:src="@drawable/lens"
                 app:layout_constraintBottom_toTopOf="@id/textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/montserratmedium"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/take_photo"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
