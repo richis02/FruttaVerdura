@@ -3,6 +3,7 @@ package com.example.prova_progetto.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -27,12 +28,58 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
 
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
+        private val imgView: ImageView = itemView.findViewById(R.id.item_image)
         //todo: da fare la grafica e recuperare ConstraintLayout
+
+        // Per una questione di efficenza è stata definita una mappa, questo è possibile perchè
+        // la dimensione del dataset è ridotta
+        private val imageMap = mapOf(
+            "garlic" to R.drawable.garlic,
+            "pineapple" to R.drawable.pineapple,
+            "watermelon" to R.drawable.watermelon,
+            "orange" to R.drawable.orange,
+            "banana" to R.drawable.banana,
+            "beetroot" to R.drawable.beetroot,
+            "capsicum" to R.drawable.capsicum,
+            "carrots" to R.drawable.carrots,
+            "cauliflower" to R.drawable.cauliflower,
+            "cabbage" to R.drawable.cabbage,
+            "cucumber" to R.drawable.cucumber,
+            "onion" to R.drawable.onion,
+            "beans" to R.drawable.beans,
+            "jalapeno" to R.drawable.jalapeno,
+            "kiwi" to R.drawable.kiwi,
+            "lettuce" to R.drawable.lettuce,
+            "lemon" to R.drawable.lemon,
+            "corn" to R.drawable.corn,
+            "mango" to R.drawable.mango,
+            "apple" to R.drawable.apple,
+            "eggplant" to R.drawable.eggplant,
+            "pomegranate" to R.drawable.pomegranate,
+            "paprika" to R.drawable.paprika,
+            "sweet_potato" to R.drawable.sweet_potato,
+            "potato" to R.drawable.potato,
+            "chili" to R.drawable.chili,
+            "bell_pepper" to R.drawable.bell_pepper,
+            "pear" to R.drawable.pear,
+            "beans" to R.drawable.beans,
+            "tomato" to R.drawable.tomato,
+            "raddish" to R.drawable.radish,
+            "turnip" to R.drawable.turnip,
+            "spinach" to R.drawable.spinach,
+            "grapes" to R.drawable.grapes,
+            "ginger" to R.drawable.ginger,
+            "sausage" to R.drawable.sausage
+        )
 
         fun bind(fruitVeg: FruitVegetable?) {
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
+                val img = it.img
                 listItemView.text = fruitVeg.fruitVegId
+                val imgResId = imageMap[img] ?: R.drawable.icon
+
+                imgView.setImageResource(imgResId)
             }
         }
 
