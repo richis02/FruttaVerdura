@@ -86,7 +86,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
         companion object {
             fun create(parent: ViewGroup): ItemListViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.all_list_item, parent, false)
+                    .inflate(R.layout.fruit_veg_of_list_item, parent, false)
                 return ItemListViewHolder(view)
             }
 

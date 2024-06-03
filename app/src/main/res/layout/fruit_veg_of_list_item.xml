@@ -44,7 +44,6 @@
         android:id="@+id/quantity"
         android:fontFamily="@font/montserratmedium"
         android:textSize="20sp"
-        android:text="@string/nth_list_name"
         android:layout_marginTop="10sp"
         android:layout_marginBottom="10sp"
         android:layout_marginEnd="20sp"
