@@ -18,4 +18,8 @@
     <color name="light_yellow_green">#F8FEED</color>
     <color name="grey_light_border">#D7E2DA</color>
     <color name="grey_dark_border">#3F6969</color>
+
+    <color name="red_light_border">#BC4951</color>
+    <color name="red_extra_light_background">#E6AFB4</color>
+
 </resources>

@@ -36,6 +36,9 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
     private val indexesToDelete: MutableList<String> = mutableListOf()
     private var listId: Long? = null
 
+    lateinit var recyclerView: RecyclerView
+    lateinit var adapter : FruitVegOfListAdapter
+
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
         FruitVegViewModelFactory((application as FruitVegApplication).repository)
     }
@@ -49,8 +52,9 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         val tvListTitle: TextView = findViewById(R.id.tv_nome_lista)
         tvListTitle.text = listTitle
 
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_fruit_of_list)
-        val adapter = FruitVegOfListAdapter(this)
+        recyclerView = findViewById(com.example.prova_progetto.R.id.recycler_fruit_of_list)
+        adapter = FruitVegOfListAdapter(this)
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -80,6 +84,10 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
             if(isDeleting) {
                 eliminaButton.visibility = View.GONE
                 isDeleting = false
+
+                indexesToDelete.clear()
+                val adapter = (recyclerView.adapter as FruitVegOfListAdapter)
+                adapter.updateSelectedItems(indexesToDelete)
             } else {
                 eliminaButton.visibility = View.VISIBLE
                 isDeleting = true
@@ -137,17 +145,18 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
     }
 
     override fun onItemClick(id: String, quantity: Int?) {
-        if(!isDeleting) {
+        if (!isDeleting) {
             showCustomDialog(id, quantity!!)
-        } else
-        {
+        } else {
             val index = indexesToDelete.indexOf(id)
-            if(index != -1) {
+            if (index != -1) {
                 indexesToDelete.removeAt(index)
-            }
-            else {
+            } else {
                 indexesToDelete.add(id)
             }
+            // Aggiorna il RecyclerView per riflettere i cambiamenti visivi
+            val adapter = (recyclerView.adapter as FruitVegOfListAdapter)
+            adapter.updateSelectedItems(indexesToDelete)
         }
     }
 

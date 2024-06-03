@@ -1,25 +1,23 @@
 package com.example.prova_progetto.Adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prova_progetto.Activity.FruitDetailsActivity
 import com.example.prova_progetto.OnFruitVegClickListener
-import com.example.prova_progetto.OnItemsListClickListener
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegInfo
 
 class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : ListAdapter<FruitVegInfo, FruitVegOfListAdapter.ItemListViewHolder>(
     ITEMSLISTS_COMPARATOR
 ) {
+
+    private val selectedItems: MutableSet<String> = mutableSetOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         return ItemListViewHolder.create(parent)
@@ -30,13 +28,21 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
         holder.itemView.setOnClickListener {
             listener.onItemClick(current.fruitVeg.fruitVegId, current.quantity)
         }
-        holder.bind(current)
+        holder.bind(current, selectedItems.contains(current.fruitVeg.fruitVegId))
     }
+
+    fun updateSelectedItems(selectedIds: List<String>) {
+        selectedItems.clear()
+        selectedItems.addAll(selectedIds)
+        notifyDataSetChanged()
+    }
+
 
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
         private val quantityView: TextView = itemView.findViewById(R.id.quantity)
         private val imgView: ImageView = itemView.findViewById(R.id.item_image)
+        private val layout: LinearLayout = itemView.findViewById(R.id.list_item)
 
         // Per una questione di efficenza è stata definita una mappa, questo è possibile perchè
         // la dimensione del dataset è ridotta
@@ -79,7 +85,7 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
             "sausage" to R.drawable.sausage
         )
 
-        fun bind(fruitVeg: FruitVegInfo?) {
+        fun bind(fruitVeg: FruitVegInfo?, isSelected: Boolean) {
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
                 val img: String = it.fruitVeg.img
@@ -88,6 +94,11 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
                 val imgResId = imageMap[img] ?: R.drawable.icon
 
                 imgView.setImageResource(imgResId)
+                if (isSelected) {
+                    layout.setBackgroundResource(R.drawable.red_border) // Rimuove il background
+                } else {
+                    layout.setBackgroundResource(R.drawable.white_dashed_border)
+                }
             }
         }
 

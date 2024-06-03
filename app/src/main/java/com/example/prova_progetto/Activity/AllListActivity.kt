@@ -26,7 +26,6 @@ import kotlinx.coroutines.launch
 
 class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
-    private val applicationScope = CoroutineScope(Dispatchers.Default)
 
     private var isDeleting: Boolean = false
     private val indexesToDelete: MutableList<Long> = mutableListOf()
@@ -37,12 +36,6 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_list)
-
-        val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
-
-        applicationScope.launch(Dispatchers.IO) {
-            FruitListRoomDatabase.populateDatabaseFromCSV(this@AllListActivity, database.fruitVegDao())
-        }
 
         val listTitleTv: EditText = findViewById(R.id.fruit_list_name)
         val deleteBtn: Button = findViewById(R.id.delete_btn)
