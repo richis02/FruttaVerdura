@@ -38,8 +38,10 @@
         app:layout_constraintBottom_toTopOf="@id/recycler_search"
         android:id="@+id/search"
         android:layout_width="0dp"
+        android:layout_weight="1"
+        android:iconifiedByDefault="false"
         android:layout_height="wrap_content"
-        android:hint="Cerca un frutto" />
+        android:queryHint="Cerca un frutto" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="20dp"
