@@ -18,6 +18,7 @@ import com.example.prova_progetto.db.FruitListRoomDatabase
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
+import com.example.prova_progetto.db.FruitVegetable
 import com.example.prova_progetto.db.ItemsList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +29,7 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
     private var isDeleting: Boolean = false
     private val indexesToDelete: MutableList<Long> = mutableListOf()
+
 
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
         FruitVegViewModelFactory((application as FruitVegApplication).repository)
@@ -109,4 +111,5 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
 //TODO        applicationScope.launch(Dispatchers.IO) {
 //           FruitListRoomDatabase.populateDatabaseFromCSV(this@AllListActivity, database.fruitVegDao())
+//
 //        }

@@ -26,9 +26,9 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
         holder.itemView.setOnClickListener {
-            listener.onItemClick(current.fruitVeg.fruitVegId, current.quantity)
+            listener.onItemClick(current.fruitVeg.fruitVegName, current.quantity)
         }
-        holder.bind(current, selectedItems.contains(current.fruitVeg.fruitVegId))
+        holder.bind(current, selectedItems.contains(current.fruitVeg.fruitVegName))
     }
 
     fun updateSelectedItems(selectedIds: List<String>) {
@@ -89,7 +89,7 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
                 val img: String = it.fruitVeg.img
-                listItemView.text = fruitVeg.fruitVeg.fruitVegId
+                listItemView.text = fruitVeg.fruitVeg.fruitVegName
                 quantityView.text = fruitVeg.quantity.toString()
                 val imgResId = imageMap[img] ?: R.drawable.icon
 
@@ -121,7 +121,7 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
 
             override fun areContentsTheSame(oldItem: FruitVegInfo, newItem: FruitVegInfo): Boolean {
                 //TODO: testare come fare ad aggiornare in caso di cambio della quantità
-                return oldItem.fruitVeg.fruitVegId == newItem.fruitVeg.fruitVegId
+                return oldItem.fruitVeg.fruitVegName == newItem.fruitVeg.fruitVegName
             }
         }
     }

@@ -6,7 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Activity.MainActivity">
+        tools:context=".Activity.MainActivity"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -14,7 +15,8 @@
             android:id="@+id/title_bar"
             app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02"
             app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.07"
-            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03" >
+            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
+            >
 
             <ImageView
                 android:layout_width="wrap_content"

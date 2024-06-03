@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "fruit_veg")
 data class FruitVegetable(
-    @PrimaryKey @ColumnInfo(name = "fruit_veg_id") val fruitVegId: String,
+    @PrimaryKey @ColumnInfo(name = "fruit_veg_id") val fruitVegName: String,
     @ColumnInfo(name = "energy_kj") val energyJoule : Double,
     @ColumnInfo(name = "energy_kcal") val energyCal : Double,
     @ColumnInfo(name = "proteins") val proteins : Double,

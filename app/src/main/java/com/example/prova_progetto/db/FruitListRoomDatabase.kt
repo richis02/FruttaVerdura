@@ -13,7 +13,7 @@ import com.opencsv.CSVReaderBuilder
 import java.io.InputStreamReader
 
 
-@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 13, exportSchema = false)
+@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 16, exportSchema = false)
 public abstract class FruitListRoomDatabase: RoomDatabase() {
     abstract fun fruitVegDao() : FruitVegetableDao
     abstract fun itemsListDao() : ItemsListDao
@@ -71,6 +71,8 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
         //TODO: RENDERLO PRIVATO E POPOLARE SOLO ALLA CREAZIONE
          suspend fun populateDatabaseFromCSV(context: Context, fruitVegDao: FruitVegetableDao) {
 
+             fruitVegDao.deleteAllFruitVeg()
+
             try {
                 val inputStream = context.assets.open("dataset-frutta.CSV")
                 val reader = CSVReaderBuilder(InputStreamReader(inputStream))
@@ -84,7 +86,7 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
                     Log.d("ggg",nextLine!![0])
 
                     val entity = FruitVegetable(
-                        fruitVegId = nextLine!![0],
+                        fruitVegName = nextLine!![0],
                         energyJoule = nextLine!![1].toDouble(),
                         energyCal = nextLine!![2].toDouble(),
                         proteins = nextLine!![3].toDouble(),

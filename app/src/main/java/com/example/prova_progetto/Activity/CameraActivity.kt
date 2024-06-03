@@ -2,6 +2,7 @@ package com.example.prova_progetto.Activity
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -29,10 +30,14 @@ class CameraActivity: ComponentActivity(){
 
         imageV.setImageBitmap(bitmap)
         if (bitmap != null) {
-            fruitVegViewModel.allFruitVegNames.observe(this, Observer { fruitVegNames ->
+            fruitVegViewModel.allFruitVeg.observe(this, Observer { fruitVegNames ->
                 // Controlla se fruitVegNames non è nullo prima di chiamare findImage
                 fruitVegNames?.let {
-                    result.text = ClassifyImage().findImage(bitmap, this.applicationContext, it)
+                    val fruitNames : MutableList<String> = mutableListOf()
+                    for(x in it)
+                        fruitNames.add(x.fruitVegName)
+                    Log.d("aaaa",it.size.toString())
+                    result.text = ClassifyImage().findImage(bitmap, this.applicationContext, fruitNames)
                 }
             })
         }

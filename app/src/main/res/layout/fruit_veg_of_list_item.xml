@@ -4,14 +4,16 @@
     android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/white_dashed_border"
+    android:background="@drawable/test_gray_border"
     android:layout_marginTop="4dp"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
     android:layout_marginBottom="4dp"
     android:orientation="horizontal"
     android:layout_marginHorizontal="7dp"
-    android:layout_marginVertical="7dp">
+    android:layout_marginVertical="7dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <ImageView
         android:id="@+id/item_image"
@@ -24,7 +26,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        />
 
     <TextView
         android:id="@+id/list_text_view"

@@ -29,62 +29,91 @@
             android:text="@string/nth_list_name"/>
 
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="20dp"
         android:id="@+id/recycler_fruit_of_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@id/btn_elimina"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.07"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
-        app:layout_constraintRight_toRightOf="@id/guideline_vertical_0.97" />
+        app:layout_constraintRight_toRightOf="@id/guideline_vertical_0.97"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.07"
+        app:layout_constraintVertical_bias="0.0"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_mostra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/baseline_more_horiz_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:backgroundTint="@color/green_background"/>
+        android:src="@drawable/baseline_add_24"
+
+        app:layout_constraintBottom_toBottomOf="@id/button_guideline_horizontal_bottom"
+        app:layout_constraintEnd_toEndOf="@id/button_guideline_vertical_right"
+
+        app:backgroundTint="@color/green_background"
+        app:tint="@android:color/white"
+        app:fabSize="normal"
+        app:fabCustomSize="80dp"
+        android:padding="16dp"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_cerca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="16dp"
         android:src="@drawable/baseline_search_24"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/fab_mostra"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:backgroundTint="@color/green_background"/>
+        app:backgroundTint="@color/white"
+
+        app:layout_constraintBottom_toBottomOf="@id/button_guideline_horizontal_bottom"
+
+        android:foregroundGravity="top"
+        app:layout_constraintStart_toEndOf="@id/button_guideline_vertical_left"
+
+        android:layout_marginBottom="15dp"
+
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="16dp"
         android:src="@drawable/camera"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/fab_cerca"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:backgroundTint="@color/green_background"/>
+
+        app:layout_constraintStart_toEndOf="@id/button_guideline_vertical_left"
+        app:layout_constraintTop_toBottomOf="@id/button_guideline_horizontal_top"
+        app:layout_constraintVertical_bias="0.0"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+
+        app:backgroundTint="@color/white"
+
+        app:fabSize="normal"
+        app:fabCustomSize="60dp"
+        android:padding="16dp"
+
+
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_rimuovi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="16dp"
         android:src="@drawable/baseline_delete_24"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/fab_camera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:backgroundTint="@color/green_background"/>
+        app:backgroundTint="@color/white"
+        android:background="@drawable/test_gray_border"
+
+        app:layout_constraintEnd_toEndOf="@id/button_guideline_vertical_right"
+        app:layout_constraintTop_toTopOf="@id/button_guideline_horizontal_top"
+
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.0"
+
+        android:layout_marginEnd="15dp"
+
+        />
 
     <Button
         android:id="@+id/btn_elimina"
@@ -111,17 +140,46 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.07" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_0.03"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.03" />
+        app:layout_constraintGuide_begin="12dp" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_0.97"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guideline_vertical_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.42" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guideline_horizontal_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guideline_vertical_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guideline_horizontal_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.94" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

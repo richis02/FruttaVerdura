@@ -22,7 +22,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
-        holder.itemView.setOnClickListener { listener.onItemClick(current.fruitVegId, null) }
+        holder.itemView.setOnClickListener { listener.onItemClick(current.fruitVegName, null) }
         holder.bind(current)
     }
 
@@ -76,7 +76,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
                 val img = it.img
-                listItemView.text = fruitVeg.fruitVegId
+                listItemView.text = fruitVeg.fruitVegName
                 val imgResId = imageMap[img] ?: R.drawable.icon
 
                 imgView.setImageResource(imgResId)
@@ -101,7 +101,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
             }
 
             override fun areContentsTheSame(oldItem: FruitVegetable, newItem: FruitVegetable): Boolean {
-                return oldItem.fruitVegId == newItem.fruitVegId
+                return oldItem.fruitVegName == newItem.fruitVegName
             }
         }
     }
