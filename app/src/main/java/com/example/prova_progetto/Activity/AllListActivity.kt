@@ -38,6 +38,15 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_list)
 
+
+                val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
+
+        fruitVegViewModel.deleteAllFruitVeg()
+        applicationScope.launch(Dispatchers.IO) {
+            FruitListRoomDatabase.populateDatabaseFromCSV(this@AllListActivity, database.fruitVegDao())
+        }
+
+
         val listTitleTv: EditText = findViewById(R.id.fruit_list_name)
         val deleteBtn: Button = findViewById(R.id.delete_btn)
         deleteBtn.setOnClickListener{

@@ -1,6 +1,5 @@
 package com.example.prova_progetto.Activity
 
-import android.app.AlertDialog
 import android.app.Dialog
 import com.example.prova_progetto.Adapter.FruitVegOfListAdapter
 import android.content.Intent
@@ -22,10 +21,8 @@ import com.example.prova_progetto.db.FruitVegViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prova_progetto.Adapter.ItemsListAdapter
 import com.example.prova_progetto.OnFruitVegClickListener
 import com.example.prova_progetto.R
-import com.example.prova_progetto.db.ListFruitsCrossRef
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
@@ -70,13 +67,13 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
                 cercaButton.visibility = View.GONE
                 cameraButton.visibility = View.GONE
                 rimuoviButton.visibility = View.GONE
-                mostraButton.setImageResource(R.drawable.baseline_more_horiz_24)
+                //mostraButton.setImageResource(R.drawable.baseline_more_horiz_36)
             }
             else{
                 cercaButton.visibility = View.VISIBLE
                 cameraButton.visibility = View.VISIBLE
                 rimuoviButton.visibility = View.VISIBLE
-                mostraButton.setImageResource(R.drawable.baseline_more_vert_24)
+                //mostraButton.setImageResource(R.drawable.baseline_more_vert_36)
             }
         }
 
@@ -95,7 +92,7 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
             cercaButton.visibility = View.GONE
             cameraButton.visibility = View.GONE
             rimuoviButton.visibility = View.GONE
-            mostraButton.setImageResource(R.drawable.baseline_more_horiz_24)
+            //mostraButton.setImageResource(R.drawable.baseline_more_horiz_36)
         }
 
         eliminaButton.setOnClickListener {

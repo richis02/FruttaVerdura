@@ -13,6 +13,7 @@ import com.example.prova_progetto.db.FruitVegViewModelFactory
 import androidx.lifecycle.Observer
 import com.example.prova_progetto.ClassifyImage
 import com.example.prova_progetto.R
+import kotlin.math.log
 
 
 class CameraActivity: ComponentActivity(){
