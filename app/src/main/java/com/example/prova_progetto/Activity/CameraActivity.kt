@@ -2,6 +2,7 @@ package com.example.prova_progetto.Activity
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -12,6 +13,7 @@ import com.example.prova_progetto.db.FruitVegViewModelFactory
 import androidx.lifecycle.Observer
 import com.example.prova_progetto.ClassifyImage
 import com.example.prova_progetto.R
+import kotlin.math.log
 
 
 class CameraActivity: ComponentActivity(){
@@ -32,6 +34,8 @@ class CameraActivity: ComponentActivity(){
             fruitVegViewModel.allFruitVegNames.observe(this, Observer { fruitVegNames ->
                 // Controlla se fruitVegNames non è nullo prima di chiamare findImage
                 fruitVegNames?.let {
+                    for (x in it)
+                        Log.v("leggi", x)
                     result.text = ClassifyImage().findImage(bitmap, this.applicationContext, it)
                 }
             })
