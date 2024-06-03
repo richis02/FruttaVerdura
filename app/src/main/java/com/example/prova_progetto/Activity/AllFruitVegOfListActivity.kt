@@ -164,7 +164,7 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         val confermaButton: Button = dialog.findViewById(R.id.btn_conferma)
         confermaButton.setOnClickListener {
             // In caso di frutto già presente viene aggiornata la quantità
-            fruitVegViewModel.updateQuantity(id, listId!!, quantity)
+            fruitVegViewModel.updateQuantity(id, listId!!, quantity - qnt)
             dialog.dismiss()
         }
 

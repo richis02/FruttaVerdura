@@ -51,8 +51,8 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
         repository.insertList(itemsList)
     }
 
-    fun insertFruitListCrossRef(listCrossRef: ListFruitsCrossRef, quantity: Int) = viewModelScope.launch {
-        repository.insertOrUpdateListFruitCrossRef(listCrossRef, quantity)
+    fun insertFruitListCrossRef(listCrossRef: ListFruitsCrossRef) = viewModelScope.launch {
+        repository.insertOrUpdateListFruitCrossRef(listCrossRef)
     }
 
     fun deleteFruitVeg(fruitVegId : String) = viewModelScope.launch {

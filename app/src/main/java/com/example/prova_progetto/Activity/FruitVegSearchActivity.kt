@@ -93,7 +93,7 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         confermaButton.setOnClickListener {
             val listFruitCrossRef = ListFruitsCrossRef(listId = listId!!, fruitId = id, quantity = quantity)
             // In caso di frutto già presente viene aggiornata la quantità
-            fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef, quantity)
+            fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef)
             dialog.dismiss()
         }
         

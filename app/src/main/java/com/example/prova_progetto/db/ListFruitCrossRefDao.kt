@@ -16,7 +16,7 @@ interface ListFruitCrossRefDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertFruitListCrossRef(listCrossRef: ListFruitsCrossRef) : Long
 
-    @Query("UPDATE list_fruit_cross_ref SET quantity = :quantity WHERE fruit_id = :fruitId AND list_id = :listId")
+    @Query("UPDATE list_fruit_cross_ref SET quantity = quantity + :quantity WHERE fruit_id = :fruitId AND list_id = :listId")
     suspend fun updateQuantity(fruitId: String, listId: Long, quantity: Int)
 
     @Query("DELETE FROM list_fruit_cross_ref WHERE fruit_id = :fruitId AND list_id = :listId")
@@ -26,10 +26,10 @@ interface ListFruitCrossRefDao {
     suspend fun deleteAllFruitListCrossRef()
 
     // Custom function per gestire l'aumento della quantità
-    suspend fun insertOrUpdateFruitListCrossRef(listCrossRef: ListFruitsCrossRef, new_quantity: Int) {
+    suspend fun insertOrUpdateFruitListCrossRef(listCrossRef: ListFruitsCrossRef) {
         val id = insertFruitListCrossRef(listCrossRef)
         if (id == -1L) { // Conflict occurred, update the quantity
-            updateQuantity(listCrossRef.fruitId, listCrossRef.listId, listCrossRef.quantity + new_quantity)
+            updateQuantity(listCrossRef.fruitId, listCrossRef.listId, listCrossRef.quantity)
         }
     }
 }
