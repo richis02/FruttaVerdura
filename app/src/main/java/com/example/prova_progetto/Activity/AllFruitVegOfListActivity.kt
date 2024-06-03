@@ -45,6 +45,10 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
 
         listId = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
 
+        val listTitle = intent.getStringExtra("list_name")
+        val tvListTitle: TextView = findViewById(R.id.tv_nome_lista)
+        tvListTitle.text = listTitle
+
         val recyclerView: RecyclerView = findViewById(R.id.recycler_fruit_of_list)
         val adapter = FruitVegOfListAdapter(this)
         recyclerView.adapter = adapter
@@ -73,8 +77,13 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         }
 
         rimuoviButton.setOnClickListener {
-            isDeleting = !isDeleting
-            eliminaButton.visibility = View.VISIBLE
+            if(isDeleting) {
+                eliminaButton.visibility = View.GONE
+                isDeleting = false
+            } else {
+                eliminaButton.visibility = View.VISIBLE
+                isDeleting = true
+            }
             cercaButton.visibility = View.GONE
             cameraButton.visibility = View.GONE
             rimuoviButton.visibility = View.GONE
@@ -103,7 +112,6 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
             v.context.startActivity(intent)
         }
 
-
         listId?.let {
             fruitVegViewModel.getAllFruitsVegOfList(listId!!).observe(this, Observer {fruits ->
                 fruits?.let{
@@ -111,9 +119,6 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
                 }
             })
         }
-
-        //TODO: COSI è IL MODO CORRETTO DI SCRIVERE STRINGHE STATICHE
-
     }
 
     companion object {

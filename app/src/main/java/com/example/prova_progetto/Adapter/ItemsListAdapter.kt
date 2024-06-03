@@ -23,7 +23,7 @@ class ItemsListAdapter(private val listener: OnItemsListClickListener) : ListAda
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
         holder.itemView.setOnClickListener {
-            listener.onItemClick(current.itemsListId)
+            listener.onItemClick(current.itemsListId, current.listTitle)
         }
         holder.bind(current)
     }
@@ -47,8 +47,6 @@ class ItemsListAdapter(private val listener: OnItemsListClickListener) : ListAda
                     .inflate(R.layout.all_list_item, parent, false)
                 return ItemListViewHolder(view)
             }
-
-            const val LIST_KEY = "list_key"
         }
     }
 
