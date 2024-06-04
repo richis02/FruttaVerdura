@@ -30,22 +30,12 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
     private var isDeleting: Boolean = false
     private val indexesToDelete: MutableList<Long> = mutableListOf()
 
-
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
         FruitVegViewModelFactory((application as FruitVegApplication).repository)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_list)
-
-
-                val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
-
-        fruitVegViewModel.deleteAllFruitVeg()
-        applicationScope.launch(Dispatchers.IO) {
-            FruitListRoomDatabase.populateDatabaseFromCSV(this@AllListActivity, database.fruitVegDao())
-        }
-
 
         val listTitleTv: EditText = findViewById(R.id.fruit_list_name)
         val deleteBtn: Button = findViewById(R.id.delete_btn)

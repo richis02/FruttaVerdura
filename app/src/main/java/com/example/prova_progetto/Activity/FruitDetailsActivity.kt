@@ -1,6 +1,7 @@
 package com.example.prova_progetto.Activity
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -21,7 +22,7 @@ class FruitDetailsActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        val tv_nome: TextView = findViewById(R.id.nome)
+        val image: ImageView = findViewById(R.id.image)
         val tv_val_nutr: TextView = findViewById(R.id.valore_nutrizionale)
 
         val fruit_name: String? = intent.getStringExtra("fruit_key")
