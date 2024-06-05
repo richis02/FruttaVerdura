@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
+        android:textColor="@color/green_text_icons"
         android:layout_gravity="center_horizontal"
         android:paddingBottom="16dp" />
 
@@ -23,9 +24,11 @@
 
         <Button
             android:id="@+id/btn_decrease"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="-" />
+            android:text="-"
+            android:textSize="21sp"
+            android:background="@drawable/circular_green_button_background"/>
 
         <TextView
             android:id="@+id/tv_quantity"
@@ -34,13 +37,17 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:text="1"
+            android:fontFamily="@font/montserratbold"
+            android:textColor="@color/green_text_icons"
             android:textSize="16sp" />
 
         <Button
             android:id="@+id/btn_increase"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="+" />
+            android:text="+"
+            android:textSize="21sp"
+            android:background="@drawable/circular_green_button_background"/>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

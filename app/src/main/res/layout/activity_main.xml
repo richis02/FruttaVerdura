@@ -83,7 +83,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/all_list"
                 android:textColor="@color/green_text_icons"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/all_list_image"
