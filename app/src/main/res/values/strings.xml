@@ -24,4 +24,6 @@
     <string name="nth_list_name">%1$s</string>
 
     <string name="nth_fruit_name">%1$s</string>
+
+    <string name="tutte_le_liste">Le tue liste</string>
 </resources>

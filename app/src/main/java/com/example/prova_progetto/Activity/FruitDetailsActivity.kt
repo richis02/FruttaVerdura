@@ -24,11 +24,11 @@ class FruitDetailsActivity: ComponentActivity() {
         back.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-        //val tv_val_nutr: TextView = findViewById(R.id.valore_nutrizionale)
 
         val fruit_name: String? = intent.getStringExtra("fruit_key")
 
-        val image: ImageView = findViewById(R.id.fruit_image)
+        val tvNome: TextView = findViewById(R.id.title_fruit)
+        tvNome.text = fruit_name
 
         fruit_name?.let {
             fruitVegViewModel.getFruitVeg(fruit_name).observe(this, Observer {fruit ->
@@ -37,6 +37,7 @@ class FruitDetailsActivity: ComponentActivity() {
                         it.img, "drawable",
                         packageName
                     )
+                    val image: ImageView = findViewById(R.id.fruit_image)
                     if (imageResourceId != 0) // Verifico che l'ID della risorsa sia valido
                         image.setImageResource(imageResourceId);
 

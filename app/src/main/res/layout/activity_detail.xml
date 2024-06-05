@@ -23,6 +23,7 @@
                 android:src="@drawable/baseline_arrow_back_ios_new_24" />
 
             <TextView
+                android:id="@+id/title_fruit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserratbold"
