@@ -23,16 +23,16 @@ class FruitDetailsActivity: ComponentActivity() {
         setContentView(R.layout.activity_detail)
 
         val image: ImageView = findViewById(R.id.image)
-        val tv_val_nutr: TextView = findViewById(R.id.valore_nutrizionale)
+        //val tv_val_nutr: TextView = findViewById(R.id.valore_nutrizionale)
 
         val fruit_name: String? = intent.getStringExtra("fruit_key")
 
-        tv_nome.text = fruit_name
+        //tv_nome.text = fruit_name
 
         fruit_name?.let {
             fruitVegViewModel.getFruitVeg(fruit_name).observe(this, Observer {fruit ->
                 fruit?.let{
-                    tv_val_nutr.text = it.proteins.toString()
+                    //tv_val_nutr.text = it.proteins.toString()
                 }
             })
         }

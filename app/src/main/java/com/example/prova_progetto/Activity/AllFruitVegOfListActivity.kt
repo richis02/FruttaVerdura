@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
@@ -61,6 +62,8 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         val rimuoviButton: FloatingActionButton = findViewById(R.id.fab_rimuovi)
 
         val eliminaButton: Button = findViewById(R.id.btn_elimina)
+        val annullaButton: Button = findViewById(R.id.btn_annulla)
+        val constraintLayout: ConstraintLayout = findViewById(R.id.btn_elimina_linear)
 
         mostraButton.setOnClickListener{
             if(cameraButton.isVisible){
@@ -78,29 +81,30 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         }
 
         rimuoviButton.setOnClickListener {
-            if(isDeleting) {
-                eliminaButton.visibility = View.GONE
-                isDeleting = false
-
-                indexesToDelete.clear()
-                val adapter = (recyclerView.adapter as FruitVegOfListAdapter)
-                adapter.updateSelectedItems(indexesToDelete)
-            } else {
-                eliminaButton.visibility = View.VISIBLE
-                isDeleting = true
-            }
+            isDeleting = true
             cercaButton.visibility = View.GONE
             cameraButton.visibility = View.GONE
             rimuoviButton.visibility = View.GONE
-            //mostraButton.setImageResource(R.drawable.baseline_more_horiz_36)
+            mostraButton.visibility = View.GONE
+
+            constraintLayout.visibility = View.VISIBLE
         }
 
         eliminaButton.setOnClickListener {
             for(index in indexesToDelete)
                 fruitVegViewModel.deleteFruitListCrossRef(index, listId!!)
             //listId non può essere nullo
-            eliminaButton.visibility = View.GONE
+            constraintLayout.visibility = View.GONE
+            mostraButton.visibility = View.VISIBLE
             isDeleting = false
+        }
+        annullaButton.setOnClickListener {
+            indexesToDelete.clear()
+            constraintLayout.visibility = View.GONE
+            mostraButton.visibility = View.VISIBLE
+            isDeleting = false
+            val adapter = (recyclerView.adapter as FruitVegOfListAdapter)
+            adapter.updateSelectedItems(indexesToDelete)
         }
 
         cameraButton.setOnClickListener {

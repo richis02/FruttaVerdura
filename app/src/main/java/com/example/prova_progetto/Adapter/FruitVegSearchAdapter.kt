@@ -33,9 +33,10 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
         private val imgView: ImageView = itemView.findViewById(R.id.item_image)
         //todo: da fare la grafica e recuperare ConstraintLayout
 
-        private val imgResId: Drawable
-            get() {
-            }
+        //private val imgResId : R.drawable
+          //  get() {
+            //    return imgResId
+            //}
 
         // Per una questione di efficenza è stata definita una mappa, questo è possibile perchè
         // la dimensione del dataset è ridotta
@@ -83,7 +84,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
             fruitVeg?.let {
                 val img = it.img
                 listItemView.text = fruitVeg.fruitVegName
-                imgResId = imageMap[img] ?: R.drawable.icon
+                val imgResId = imageMap[img] ?: R.drawable.icon
 
                 imgView.setImageResource(imgResId)
             }

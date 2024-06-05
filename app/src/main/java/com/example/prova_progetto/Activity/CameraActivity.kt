@@ -31,14 +31,11 @@ class CameraActivity: ComponentActivity(){
 
         imageV.setImageBitmap(bitmap)
         if (bitmap != null) {
-            fruitVegViewModel.allFruitVeg.observe(this, Observer { fruitVegNames ->
+            fruitVegViewModel.allFruitVegNames.observe(this, Observer { fruitVegNames ->
                 // Controlla se fruitVegNames non è nullo prima di chiamare findImage
                 fruitVegNames?.let {
-                    val fruitNames : MutableList<String> = mutableListOf()
-                    for(x in it)
-                        fruitNames.add(x.fruitVegName)
                     Log.d("aaaa",it.size.toString())
-                    result.text = ClassifyImage().findImage(bitmap, this.applicationContext, fruitNames)
+                    result.text = ClassifyImage().findImage(bitmap, this.applicationContext, it)
                 }
             })
         }
