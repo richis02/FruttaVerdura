@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.view.View
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -43,6 +44,11 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
     override fun onCreate (savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fruit_list)
+
+        val back: ImageView = findViewById(R.id.back_arrow)
+        back.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         listId = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
 

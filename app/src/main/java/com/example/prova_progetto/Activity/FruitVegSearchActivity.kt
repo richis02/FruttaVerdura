@@ -5,10 +5,12 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.Image
 import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -53,6 +55,12 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
             // Metodo da eseguire quando c'è un cambiamento
             lists?.let { adapter.submitList(it) }
         })
+
+        val back: ImageView = findViewById(R.id.back_arrow)
+        back.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

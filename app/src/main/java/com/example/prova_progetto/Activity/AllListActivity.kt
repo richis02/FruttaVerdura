@@ -68,6 +68,7 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
             if(listTitleTv.text.toString() != "") {
                 val newList = ItemsList(listTitle = listTitleTv.text.toString())
                 fruitVegViewModel.insertList(newList)
+                listTitleTv.text = null //tolgo il testo
             }
         }
 

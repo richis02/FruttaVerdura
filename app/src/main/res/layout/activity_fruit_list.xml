@@ -13,6 +13,7 @@
         app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03" >
 
         <ImageView
+            android:id="@+id/back_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_arrow_back_ios_new_24" />
@@ -46,10 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_add_24"
-
         app:layout_constraintBottom_toBottomOf="@id/button_guideline_horizontal_bottom"
         app:layout_constraintEnd_toEndOf="@id/button_guideline_vertical_right"
-
         app:backgroundTint="@color/green_background"
         app:tint="@android:color/white"
         app:fabSize="normal"
@@ -63,37 +62,26 @@
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_search_24"
         app:backgroundTint="@color/white"
-
         app:layout_constraintBottom_toBottomOf="@id/button_guideline_horizontal_bottom"
-
-        android:foregroundGravity="top"
         app:layout_constraintStart_toEndOf="@id/button_guideline_vertical_left"
-
-        android:layout_marginBottom="15dp"
-        android:visibility="gone"
-        />
+        android:layout_marginBottom="10dp"
+        app:elevation="2dp"
+        app:borderWidth="1dp"
+        android:visibility="gone"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/camera"
-
         app:layout_constraintStart_toEndOf="@id/button_guideline_vertical_left"
         app:layout_constraintTop_toBottomOf="@id/button_guideline_horizontal_top"
-        app:layout_constraintVertical_bias="0.0"
-
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
         app:backgroundTint="@color/white"
-
-        app:fabSize="normal"
-        app:fabCustomSize="60dp"
-        android:padding="16dp"
-        android:visibility="gone"
-
-        />
+        app:elevation="2dp"
+        app:borderWidth="1dp"
+        android:visibility="gone"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_rimuovi"
@@ -102,16 +90,12 @@
         android:src="@drawable/baseline_delete_24"
         app:backgroundTint="@color/white"
         android:background="@drawable/test_gray_border"
-
         app:layout_constraintEnd_toEndOf="@id/button_guideline_vertical_right"
         app:layout_constraintTop_toTopOf="@id/button_guideline_horizontal_top"
-
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintHorizontal_bias="0.0"
-
-        android:layout_marginEnd="15dp"
-        android:visibility="gone"
-        />
+        android:layout_marginEnd="10dp"
+        app:elevation="2dp"
+        app:borderWidth="1dp"
+        android:visibility="gone"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_elimina_linear"
@@ -178,27 +162,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.42" />
+        app:layout_constraintGuide_end="210dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button_guideline_horizontal_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.68" />
+        app:layout_constraintGuide_end="210dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button_guideline_vertical_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_end="40dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button_guideline_horizontal_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.94" />
+        app:layout_constraintGuide_end="40dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

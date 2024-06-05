@@ -22,7 +22,11 @@ class FruitDetailsActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        val image: ImageView = findViewById(R.id.image)
+        val back: ImageView = findViewById(R.id.back_arrow)
+        back.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        //val image: ImageView = findViewById(R.id.image)
         //val tv_val_nutr: TextView = findViewById(R.id.valore_nutrizionale)
 
         val fruit_name: String? = intent.getStringExtra("fruit_key")
