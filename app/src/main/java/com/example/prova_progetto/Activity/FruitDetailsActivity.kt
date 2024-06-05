@@ -2,6 +2,7 @@ package com.example.prova_progetto.Activity
 
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -41,23 +42,36 @@ class FruitDetailsActivity: ComponentActivity() {
                     if (imageResourceId != 0) // Verifico che l'ID della risorsa sia valido
                         image.setImageResource(imageResourceId);
 
-                    val tvEnergyJ: TextView = findViewById(R.id.tv_energy_j)
-                    tvEnergyJ.text = "Energia (Joule): ${it.energyJoule}"
+                    val tvEnergyJ: TextView = findViewById(R.id.number_of_energy_j)
+                    tvEnergyJ.text = "${it.energyJoule}"
+                    val pbEnergyJ: ProgressBar = findViewById(R.id.stats_progressbar_energy_j)
+                    pbEnergyJ.progress = it.energyJoule.toInt()
 
-                    val tvEnergyC: TextView = findViewById(R.id.tv_energy_c)
-                    tvEnergyC.text = "Energia (KiloCalorie): ${it.energyCal}"
+                    val tvEnergyC: TextView = findViewById(R.id.number_of_energy_cal)
+                    tvEnergyC.text = "${it.energyCal}"
+                    val pbEnergyCal: ProgressBar = findViewById(R.id.stats_progressbar_energy_cal)
+                    pbEnergyCal.progress = it.energyCal.toInt()
 
-                    val tvProtein: TextView = findViewById(R.id.tv_protein)
-                    tvProtein.text = "Proteine: ${it.proteins}"
+                    val tvProtein: TextView = findViewById(R.id.number_of_protein)
+                    tvProtein.text = "${it.proteins}"
+                    val pbProtein: ProgressBar = findViewById(R.id.stats_progressbar_protein)
+                    pbProtein.progress = it.proteins.toInt()
 
-                    val tvCarbohydrates: TextView = findViewById(R.id.tv_carbohydrates)
-                    tvCarbohydrates.text = "Carboidrati: ${it.carbohydrates}"
+                    val tvCarbohydrates: TextView = findViewById(R.id.number_of_carbohydrates)
+                    tvCarbohydrates.text = "${it.carbohydrates}"
+                    val pbCarbohydrates: ProgressBar = findViewById(R.id.stats_progressbar_carbohydrates)
+                    pbCarbohydrates.progress = it.carbohydrates.toInt()
 
-                    val tvLipids: TextView = findViewById(R.id.tv_lipids)
-                    tvLipids.text = "Lipidi: ${it.lipids}"
 
-                    val tvFibre: TextView = findViewById(R.id.tv_fibre)
-                    tvFibre.text = "Fibre: ${it.fibre}"
+                    val tvLipids: TextView = findViewById(R.id.number_of_lipids)
+                    tvLipids.text = "${it.lipids}"
+                    val pbLipids: ProgressBar = findViewById(R.id.stats_progressbar_lipids)
+                    pbLipids.progress = it.lipids.toInt()
+
+                    val tvFibre: TextView = findViewById(R.id.number_of_fibers)
+                    tvFibre.text = "${it.fibre}"
+                    val pbFibers: ProgressBar = findViewById(R.id.stats_progressbar_fibers)
+                    pbFibers.progress = it.fibre.toInt()
                 }
             })
         }
