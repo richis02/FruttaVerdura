@@ -8,16 +8,50 @@ import android.provider.MediaStore
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
 import android.Manifest
+import android.content.Context
+import androidx.activity.viewModels
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.prova_progetto.R
+import com.example.prova_progetto.db.FruitListRoomDatabase
+import com.example.prova_progetto.db.FruitVegApplication
+import com.example.prova_progetto.db.FruitVegViewModel
+import com.example.prova_progetto.db.FruitVegViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
     private val REQUEST_CAMERA_PERMISSION: Int = 123
 
+    private val fruitVegViewModel: FruitVegViewModel by viewModels {
+        FruitVegViewModelFactory((application as FruitVegApplication).repository)
+    }
+
+    private val applicationScope = CoroutineScope(Dispatchers.Default)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //devo controllare se l'app è la prima volta che viene lanciata o se è cambiata la versione del db.
+        //in caso positivo del controllo vuol dire che devo fare l'update del db
+
+        if (isFirstRun() || isDatabaseUpdated()) {
+            // Cancella tutti i dati esistenti
+            fruitVegViewModel.deleteAllFruitVeg()
+
+            val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
+
+            // Popola il database da CSV
+            applicationScope.launch(Dispatchers.IO) {
+                FruitListRoomDatabase.populateDatabaseFromCSV(this@MainActivity, database.fruitVegDao())
+                setFirstRunCompleted()
+                setDatabaseUpdated()
+            }
+        }
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED)
         {
@@ -99,6 +133,35 @@ class MainActivity : ComponentActivity() {
         search.setOnClickListener {v ->
             val intent = Intent(v.context, FruitVegSearchActivity::class.java)
             v.context.startActivity(intent)
+        }
+    }
+
+    private fun isFirstRun(): Boolean {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean("is_first_run", true)
+    }
+
+    private fun setFirstRunCompleted() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putBoolean("is_first_run", false)
+            apply()
+        }
+    }
+
+    private fun isDatabaseUpdated(): Boolean {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val currentVersion = 17 // Cambia questo valore ogni volta che aggiorni il database
+        val savedVersion = sharedPreferences.getInt("db_version", 0)
+        return currentVersion > savedVersion
+    }
+
+    private fun setDatabaseUpdated() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val currentVersion = 17 // Deve corrispondere alla versione attuale del database
+        with(sharedPreferences.edit()) {
+            putInt("db_version", currentVersion)
+            apply()
         }
     }
 }

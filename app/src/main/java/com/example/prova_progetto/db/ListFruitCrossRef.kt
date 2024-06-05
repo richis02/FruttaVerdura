@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
         ),
         ForeignKey(
             entity = FruitVegetable::class,
-            parentColumns = ["fruit_veg_id"],
+            parentColumns = ["fruit_veg_name"],
             childColumns = ["fruit_id"],
             onDelete = ForeignKey.CASCADE
         ),

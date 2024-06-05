@@ -1,5 +1,6 @@
 package com.example.prova_progetto.Adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.example.prova_progetto.OnFruitVegClickListener
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegetable
 
+
 class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : ListAdapter<FruitVegetable, FruitVegSearchAdapter.ItemListViewHolder>(
     ITEMSLISTS_COMPARATOR
 ) {
@@ -22,7 +24,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
-        holder.itemView.setOnClickListener { listener.onItemClick(current.fruitVegId, null) }
+        holder.itemView.setOnClickListener { listener.onItemClick(current.fruitVegName, null) }
         holder.bind(current)
     }
 
@@ -30,6 +32,11 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
         private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
         private val imgView: ImageView = itemView.findViewById(R.id.item_image)
         //todo: da fare la grafica e recuperare ConstraintLayout
+
+        //private val imgResId : R.drawable
+          //  get() {
+            //    return imgResId
+            //}
 
         // Per una questione di efficenza è stata definita una mappa, questo è possibile perchè
         // la dimensione del dataset è ridotta
@@ -76,7 +83,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
             // Con let si gestisce il caso di fruitVeg = null
             fruitVeg?.let {
                 val img = it.img
-                listItemView.text = fruitVeg.fruitVegId
+                listItemView.text = fruitVeg.fruitVegName
                 val imgResId = imageMap[img] ?: R.drawable.icon
 
                 imgView.setImageResource(imgResId)
@@ -101,7 +108,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
             }
 
             override fun areContentsTheSame(oldItem: FruitVegetable, newItem: FruitVegetable): Boolean {
-                return oldItem.fruitVegId == newItem.fruitVegId
+                return oldItem.fruitVegName == newItem.fruitVegName
             }
         }
     }

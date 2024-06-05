@@ -18,6 +18,7 @@ import com.example.prova_progetto.db.FruitListRoomDatabase
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
+import com.example.prova_progetto.db.FruitVegetable
 import com.example.prova_progetto.db.ItemsList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,17 +39,28 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
         val listTitleTv: EditText = findViewById(R.id.fruit_list_name)
         val deleteBtn: Button = findViewById(R.id.delete_btn)
+        val annullaBtn: Button = findViewById(R.id.annulla_btn)
         deleteBtn.setOnClickListener{
             if(!isDeleting){
                 isDeleting = true
                 deleteBtn.text = "Conferma"
+                annullaBtn.visibility = View.VISIBLE
+
             } else {
                 isDeleting = false
                 deleteBtn.text = "Elimina"
                 for (index in indexesToDelete) {
                     fruitVegViewModel.deleteItemList(index)
                 }
+                annullaBtn.visibility = View.GONE
             }
+        }
+
+        annullaBtn.setOnClickListener {
+            annullaBtn.visibility = View.GONE
+            deleteBtn.text = "Elimina"
+            indexesToDelete.clear()
+            isDeleting = false
         }
 
         val addList: ImageView = findViewById(R.id.add_list)
@@ -56,6 +68,7 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
             if(listTitleTv.text.toString() != "") {
                 val newList = ItemsList(listTitle = listTitleTv.text.toString())
                 fruitVegViewModel.insertList(newList)
+                listTitleTv.text = null //tolgo il testo
             }
         }
 
@@ -109,4 +122,5 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
 //TODO        applicationScope.launch(Dispatchers.IO) {
 //           FruitListRoomDatabase.populateDatabaseFromCSV(this@AllListActivity, database.fruitVegDao())
+//
 //        }
