@@ -5,13 +5,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
-import com.example.prova_progetto.db.FruitVegetable
-import androidx.lifecycle.Observer
 
 class FruitDetailsActivity: ComponentActivity() {
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
@@ -26,17 +24,39 @@ class FruitDetailsActivity: ComponentActivity() {
         back.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-        //val image: ImageView = findViewById(R.id.image)
         //val tv_val_nutr: TextView = findViewById(R.id.valore_nutrizionale)
 
         val fruit_name: String? = intent.getStringExtra("fruit_key")
 
-        //tv_nome.text = fruit_name
+        val image: ImageView = findViewById(R.id.fruit_image)
 
         fruit_name?.let {
             fruitVegViewModel.getFruitVeg(fruit_name).observe(this, Observer {fruit ->
                 fruit?.let{
-                    //tv_val_nutr.text = it.proteins.toString()
+                    val imageResourceId = resources.getIdentifier(
+                        it.img, "drawable",
+                        packageName
+                    )
+                    if (imageResourceId != 0) // Verifico che l'ID della risorsa sia valido
+                        image.setImageResource(imageResourceId);
+
+                    val tvEnergyJ: TextView = findViewById(R.id.tv_energy_j)
+                    tvEnergyJ.text = "Energia (Joule): ${it.energyJoule}"
+
+                    val tvEnergyC: TextView = findViewById(R.id.tv_energy_c)
+                    tvEnergyC.text = "Energia (KiloCalorie): ${it.energyCal}"
+
+                    val tvProtein: TextView = findViewById(R.id.tv_protein)
+                    tvProtein.text = "Proteine: ${it.proteins}"
+
+                    val tvCarbohydrates: TextView = findViewById(R.id.tv_carbohydrates)
+                    tvCarbohydrates.text = "Carboidrati: ${it.carbohydrates}"
+
+                    val tvLipids: TextView = findViewById(R.id.tv_lipids)
+                    tvLipids.text = "Lipidi: ${it.lipids}"
+
+                    val tvFibre: TextView = findViewById(R.id.tv_fibre)
+                    tvFibre.text = "Fibre: ${it.fibre}"
                 }
             })
         }

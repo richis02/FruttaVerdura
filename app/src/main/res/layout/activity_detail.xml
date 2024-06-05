@@ -25,7 +25,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_nome_lista"
                 android:fontFamily="@font/montserratbold"
                 android:textSize="20sp"
                 android:layout_marginStart="20sp"
@@ -73,19 +72,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:id="@+id/carbohydrates"/>
+                android:id="@+id/tv_carbohydrates"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:id="@+id/lipids"/>
+                android:id="@+id/tv_lipids"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:id="@+id/fibre"/>
+                android:id="@+id/tv_fibre"/>
 
 
         </LinearLayout>
