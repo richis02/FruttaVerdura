@@ -14,10 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.prova_progetto.Adapter.ItemsListAdapter
 import com.example.prova_progetto.OnItemsListClickListener
 import com.example.prova_progetto.R
+import com.example.prova_progetto.db.FruitListRoomDatabase
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
 import com.example.prova_progetto.db.ItemsList
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class AllListActivity: ComponentActivity(), OnItemsListClickListener {
@@ -66,16 +70,18 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
         fruitVegViewModel.allList.observe(this, Observer { lists ->
             // Aggiornamento copia cached
-            lists?.let { adapter.submitList(it) }
+            lists?.let {
+                adapter.submitList(it)
+            }
         })
 
     }
 
-    override fun onItemClick(id: Long) {
+    override fun onItemClick(id: Long, name: String) {
         if(!isDeleting) {
             val intent = Intent(this, AllFruitVegOfListActivity::class.java)
-            intent.putExtra(ItemsListAdapter.ItemListViewHolder.LIST_KEY, id)
-
+            intent.putExtra(LIST_KEY, id)
+            intent.putExtra(LIST_NAME, name)
             startActivity(intent)
         } else
         {
@@ -89,6 +95,10 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         }
     }
 
+    companion object{
+        const val LIST_KEY = "list_key"
+        const val LIST_NAME = "list_name"
+    }
     //TODO: IMPLEMENTARE AGGIUNTA LISTA VEDI CODELAB
 }
 

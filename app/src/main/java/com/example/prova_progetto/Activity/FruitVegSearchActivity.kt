@@ -30,7 +30,6 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FruitVegSearchAdapter
 
-    //TODO: CAPIRE SE VA MODIFICATO
     private var listId: Long? = null
 
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
@@ -93,7 +92,8 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         confermaButton.setOnClickListener {
             val listFruitCrossRef = ListFruitsCrossRef(listId = listId!!, fruitId = id, quantity = quantity)
             // In caso di frutto già presente viene aggiornata la quantità
-            fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef, quantity)
+            fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef)
+            dialog.dismiss()
         }
         
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

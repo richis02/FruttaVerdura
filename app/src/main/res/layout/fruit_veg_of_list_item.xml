@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dashed_border"
+    android:background="@drawable/white_dashed_border"
     android:layout_marginTop="4dp"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
@@ -12,25 +13,45 @@
     android:layout_marginHorizontal="7dp"
     android:layout_marginVertical="7dp">
 
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:id="@+id/list_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20sp"
-        android:fontFamily="@font/montserratthin"
+        android:fontFamily="@font/montserratmedium"
         android:text="@string/nth_list_name"
+        android:textSize="20sp"
+        android:layout_marginStart="20sp"
         android:textColor="@color/green_text_icons"
-        android:textSize="30sp" />
+        android:layout_gravity="center_vertical" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/quantity"
-        android:fontFamily="@font/montserratthin"
+        android:fontFamily="@font/montserratbold"
+        android:textSize="20sp"
         android:textColor="@color/green_text_icons"
-        android:textSize="30sp"
-        android:text="@string/nth_list_name" />
+        android:layout_gravity="center_vertical"
+        android:gravity="end"
+        android:layout_marginEnd="20dp" />
 
 </LinearLayout>
 
