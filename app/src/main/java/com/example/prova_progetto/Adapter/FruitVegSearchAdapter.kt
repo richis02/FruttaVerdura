@@ -69,7 +69,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
             "chili" to R.drawable.chili,
             "bell_pepper" to R.drawable.bell_pepper,
             "pear" to R.drawable.pear,
-            "beans" to R.drawable.beans,
+            "peas" to R.drawable.peas,
             "tomato" to R.drawable.tomato,
             "raddish" to R.drawable.radish,
             "turnip" to R.drawable.turnip,

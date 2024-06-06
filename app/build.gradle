@@ -73,6 +73,8 @@ dependencies {
     implementation libs.androidx.ui.tooling.preview
     implementation libs.androidx.material3
     implementation libs.androidx.room.common
+    implementation libs.androidx.camera.view
+    implementation libs.androidx.camera.lifecycle
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -82,6 +84,10 @@ dependencies {
     debugImplementation libs.androidx.ui.test.manifest
 
     implementation 'org.tensorflow:tensorflow-lite:+'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.9.0'
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.4.0'
+
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'androidx.recyclerview:recyclerview:1.2.1'

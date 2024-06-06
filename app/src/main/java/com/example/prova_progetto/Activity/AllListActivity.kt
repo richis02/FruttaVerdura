@@ -37,6 +37,11 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_list)
 
+        val back: ImageView = findViewById(R.id.back_arrow)
+        back.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         val listTitleTv: EditText = findViewById(R.id.fruit_list_name)
         val deleteBtn: Button = findViewById(R.id.delete_btn)
         val annullaBtn: Button = findViewById(R.id.annulla_btn)

@@ -26,4 +26,6 @@
     <string name="nth_fruit_name">%1$s</string>
 
     <string name="tutte_le_liste">Le tue liste</string>
+    <string name="frutta">Frutta e Verdura</string>
+    <string name="foto">Inquadra un frutto</string>
 </resources>

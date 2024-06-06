@@ -116,11 +116,13 @@ class MainActivity : ComponentActivity() {
 
     private fun setAllEvent(){
         val camera: ConstraintLayout = findViewById(R.id.open_camera)
-        camera.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        camera.setOnClickListener {v ->
+            /*val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             if(intent.resolveActivity(packageManager) != null){
                 startActivityForResult(intent, REQUEST_CAMERA_PERMISSION)
-            }
+            }*/
+            val intent = Intent(v.context, RealTimeDetectionActivity::class.java)
+            v.context.startActivity(intent)
         }
 
         val list: ConstraintLayout = findViewById(R.id.all_list)

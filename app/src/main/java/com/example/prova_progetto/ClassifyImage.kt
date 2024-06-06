@@ -10,8 +10,6 @@ import java.nio.channels.FileChannel
 
 class ClassifyImage constructor(){
 
-    //TODO: VERIDFFICARE LA CORRETTEZA DELL'ARRAY PASSATO IN QUESTO MODO
-    // --> CONTROLLARE CHE L'ORDINE DEGLI ELEMENTI SIA CORRETTO!!!!!
     fun findImage(image: Bitmap, context: Context, fruitAndVegetableArray: List<String>): String{
 
         val interpreter = loadModelFile(context, "model.tflite")?.let { Interpreter(it) }
@@ -21,7 +19,7 @@ class ClassifyImage constructor(){
             val input = preprocessBitmap(image)
             interpreter.run(input, output)
             val maxIndex = output[0].indices.maxByOrNull { output[0][it] } ?: -1
-            return "Prediction: ${fruitAndVegetableArray[maxIndex]}, Confidence: ${output[0][maxIndex]}"
+            return "Vedo: ${fruitAndVegetableArray[maxIndex]}, con probabilità del: ${output[0][maxIndex] * 100}%"
         }
         return "Error"
     }

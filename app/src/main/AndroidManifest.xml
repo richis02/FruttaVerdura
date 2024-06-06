@@ -33,6 +33,7 @@
         <activity android:name=".Activity.FruitVegSearchActivity" />
         <activity android:name=".Activity.FruitDetailsActivity" />
         <activity android:name=".Activity.AllFruitVegOfListActivity" />
+        <activity android:name=".Activity.RealTimeDetectionActivity" />
     </application>
 
 </manifest>
