@@ -6,11 +6,14 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
+import android.util.Rational
+import android.util.Size
 import android.view.*
-import android.widget.AdapterView
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.viewModels
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Camera
@@ -20,10 +23,12 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.Observer
 import com.example.prova_progetto.ImageClassifierHelper
 import com.example.prova_progetto.R
-import org.tensorflow.lite.task.vision.classifier.Classifications
+import com.example.prova_progetto.db.FruitVegApplication
+import com.example.prova_progetto.db.FruitVegViewModel
+import com.example.prova_progetto.db.FruitVegViewModelFactory
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -33,9 +38,14 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
         private const val TAG = "Image Classifier"
     }
 
+    private val fruitVegViewModel: FruitVegViewModel by viewModels {
+        FruitVegViewModelFactory((application as FruitVegApplication).repository)
+    }
+
     private lateinit var imageClassifierHelper: ImageClassifierHelper
     private lateinit var bitmapBuffer: Bitmap
     private lateinit var tvResult: TextView
+    private lateinit var btnResult: Button
     private lateinit var viewFinder: PreviewView
 
     private var preview: Preview? = null
@@ -45,15 +55,6 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
 
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
-
-    override fun onResume() {
-        super.onResume()
-/*
-        if (!PermissionsFragment.hasPermissions(requireContext())) {
-            Navigation.findNavController(requireActivity(), R.id.fragment_container)
-                .navigate(CameraFragmentDirections.actionCameraToPermissions())
-        }*/
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -67,9 +68,14 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
         setContentView(R.layout.real_time_detection_activity)
 
         tvResult = findViewById(R.id.tv_result)
+        btnResult = findViewById(R.id.btn_result)
 
-        imageClassifierHelper =
-            ImageClassifierHelper(context = this, imageClassifierListener = this)
+        fruitVegViewModel.allFruitVegNames.observe(this, Observer { fruitVegNames ->
+            fruitVegNames?.let {
+                imageClassifierHelper =
+                    ImageClassifierHelper(context = this, imageClassifierListener = this, fruitAndVegetableArray = it)
+            }
+        })
 
         viewFinder = findViewById(R.id.view_camera)
         viewFinder.post {
@@ -94,11 +100,6 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
         )
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        imageAnalyzer?.targetRotation = viewFinder.display.rotation
-    }
-
     // Declare and bind preview, capture and analysis use cases
     @SuppressLint("UnsafeOptInUsageError")
     private fun bindCameraUseCases() {
@@ -115,7 +116,6 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
         preview =
             Preview.Builder()
                 .setTargetAspectRatio(AspectRatio.RATIO_4_3)
-                .setTargetRotation(viewFinder.display.rotation)
                 .build()
 
         // ImageAnalysis. Using RGBA 8888 to match how our models work
@@ -158,29 +158,10 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
         }
     }
 
-    private fun getScreenOrientation() : Int {
-        val outMetrics = DisplayMetrics()
-
-        val display: Display?
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-            display = this.display
-            display?.getRealMetrics(outMetrics)
-        } else {
-            @Suppress("DEPRECATION")
-            display = this.windowManager.defaultDisplay
-            @Suppress("DEPRECATION")
-            display.getMetrics(outMetrics)
-        }
-
-        return display?.rotation ?: 0
-    }
-
     private fun classifyImage(image: ImageProxy) {
         // Copy out RGB bits to the shared bitmap buffer
         image.use { bitmapBuffer.copyPixelsFromBuffer(image.planes[0].buffer) }
-
-        // Pass Bitmap and rotation to the image classifier helper for processing and classification
-        imageClassifierHelper.classify(bitmapBuffer, getScreenOrientation())
+        imageClassifierHelper.classifyBitmap(bitmapBuffer)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -195,6 +176,10 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
     override fun onResults(results: String?) {
         runOnUiThread {
             // Show result on bottom sheet
+            if(results == "")
+                btnResult.visibility = View.GONE
+            else
+                btnResult.visibility = View.VISIBLE
             tvResult.text = results
         }
     }

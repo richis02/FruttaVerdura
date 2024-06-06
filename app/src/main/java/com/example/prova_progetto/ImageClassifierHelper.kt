@@ -3,104 +3,34 @@ package com.example.prova_progetto
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
-import android.view.Surface
+import java.io.FileInputStream
+import java.nio.MappedByteBuffer
+import java.nio.channels.FileChannel
 import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.gpu.CompatibilityList
-import org.tensorflow.lite.support.image.ImageProcessor
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.task.core.BaseOptions
-import org.tensorflow.lite.task.core.vision.ImageProcessingOptions
-import org.tensorflow.lite.task.vision.classifier.ImageClassifier
+
 
 class ImageClassifierHelper(
-    var threshold: Float = 0.5f,
-    var numThreads: Int = 2,
-    var maxResults: Int = 3,
-    var currentDelegate: Int = 0,
-    var currentModel: Int = 0,
+    var threshold: Float = 0.5f, //non so come usarla
     val context: Context,
-    val imageClassifierListener: ClassifierListener?
+    val imageClassifierListener: ClassifierListener?,
+    val fruitAndVegetableArray: List<String>
 ) {
-    private var imageClassifier: Interpreter? = null
 
+    private var interpreter: Interpreter? = null
     init {
-        setupImageClassifier()
-    }
-
-    fun clearImageClassifier() {
-        imageClassifier = null
-    }
-
-    private fun setupImageClassifier() {
-        val optionsBuilder = ImageClassifier.ImageClassifierOptions.builder()
-            .setScoreThreshold(threshold)
-            .setMaxResults(maxResults)
-
-        val baseOptionsBuilder = BaseOptions.builder().setNumThreads(numThreads)
-
-        when (currentDelegate) {
-            DELEGATE_CPU -> {
-                // Default
-            }
-            DELEGATE_GPU -> {
-                if (CompatibilityList().isDelegateSupportedOnThisDevice) {
-                    baseOptionsBuilder.useGpu()
-                } else {
-                    imageClassifierListener?.onError("GPU is not supported on this device")
-                }
-            }
-            DELEGATE_NNAPI -> {
-                baseOptionsBuilder.useNnapi()
-            }
-        }
-
-        optionsBuilder.setBaseOptions(baseOptionsBuilder.build())
-
-        try {
-            imageClassifier =
-                findImage(bit, modelName, optionsBuilder.build())
-        } catch (e: IllegalStateException) {
-            imageClassifierListener?.onError(
-                "Image classifier failed to initialize. See error logs for details"
-            )
-            Log.e(TAG, "TFLite failed to load model with error: " + e.message)
+        interpreter = loadModelFile(context)?.let { Interpreter(it) }
+        for (x in fruitAndVegetableArray){
+            Log.e("QWE", x)
         }
     }
-
-    fun classify(image: Bitmap, rotation: Int) {
-        if (imageClassifier == null) {
-            setupImageClassifier()
-        }
-
-        val imageProcessor =
-            ImageProcessor.Builder()
-                .build()
-
-        // Preprocess the image and convert it into a TensorImage for classification.
-        val tensorImage = imageProcessor.process(TensorImage.fromBitmap(image))
-
-        val imageProcessingOptions = ImageProcessingOptions.builder()
-            .setOrientation(getOrientationFromRotation(rotation))
-            .build()
-
-        val results = imageClassifier?.classify(tensorImage, imageProcessingOptions)
-        imageClassifierListener?.onResults(
-            results
-        )
-    }
-
-    // Receive the device rotation (Surface.x values range from 0->3) and return EXIF orientation
-    // http://jpegclub.org/exif_orientation.html
-    private fun getOrientationFromRotation(rotation: Int) : ImageProcessingOptions.Orientation {
-        when (rotation) {
-            Surface.ROTATION_270 ->
-                return ImageProcessingOptions.Orientation.BOTTOM_RIGHT
-            Surface.ROTATION_180 ->
-                return ImageProcessingOptions.Orientation.RIGHT_BOTTOM
-            Surface.ROTATION_90 ->
-                return ImageProcessingOptions.Orientation.TOP_LEFT
-            else ->
-                return ImageProcessingOptions.Orientation.RIGHT_TOP
+    fun classifyBitmap(bitmap: Bitmap) {
+        if (interpreter != null) {
+            val output = Array(1) { FloatArray(fruitAndVegetableArray.size) } // Correggi la forma dell'array di output
+            val input = preprocessBitmap(bitmap)
+            interpreter!!.run(input, output) //sopra c'è il controllo che non sia null
+            val maxIndex = output[0].indices.maxByOrNull { output[0][it] } ?: -1
+            val resultString = fruitAndVegetableArray[maxIndex]
+            imageClassifierListener?.onResults(resultString)
         }
     }
 
@@ -112,11 +42,34 @@ class ImageClassifierHelper(
     }
 
     companion object {
-        const val DELEGATE_CPU = 0
-        const val DELEGATE_GPU = 1
-        const val DELEGATE_NNAPI = 2
-
         private const val TAG = "ImageClassifierHelper"
         const val modelName = "model.tflite"
+    }
+
+    private fun loadModelFile(context: Context): MappedByteBuffer? {
+        return try {
+            val fileDescriptor = context.assets.openFd(modelName)
+            val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
+            val fileChannel = inputStream.channel
+            fileChannel.map(FileChannel.MapMode.READ_ONLY, fileDescriptor.startOffset, fileDescriptor.declaredLength)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun preprocessBitmap(bitmap: Bitmap): Array<Array<Array<FloatArray>>> {
+        val imageSize = 224  // Modifica in base al tuo modello
+        val resizedBitmap = Bitmap.createScaledBitmap(bitmap, imageSize, imageSize, true)
+        val input = Array(1) { Array(imageSize) { Array(imageSize) { FloatArray(3) } } }
+        for (y in 0 until imageSize) {
+            for (x in 0 until imageSize) {
+                val pixel = resizedBitmap.getPixel(x, y)
+                input[0][y][x][0] = (pixel shr 16 and 0xFF) / 255.0f
+                input[0][y][x][1] = (pixel shr 8 and 0xFF) / 255.0f
+                input[0][y][x][2] = (pixel and 0xFF) / 255.0f
+            }
+        }
+        return input
     }
 }

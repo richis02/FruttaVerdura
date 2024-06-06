@@ -87,6 +87,7 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.0'
     implementation 'org.tensorflow:tensorflow-lite-gpu:2.9.0'
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.3.1'
 
     implementation 'androidx.cardview:cardview:1.0.0'
 
@@ -106,5 +107,15 @@ dependencies {
 
     //Lettura file CSV
     implementation 'com.opencsv:opencsv:5.5.2'
+
+    // CameraX core library
+    implementation "androidx.camera:camera-core:1.3.3"
+
+    // CameraX Camera2 library (necessaria per il supporto a Camera2)
+    implementation "androidx.camera:camera-camera2:1.3.3"
+
+    // Altre dipendenze opzionali di CameraX, se necessario
+    implementation "androidx.camera:camera-lifecycle:1.3.3"
+    implementation "androidx.camera:camera-view:1.3.3"
 
 }
