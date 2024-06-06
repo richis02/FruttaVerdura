@@ -151,7 +151,7 @@ class MainActivity : ComponentActivity() {
 
     private fun isDatabaseUpdated(): Boolean {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        val currentVersion = 17 // Cambia questo valore ogni volta che aggiorni il database
+        val currentVersion = 18 // Cambia questo valore ogni volta che aggiorni il database
         val savedVersion = sharedPreferences.getInt("db_version", 0)
         return currentVersion > savedVersion
     }

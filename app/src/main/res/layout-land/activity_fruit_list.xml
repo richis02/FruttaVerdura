@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_bar"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.04"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.12"
+        app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03" >
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_ios_new_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_nome_lista"
+            android:fontFamily="@font/montserratbold"
+            android:textColor="@color/green_text_icons"
+            android:textSize="20sp"
+            android:layout_marginStart="20sp"
+            android:text="@string/nth_list_name"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_fruit_of_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_elimina_linear"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
+        app:layout_constraintRight_toRightOf="@id/guideline_vertical_0.97"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.12"
+        app:layout_constraintVertical_bias="0.0"
+        />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_mostra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="@id/button_guideline_horizontal_bottom"
+        app:layout_constraintEnd_toEndOf="@id/button_guideline_vertical_right"
+        app:backgroundTint="@color/green_background"
+        app:tint="@android:color/white"
+        app:fabSize="normal"
+        app:fabCustomSize="80dp"
+        android:padding="16dp"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_cerca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_search_24"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/button_guideline_horizontal_bottom"
+        app:layout_constraintStart_toEndOf="@id/button_guideline_vertical_left"
+        android:layout_marginBottom="10dp"
+        app:elevation="2dp"
+        app:borderWidth="1dp"
+        android:visibility="gone"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/camera"
+        app:layout_constraintStart_toEndOf="@id/button_guideline_vertical_left"
+        app:layout_constraintTop_toBottomOf="@id/button_guideline_horizontal_top"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        app:backgroundTint="@color/white"
+        app:elevation="2dp"
+        app:borderWidth="1dp"
+        android:visibility="gone"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_rimuovi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_delete_24"
+        app:backgroundTint="@color/white"
+        android:background="@drawable/test_gray_border"
+        app:layout_constraintEnd_toEndOf="@id/button_guideline_vertical_right"
+        app:layout_constraintTop_toTopOf="@id/button_guideline_horizontal_top"
+        android:layout_marginEnd="10dp"
+        app:elevation="2dp"
+        app:borderWidth="1dp"
+        android:visibility="gone"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_elimina_linear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_elimina"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/green_background"
+            android:textColor="@color/white"
+            android:text="Elimina"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_annulla"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_annulla"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/green_background"
+            android:textColor="@color/white"
+            android:text="Annulla"
+            app:layout_constraintStart_toEndOf="@id/btn_elimina"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.04" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_0.03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_0.97"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guideline_vertical_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="210dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guideline_horizontal_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="210dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guideline_vertical_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_guideline_horizontal_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="40dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
