@@ -6,45 +6,47 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Activity.MainActivity"
-        android:background="@color/light_yellow_green">
+        tools:context=".Activity.MainActivity">
+
+        <ImageView
+            android:id="@+id/fruit_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/contentDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.50"/>
 
         <LinearLayout
+            android:id="@+id/title_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/title_bar"
-            app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02"
+            android:background="@drawable/rounded_border"
             app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.07"
-            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03" >
+            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
+            app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02">
 
             <ImageView
                 android:id="@+id/back_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_arrow_back_ios_new_24"
-                android:contentDescription="@string/contentDescription"/>
+                android:layout_gravity="center"
+                android:contentDescription="@string/contentDescription"
+                android:src="@drawable/baseline_arrow_back_ios_new_24" />
 
             <TextView
                 android:id="@+id/title_fruit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserratbold"
-                android:textSize="20sp"
                 android:layout_marginStart="20sp"
-                android:text="@string/nth_list_name"/>
-
+                android:layout_marginEnd="10sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserratbold"
+                android:text="@string/nth_list_name"
+                android:textColor="@color/green_text_icons"
+                android:textSize="20sp" />
         </LinearLayout>
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/fruit_image"
-            android:src = "@drawable/sweet_potato"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.07"
-            app:layout_constraintBottom_toTopOf="@id/dettagli_nutrizionali"
-            android:contentDescription="@string/contentDescription"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dettagli_nutrizionali"
@@ -56,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_0.35">
+            app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_0.40">
 
             <TextView
                 android:id="@+id/dettagli_nutrizionali_titolo"
@@ -495,24 +497,48 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.02" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_horizontal_0.07"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.07" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_vertical_0.03"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.03" />
+
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_horizontal_0.35"
+        android:id="@+id/guideline_horizontal_0.40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.40" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal_0.50"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35" />
+            app:layout_constraintGuide_percent="0.50" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>
+
+
+<!--
+<ImageView
+            android:id="@+id/fruit_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/banana_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.50"/>
+-->

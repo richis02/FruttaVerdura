@@ -35,7 +35,7 @@ class FruitDetailsActivity: ComponentActivity() {
             fruitVegViewModel.getFruitVeg(fruit_name).observe(this, Observer {fruit ->
                 fruit?.let{
                     val imageResourceId = resources.getIdentifier(
-                        it.img, "drawable",
+                        it.photo, "drawable",
                         packageName
                     )
                     val image: ImageView = findViewById(R.id.fruit_image)
@@ -61,7 +61,6 @@ class FruitDetailsActivity: ComponentActivity() {
                     tvCarbohydrates.text = "${it.carbohydrates}"
                     val pbCarbohydrates: ProgressBar = findViewById(R.id.stats_progressbar_carbohydrates)
                     pbCarbohydrates.progress = it.carbohydrates.toInt()
-
 
                     val tvLipids: TextView = findViewById(R.id.number_of_lipids)
                     tvLipids.text = "${it.lipids}"
