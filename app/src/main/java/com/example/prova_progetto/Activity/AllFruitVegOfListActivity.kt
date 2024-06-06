@@ -56,7 +56,7 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         val tvListTitle: TextView = findViewById(R.id.tv_nome_lista)
         tvListTitle.text = listTitle
 
-        recyclerView = findViewById(com.example.prova_progetto.R.id.recycler_fruit_of_list)
+        recyclerView = findViewById(R.id.recycler_fruit_of_list)
         adapter = FruitVegOfListAdapter(this)
 
         recyclerView.adapter = adapter
@@ -76,13 +76,11 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
                 cercaButton.visibility = View.GONE
                 cameraButton.visibility = View.GONE
                 rimuoviButton.visibility = View.GONE
-                //mostraButton.setImageResource(R.drawable.baseline_more_horiz_36)
             }
             else{
                 cercaButton.visibility = View.VISIBLE
                 cameraButton.visibility = View.VISIBLE
                 rimuoviButton.visibility = View.VISIBLE
-                //mostraButton.setImageResource(R.drawable.baseline_more_vert_36)
             }
         }
 

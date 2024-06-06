@@ -18,7 +18,7 @@ interface FruitVegetableDao {
     @Query("SELECT * FROM fruit_veg")
     fun getAllFruitVeg(): Flow<List<FruitVegetable>>
 
-    @Query("SELECT fruit_veg_name FROM fruit_veg")
+    @Query("SELECT fruit_veg_name FROM fruit_veg ORDER BY fruit_veg_id")
     fun getAllFruitVegNames(): Flow<List<String>>
 
     @Query("SELECT * FROM fruit_veg WHERE fruit_veg_name LIKE :text || '%'")

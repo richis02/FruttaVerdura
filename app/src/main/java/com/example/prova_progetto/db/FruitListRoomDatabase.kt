@@ -13,7 +13,7 @@ import com.opencsv.CSVReaderBuilder
 import java.io.InputStreamReader
 
 
-@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 19, exportSchema = false)
+@Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 22, exportSchema = false)
 public abstract class FruitListRoomDatabase: RoomDatabase() {
     abstract fun fruitVegDao() : FruitVegetableDao
     abstract fun itemsListDao() : ItemsListDao
@@ -66,6 +66,8 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
             //TODO: EVITARE DI AGGUINGERE OGNI VOLTA
 
             itemsListDao.deleteAllLists()
+            fruitVegDao.deleteAllFruitVeg()
+            crossRefDao.deleteAllFruitListCrossRef()
         }
 
         //TODO: RENDERLO PRIVATO E POPOLARE SOLO ALLA CREAZIONE
