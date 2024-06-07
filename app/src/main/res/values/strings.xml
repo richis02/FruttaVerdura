@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">prova_progetto</string>
+    <string name="app_name">Fruitify</string>
     <string name="errore">Errore</string>
     <string name="photo">Scatta una foto di un frutto</string>
     <string name="search">Cerca un frutto</string>

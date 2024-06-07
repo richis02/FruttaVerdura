@@ -12,41 +12,39 @@
             android:id="@+id/fruit_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/contentDescription"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.50"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.50"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/title_bar"
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="43dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:background="@drawable/detail_rounded_border_back"
+            android:contentDescription="@string/contentDescription"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.03"
+            app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02"
+            app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.07"/>
+
+
+        <TextView
+            android:id="@id/title_fruit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border"
-            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.07"
-            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
-            app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02">
+            android:layout_marginStart="40dp"
+            android:background="@drawable/gradient_text_view"
+            android:fontFamily="@font/montserratbold"
+            android:gravity="center"
+            android:text="Frutto"
+            android:textColor="@color/light_yellow_green"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toTopOf="@id/dettagli_nutrizionali"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageView
-                android:id="@+id/back_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@string/contentDescription"
-                android:src="@drawable/baseline_arrow_back_ios_new_24" />
-
-            <TextView
-                android:id="@+id/title_fruit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20sp"
-                android:layout_marginEnd="10sp"
-                android:layout_gravity="center"
-                android:fontFamily="@font/montserratbold"
-                android:text="@string/nth_list_name"
-                android:textColor="@color/green_text_icons"
-                android:textSize="20sp" />
-        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dettagli_nutrizionali"
@@ -54,7 +52,7 @@
             android:layout_height="0dp"
             android:background="@drawable/detail_rounded_border"
             android:orientation="vertical"
-            android:padding="30dp"
+            android:padding="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -68,14 +66,15 @@
                 android:text="@string/dettagli_nutrizionali"
                 android:textColor="@color/green_text_icons"
                 android:textSize="22sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/top_three_parameters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/dettagli_nutrizionali_titolo">
+                app:layout_constraintTop_toBottomOf="@id/dettagli_nutrizionali_titolo"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/ring_energy_j"
@@ -243,7 +242,7 @@
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:indeterminate="false"
-                        android:max="7"
+                        android:max="700"
                         android:progressDrawable="@drawable/ring_value"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -284,7 +283,9 @@
                 android:id="@+id/bottom_three_parameters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/top_three_parameters">
+                app:layout_constraintTop_toBottomOf="@id/top_three_parameters"
+                app:layout_constraintStart_toStartOf="parent
+">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/ring_carbohydrates"
@@ -318,7 +319,7 @@
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:indeterminate="false"
-                        android:max="60"
+                        android:max="7030"
                         android:progressDrawable="@drawable/ring_value"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -369,8 +370,8 @@
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:indeterminate="false"
-                        android:max="15"
-                        android:progress="15"
+                        android:max="2"
+                        android:progress="2"
                         android:progressDrawable="@drawable/ring_full"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -385,7 +386,7 @@
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:indeterminate="false"
-                        android:max="2"
+                        android:max="200"
                         android:progressDrawable="@drawable/ring_value"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -451,7 +452,7 @@
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:indeterminate="false"
-                        android:max="7"
+                        android:max="700"
                         android:progressDrawable="@drawable/ring_value"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -513,11 +514,11 @@
             app:layout_constraintGuide_percent="0.03" />
 
         <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.40"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.40" />
+            android:id="@+id/guideline_horizontal_0.40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.40" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_horizontal_0.50"
@@ -525,6 +526,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.50" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left"
+            app:constraint_referenced_ids="dettagli_nutrizionali" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </merge>
@@ -541,4 +550,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/guideline_horizontal_0.50"/>
+
+
+
+
+
+                    <LinearLayout
+            android:id="@+id/title_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/detail_rounded_border_back"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.07"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
+            app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02">
+
+            <ImageView
+                android:id="@+id/back_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/contentDescription"
+                android:src="@drawable/baseline_arrow_back_ios_new_24" />
+
+            <TextView
+                android:id="@+id/title_fruit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="10sp"
+                android:fontFamily="@font/montserratbold"
+                android:text="@string/nth_list_name"
+                android:textColor="@color/green_text_icons"
+                android:textSize="20sp" />
+        </LinearLayout>
 -->
