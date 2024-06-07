@@ -55,22 +55,22 @@ class FruitDetailsActivity: ComponentActivity() {
                     val tvProtein: TextView = findViewById(R.id.number_of_protein)
                     tvProtein.text = "${it.proteins}"
                     val pbProtein: ProgressBar = findViewById(R.id.stats_progressbar_protein)
-                    pbProtein.progress = it.proteins.toInt()
+                    pbProtein.progress = (it.proteins * 100).toInt()
 
                     val tvCarbohydrates: TextView = findViewById(R.id.number_of_carbohydrates)
                     tvCarbohydrates.text = "${it.carbohydrates}"
                     val pbCarbohydrates: ProgressBar = findViewById(R.id.stats_progressbar_carbohydrates)
-                    pbCarbohydrates.progress = it.carbohydrates.toInt()
+                    pbCarbohydrates.progress = (it.carbohydrates * 100).toInt()
 
                     val tvLipids: TextView = findViewById(R.id.number_of_lipids)
                     tvLipids.text = "${it.lipids}"
                     val pbLipids: ProgressBar = findViewById(R.id.stats_progressbar_lipids)
-                    pbLipids.progress = it.lipids.toInt()
+                    pbLipids.progress = (it.lipids * 100).toInt()
 
                     val tvFibre: TextView = findViewById(R.id.number_of_fibers)
                     tvFibre.text = "${it.fibre}"
                     val pbFibers: ProgressBar = findViewById(R.id.stats_progressbar_fibers)
-                    pbFibers.progress = it.fibre.toInt()
+                    pbFibers.progress = (it.fibre * 100).toInt()
                 }
             })
         }
