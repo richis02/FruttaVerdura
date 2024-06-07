@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_nome_lista"
             android:fontFamily="@font/montserratbold"
+            android:textColor="@color/green_text_icons"
             android:textSize="20sp"
             android:layout_marginStart="20sp"
             android:text="@string/nth_list_name"/>
@@ -41,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.07"
         app:layout_constraintVertical_bias="0.0"
         />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_mostra"

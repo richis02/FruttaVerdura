@@ -18,7 +18,9 @@
             android:id="@+id/back_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_arrow_back_ios_new_24" />
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            android:layout_gravity="center"
+            android:contentDescription="@string/contentDescription"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,8 +28,10 @@
             android:id="@+id/tv_nome_lista"
             android:fontFamily="@font/montserratbold"
             android:textSize="20sp"
+            android:textColor="@color/green_text_icons"
             android:layout_marginStart="20sp"
-            android:text="@string/frutta"/>
+            android:text="@string/cerca_articolo"
+            android:layout_gravity="center" />
 
     </LinearLayout>
 

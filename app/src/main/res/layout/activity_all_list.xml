@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserratbold"
+                android:textColor="@color/green_text_icons"
                 android:textSize="20sp"
                 android:layout_marginStart="20sp"
                 android:text="@string/tutte_le_liste"/>

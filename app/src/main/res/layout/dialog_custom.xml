@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
+        android:textColor="@color/green_text_icons"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:paddingBottom="16dp" />
@@ -24,7 +25,7 @@
 
         <Button
             android:id="@+id/btn_decrease"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:text="-"
             android:textColor="@color/white"
@@ -43,7 +44,7 @@
 
         <Button
             android:id="@+id/btn_increase"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:text="+"
             android:textColor="@color/white"

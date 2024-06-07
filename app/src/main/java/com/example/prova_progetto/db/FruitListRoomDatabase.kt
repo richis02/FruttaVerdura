@@ -95,7 +95,8 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
                         carbohydrates = nextLine!![4].toDouble(),
                         lipids = nextLine!![5].toDouble(),
                         fibre = nextLine!![6].toDouble(),
-                        img = nextLine!![7]
+                        img = nextLine!![7],
+                        photo = nextLine!![8]
                     )
                     fruitVegDao.insertFruitVeg(entity)
                 }

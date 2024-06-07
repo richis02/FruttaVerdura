@@ -45,6 +45,7 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         val listTitleTv: EditText = findViewById(R.id.fruit_list_name)
         val deleteBtn: Button = findViewById(R.id.delete_btn)
         val annullaBtn: Button = findViewById(R.id.annulla_btn)
+        val backIv: ImageView = findViewById(R.id.back_arrow)
         deleteBtn.setOnClickListener{
             if(!isDeleting){
                 isDeleting = true
@@ -66,6 +67,10 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
             deleteBtn.text = "Elimina"
             indexesToDelete.clear()
             isDeleting = false
+        }
+
+        backIv.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
 
         val addList: ImageView = findViewById(R.id.add_list)
