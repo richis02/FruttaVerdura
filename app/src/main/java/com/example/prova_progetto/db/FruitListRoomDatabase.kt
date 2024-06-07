@@ -45,23 +45,25 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
         ) : RoomDatabase.Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
-                // If you want to keep the data through app restarts,
-                // comment out the following line.
+
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        Log.d("entra", "sto popolando da CSV")
-                        populateDatabase(database.fruitVegDao(), database.itemsListDao(), database.listFruitCrossRefDao())
+                        populateDatabaseFromCSV(context, database.fruitVegDao())
+                    }
+                }
+            }
+
+            override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
+                super.onDestructiveMigration(db)
+
+                INSTANCE?.let { database ->
+                    scope.launch(Dispatchers.IO) {
                         populateDatabaseFromCSV(context, database.fruitVegDao())
                     }
                 }
             }
 
 
-        }
-        suspend fun populateDatabase(fruitVegDao : FruitVegetableDao, itemsListDao: ItemsListDao, crossRefDao: ListFruitCrossRefDao){
-            itemsListDao.deleteAllLists()
-            fruitVegDao.deleteAllFruitVeg()
-            crossRefDao.deleteAllFruitListCrossRef()
         }
 
         //TODO: RENDERLO PRIVATO E POPOLARE SOLO ALLA CREAZIONE
@@ -96,19 +98,9 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
                 }
                 reader.close()
             } catch (e: Exception) {
-                Log.e("Database", "Error reading CSV", e)
+                Log.e("Database", "Errore lettura CSV", e)
             }
         }
-
-        //TODO: VERIFICARE SE SERVE
-        fun repopulateDatabase(scope: CoroutineScope) {
-            INSTANCE?.let { database ->
-                scope.launch(Dispatchers.IO) {
-                    populateDatabase(database.fruitVegDao(), database.itemsListDao(), database.listFruitCrossRefDao())
-                }
-            }
-        }
-
     }
 }
 
