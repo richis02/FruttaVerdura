@@ -31,13 +31,13 @@ class MainActivity : ComponentActivity() {
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //in questa activity non ci sono dati da salvare
+
 
         //devo controllare se l'app è la prima volta che viene lanciata o se è cambiata la versione del db.
         //in caso positivo del controllo vuol dire che devo fare l'update del db
-
         if (isFirstRun() || isDatabaseUpdated()) {
             // Cancella tutti i dati esistenti
             fruitVegViewModel.deleteAllFruitVeg()
@@ -85,8 +85,8 @@ class MainActivity : ComponentActivity() {
         {
             if (grantResults.size != 1 || grantResults[0] != PackageManager.PERMISSION_GRANTED)
             {
-                //permessi negati
-                //bisogna gestire in qualche modo
+                //permessi negati --> l'app si chiude
+                finishAffinity()
             }
             else
             {
@@ -101,26 +101,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_CAMERA_PERMISSION && resultCode == RESULT_OK){
-            val bitmap = data?.extras?.get("data") as Bitmap
-
-            val intent = Intent(this, CameraActivity::class.java).apply {
-                putExtra("imageBitmap", bitmap)
-            }
-            startActivity(intent)
-        }
-    }
-
     private fun setAllEvent(){
         val camera: ConstraintLayout = findViewById(R.id.open_camera)
         camera.setOnClickListener {v ->
-            /*val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if(intent.resolveActivity(packageManager) != null){
-                startActivityForResult(intent, REQUEST_CAMERA_PERMISSION)
-            }*/
             val intent = Intent(v.context, RealTimeDetectionActivity::class.java)
             v.context.startActivity(intent)
         }
@@ -153,14 +136,14 @@ class MainActivity : ComponentActivity() {
 
     private fun isDatabaseUpdated(): Boolean {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        val currentVersion = 22 // Cambia questo valore ogni volta che aggiorni il database
+        val currentVersion = 23 // Cambia questo valore ogni volta che aggiorni il database
         val savedVersion = sharedPreferences.getInt("db_version", 0)
         return currentVersion > savedVersion
     }
 
     private fun setDatabaseUpdated() {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        val currentVersion = 22 // Deve corrispondere alla versione attuale del database
+        val currentVersion = 23 // Deve corrispondere alla versione attuale del database
         with(sharedPreferences.edit()) {
             putInt("db_version", currentVersion)
             apply()

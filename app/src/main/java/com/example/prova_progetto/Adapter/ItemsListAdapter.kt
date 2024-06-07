@@ -1,5 +1,6 @@
 package com.example.prova_progetto.Adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,9 @@ class ItemsListAdapter(private val listener: OnItemsListClickListener)
     : ListAdapter<ItemsList, ItemsListAdapter.ItemListViewHolder>(
     ITEMSLISTS_COMPARATOR
 ) {
+
+    private val selectedItems: MutableSet<Long> = mutableSetOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         return ItemListViewHolder.create(parent)
     }
@@ -25,17 +29,32 @@ class ItemsListAdapter(private val listener: OnItemsListClickListener)
         holder.itemView.setOnClickListener {
             listener.onItemClick(current.itemsListId, current.listTitle)
         }
-        holder.bind(current)
+        holder.bind(current, selectedItems.contains(current.itemsListId))
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateSelectedItems(selectedIds: List<Long>) {
+        selectedItems.clear()
+        selectedItems.addAll(selectedIds)
+        notifyDataSetChanged()
     }
 
     // Binda un testo con una textview
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
+        private val layout: LinearLayout = itemView.findViewById(R.id.list_item)
 
-        fun bind(itemList: ItemsList?) {
+
+        fun bind(itemList: ItemsList?, isSelected: Boolean) {
             // Con let si gestisce il caso itemList = null
             itemList?.let{
                 listItemView.text = itemList.listTitle
+            }
+
+            if (isSelected) {
+                layout.setBackgroundResource(R.drawable.red_border) // Rimuove il background
+            } else {
+                layout.setBackgroundResource(R.drawable.white_dashed_border)
             }
 
         }

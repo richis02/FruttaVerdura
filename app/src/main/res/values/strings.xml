@@ -39,5 +39,7 @@
     <string name="lipids">Lipidi</string>
     <string name="fibers">Fibre</string>
 
+    <string name="elimina">Elimina</string>
+    <string name="conferma">Conferma</string>
 
 </resources>

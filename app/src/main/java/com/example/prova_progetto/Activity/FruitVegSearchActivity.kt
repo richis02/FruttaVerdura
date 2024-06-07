@@ -29,6 +29,11 @@ import com.example.prova_progetto.db.ListFruitsCrossRef
 
 class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
 
+    private lateinit var dialog: Dialog
+    private var isShowCustomDialog: Boolean = false
+    private lateinit var idFruitCustomDialog: String
+    private var quantityCustomDialog: Int = 1
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FruitVegSearchAdapter
 
@@ -41,6 +46,11 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        val back: ImageView = findViewById(R.id.back_arrow)
+        back.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         listId = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
 
@@ -56,12 +66,6 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
             lists?.let { adapter.submitList(it) }
         })
 
-        val back: ImageView = findViewById(R.id.back_arrow)
-        back.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
-
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -72,12 +76,22 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
                 return true
             }
         })
+
+        savedInstanceState?.let {
+            if(it.getBoolean(CUSTOM_DIALOG)){
+                listId = it.getLong(ID_LIST)
+                quantityCustomDialog = it.getInt(QUANTITY_CUSTOM_DIALOG)
+                idFruitCustomDialog = it.getString(ID_FRUIT_CUSTOM_DIALOG).toString()
+                showCustomDialog()
+            }
+        }
     }
 
     override fun onItemClick(id: String, quantity: Int?) {
         if(listId != null) {
             //siamo certi che listId sia diverso da null
-            showCustomDialog(id)
+            idFruitCustomDialog = id
+            showCustomDialog()
         }
         else {
             val intent = Intent(this, FruitDetailsActivity::class.java)
@@ -86,21 +100,24 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         }
     }
 
-    private fun showCustomDialog(id: String) {
-        val dialog = Dialog(this)
+    private fun showCustomDialog() {
+        isShowCustomDialog = true
+        dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_custom)
-
-        var quantity = 1
         
         val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
-        annullaButton.setOnClickListener { dialog.dismiss() }
+        annullaButton.setOnClickListener {
+            isShowCustomDialog = false
+            dialog.dismiss()
+        }
         
         val confermaButton: Button = dialog.findViewById(R.id.btn_conferma)
         confermaButton.setOnClickListener {
-            val listFruitCrossRef = ListFruitsCrossRef(listId = listId!!, fruitId = id, quantity = quantity)
+            val listFruitCrossRef = ListFruitsCrossRef(listId = listId!!, fruitId = idFruitCustomDialog, quantity = quantityCustomDialog)
             // In caso di frutto già presente viene aggiornata la quantità
             fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef)
+            isShowCustomDialog = false
             dialog.dismiss()
         }
         
@@ -113,17 +130,40 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         val tvMessage: TextView = dialog.findViewById(R.id.message)
         tvMessage.text = getString(R.string.message_add)
 
+        tvQuantity.text = quantityCustomDialog.toString()
+
         btnIncrease.setOnClickListener {
-            quantity++
-            tvQuantity.text = quantity.toString()
+            quantityCustomDialog++
+            tvQuantity.text = quantityCustomDialog.toString()
         }
 
         btnDecrease.setOnClickListener {
-            if (quantity > 1) {
-                quantity--
-                tvQuantity.text = quantity.toString()
+            if (quantityCustomDialog > 1) {
+                quantityCustomDialog--
+                tvQuantity.text = quantityCustomDialog.toString()
             }
         }
         dialog.show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(isShowCustomDialog)
+            dialog.dismiss()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(CUSTOM_DIALOG, isShowCustomDialog)
+        outState.putInt(QUANTITY_CUSTOM_DIALOG, quantityCustomDialog)
+        outState.putString(ID_FRUIT_CUSTOM_DIALOG, idFruitCustomDialog)
+        outState.putLong(ID_LIST, listId ?: -1)
+        super.onSaveInstanceState(outState)
+    }
+
+    companion object{
+        const val CUSTOM_DIALOG = "custom_dialog"
+        const val QUANTITY_CUSTOM_DIALOG = "quantity_custom_dialog"
+        const val ID_FRUIT_CUSTOM_DIALOG = "id_fruit_custom_dialog"
+        const val ID_LIST = "id_list"
     }
 }

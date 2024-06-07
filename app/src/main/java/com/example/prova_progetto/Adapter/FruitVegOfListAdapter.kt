@@ -1,5 +1,6 @@
 package com.example.prova_progetto.Adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
         holder.bind(current, selectedItems.contains(current.fruitVeg.fruitVegName))
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateSelectedItems(selectedIds: List<String>) {
         selectedItems.clear()
         selectedItems.addAll(selectedIds)

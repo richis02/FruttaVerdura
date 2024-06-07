@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -23,6 +24,7 @@ import com.example.prova_progetto.db.FruitVegViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prova_progetto.Adapter.ItemsListAdapter
 import com.example.prova_progetto.OnFruitVegClickListener
 import com.example.prova_progetto.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,8 +33,14 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
 
     private val REQUEST_CAMERA_PERMISSION: Int = 123
 
+    private lateinit var dialog: Dialog
+    private var qntCustomDialogForTV: Int? = null
+    private var idCustomDialog: String = ""
+    private var qntCustomDialogForQuery: Int? = null
+
     private var isDeleting: Boolean = false
-    private val indexesToDelete: MutableList<String> = mutableListOf()
+    private var isShowCustomDialog: Boolean = false
+    private var indexesToDelete: MutableList<String> = mutableListOf()
     private var listId: Long? = null
 
     lateinit var recyclerView: RecyclerView
@@ -111,6 +119,7 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
             adapter.updateSelectedItems(indexesToDelete)
         }
 
+        //TODO: ATTENZIONE DA MODIFICARE
         cameraButton.setOnClickListener {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.putExtra(LIST_KEY, listId)
@@ -132,26 +141,43 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
                 }
             })
         }
-    }
 
-    companion object {
-        const val LIST_KEY = "list_key"
-    }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_CAMERA_PERMISSION && resultCode == RESULT_OK){
-            val bitmap = data?.extras?.get("data") as Bitmap
 
-            val intent = Intent(this, CameraActivity::class.java).apply {
-                putExtra("imageBitmap", bitmap)
+        savedInstanceState?.let {
+            listId = it.getLong(LIST_KEY)
+
+            if(it.getBoolean(IS_DELETING)) {
+                isDeleting = true
+                indexesToDelete = it.getStringArrayList(INDEXES_TO_DELETE)?.toMutableList() ?: mutableListOf()
+                val adapter = (recyclerView.adapter as FruitVegOfListAdapter)
+                adapter.updateSelectedItems(indexesToDelete)
+
+                mostraButton.visibility = View.GONE
+                cameraButton.visibility = View.GONE
+                cercaButton.visibility = View.GONE
+                rimuoviButton.visibility = View.GONE
+                constraintLayout.visibility = View.VISIBLE
             }
-            startActivity(intent)
+
+            if(it.getBoolean(CUSTOM_DIALOG)) {
+                isShowCustomDialog = true
+                it.getString(ID_FRUIT)
+                    ?.let { fruitName ->
+                        idCustomDialog = fruitName
+                    }
+                qntCustomDialogForTV = it.getInt(QUANTITY_CUSTOM_DIALOG_FOR_TV)
+                qntCustomDialogForQuery = it.getInt(QUANTITY_CUSTOM_DIALOG_FOR_QUERY)
+                showCustomDialog()
+            }
         }
     }
 
     override fun onItemClick(id: String, quantity: Int?) {
         if (!isDeleting) {
-            showCustomDialog(id, quantity!!)
+            idCustomDialog = id
+            qntCustomDialogForQuery = quantity
+            qntCustomDialogForTV = quantity
+            showCustomDialog()
         } else {
             val index = indexesToDelete.indexOf(id)
             if (index != -1) {
@@ -165,45 +191,80 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         }
     }
 
-    private fun showCustomDialog(id: String, qnt: Int?) {
-        val dialog = Dialog(this)
+
+    private fun showCustomDialog() {
+        isShowCustomDialog = true
+        dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_custom)
 
-        var quantity: Int = qnt!!
-
         val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
-        annullaButton.setOnClickListener { dialog.dismiss() }
+        annullaButton.setOnClickListener {
+            isShowCustomDialog = false
+            dialog.dismiss()
+        }
 
         val confermaButton: Button = dialog.findViewById(R.id.btn_conferma)
         confermaButton.setOnClickListener {
             // In caso di frutto già presente viene aggiornata la quantità
-            fruitVegViewModel.updateQuantity(id, listId!!, quantity - qnt)
+            fruitVegViewModel.updateQuantity(idCustomDialog, listId!!,
+                qntCustomDialogForTV?.minus(qntCustomDialogForQuery!!) ?: 0
+            )
+            isShowCustomDialog = false
             dialog.dismiss()
         }
 
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvQuantity: TextView = dialog.findViewById(R.id.tv_quantity)
-        tvQuantity.text = quantity.toString()
+        tvQuantity.text = qntCustomDialogForTV.toString()
         val btnIncrease: Button = dialog.findViewById(R.id.btn_increase)
         val btnDecrease: Button = dialog.findViewById(R.id.btn_decrease)
 
         val tvMessage: TextView = dialog.findViewById(R.id.message)
-        tvMessage.text = getString(R.string.message_modify)
+        tvMessage.setText("${getString(R.string.message_modify)} di $idCustomDialog")
 
         btnIncrease.setOnClickListener {
-            quantity++
-            tvQuantity.text = quantity.toString()
+            qntCustomDialogForTV = qntCustomDialogForTV!! + 1
+            tvQuantity.text = qntCustomDialogForTV.toString()
         }
 
         btnDecrease.setOnClickListener {
-            if (quantity > 1) {
-                quantity--
-                tvQuantity.text = quantity.toString()
+            if (qntCustomDialogForTV!! > 1) {
+                qntCustomDialogForTV = qntCustomDialogForTV!! - 1
+                tvQuantity.text = qntCustomDialogForTV.toString()
             }
         }
         dialog.show()
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //distruggo il dialog quando l'attività viene distrutta in modo da non aver problemi
+        if(isShowCustomDialog)
+            dialog.dismiss()
+    }
+
+    //Salvataggio dello stato
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(IS_DELETING, isDeleting)
+        outState.putStringArrayList(INDEXES_TO_DELETE, ArrayList(indexesToDelete))
+        outState.putBoolean(CUSTOM_DIALOG, isShowCustomDialog)
+        outState.putInt(QUANTITY_CUSTOM_DIALOG_FOR_QUERY, qntCustomDialogForQuery ?: -1)
+        outState.putString(ID_FRUIT, idCustomDialog)
+        outState.putInt(QUANTITY_CUSTOM_DIALOG_FOR_TV, qntCustomDialogForTV ?: -1)
+        outState.putLong(LIST_KEY, listId!!)
+        super.onSaveInstanceState(outState)
+    }
+
+    companion object {
+        const val LIST_KEY = "list_key"
+        const val IS_DELETING = "is_deleting"
+        const val INDEXES_TO_DELETE = "indexes_to_delete"
+        const val CUSTOM_DIALOG = "custom_dialog"
+        const val QUANTITY_CUSTOM_DIALOG_FOR_QUERY = "quantity_custom_dialog_for_query"
+        const val QUANTITY_CUSTOM_DIALOG_FOR_TV = "quantity_custom_dialog_for_tv"
+        const val ID_FRUIT = "id_fruit"
+    }
 }

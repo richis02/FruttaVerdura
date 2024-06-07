@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.prova_progetto.Adapter.FruitVegOfListAdapter
 import com.example.prova_progetto.Adapter.ItemsListAdapter
 import com.example.prova_progetto.OnItemsListClickListener
 import com.example.prova_progetto.R
@@ -27,8 +28,12 @@ import kotlinx.coroutines.launch
 
 class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
+    private lateinit var listTitleTv: EditText
     private var isDeleting: Boolean = false
-    private val indexesToDelete: MutableList<Long> = mutableListOf()
+    private var indexesToDelete: MutableList<Long> = mutableListOf()
+
+    lateinit var recyclerView: RecyclerView
+    lateinit var adapter : ItemsListAdapter
 
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
         FruitVegViewModelFactory((application as FruitVegApplication).repository)
@@ -42,35 +47,34 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        val listTitleTv: EditText = findViewById(R.id.fruit_list_name)
+        listTitleTv = findViewById(R.id.fruit_list_name)
         val deleteBtn: Button = findViewById(R.id.delete_btn)
         val annullaBtn: Button = findViewById(R.id.annulla_btn)
-        val backIv: ImageView = findViewById(R.id.back_arrow)
         deleteBtn.setOnClickListener{
             if(!isDeleting){
                 isDeleting = true
-                deleteBtn.text = "Conferma"
+                deleteBtn.setText(R.string.conferma)
                 annullaBtn.visibility = View.VISIBLE
 
             } else {
                 isDeleting = false
-                deleteBtn.text = "Elimina"
+                deleteBtn.setText(R.string.elimina)
                 for (index in indexesToDelete) {
                     fruitVegViewModel.deleteItemList(index)
                 }
+                indexesToDelete.clear()
                 annullaBtn.visibility = View.GONE
             }
         }
 
         annullaBtn.setOnClickListener {
             annullaBtn.visibility = View.GONE
-            deleteBtn.text = "Elimina"
+            deleteBtn.setText(R.string.elimina)
             indexesToDelete.clear()
             isDeleting = false
-        }
 
-        backIv.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            val adapter = (recyclerView.adapter as ItemsListAdapter)
+            adapter.updateSelectedItems(indexesToDelete)
         }
 
         val addList: ImageView = findViewById(R.id.add_list)
@@ -83,13 +87,10 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         }
 
 
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_list)
-        val adapter = ItemsListAdapter(this)
+        recyclerView = findViewById(R.id.recycler_list)
+        adapter = ItemsListAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-        //it è una convenzione di Kotlin per il nome di variabile implicito quando
-        // si usa una lambda con un singolo parametro. È usato per brevità e leggibilità.
 
         fruitVegViewModel.allList.observe(this, Observer { lists ->
             // Aggiornamento copia cached
@@ -98,6 +99,23 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
             }
         })
 
+        savedInstanceState?.let {
+            val newListName = it.getString(NEW_LIST_NAME) ?: ""
+            listTitleTv.setText(newListName)
+
+            if(it.getBoolean(IS_DELETING)) {
+                isDeleting = true
+                val longArray = it.getLongArray(INDEXES_TO_DELETE)
+                if (longArray != null) {
+                    indexesToDelete = longArray.toMutableList()
+                }
+                val adapter = (recyclerView.adapter as ItemsListAdapter)
+                adapter.updateSelectedItems(indexesToDelete)
+
+                deleteBtn.setText(R.string.conferma)
+                annullaBtn.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onItemClick(id: Long, name: String) {
@@ -116,21 +134,25 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
                 indexesToDelete.add(id)
             }
         }
+
+        val adapter = (recyclerView.adapter as ItemsListAdapter)
+        adapter.updateSelectedItems(indexesToDelete)
     }
 
     companion object{
         const val LIST_KEY = "list_key"
         const val LIST_NAME = "list_name"
+
+        const val IS_DELETING = "is_deleting"
+        const val INDEXES_TO_DELETE = "indexes_to_delete"
+        const val NEW_LIST_NAME = "new_list_name"
     }
-    //TODO: IMPLEMENTARE AGGIUNTA LISTA VEDI CODELAB
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(IS_DELETING, isDeleting)
+        outState.putLongArray(INDEXES_TO_DELETE, indexesToDelete.toLongArray())
+        outState.putString(NEW_LIST_NAME, listTitleTv.text.toString())
+        super.onSaveInstanceState(outState)
+    }
 }
 
-
-//TODO    private val applicationScope = CoroutineScope(Dispatchers.Default)
-
-//TODO        val database = FruitListRoomDatabase.getDatabase(this, applicationScope)
-
-//TODO        applicationScope.launch(Dispatchers.IO) {
-//           FruitListRoomDatabase.populateDatabaseFromCSV(this@AllListActivity, database.fruitVegDao())
-//
-//        }

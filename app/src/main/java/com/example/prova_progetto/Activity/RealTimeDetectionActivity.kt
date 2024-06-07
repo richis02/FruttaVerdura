@@ -10,6 +10,7 @@ import android.util.Rational
 import android.util.Size
 import android.view.*
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -66,6 +67,11 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.real_time_detection_activity)
+
+        val back: ImageView = findViewById(R.id.back_arrow)
+        back.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         tvResult = findViewById(R.id.tv_result)
         btnResult = findViewById(R.id.btn_result)
