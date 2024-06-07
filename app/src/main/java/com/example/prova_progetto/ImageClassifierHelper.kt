@@ -10,7 +10,7 @@ import org.tensorflow.lite.Interpreter
 
 
 class ImageClassifierHelper(
-    var threshold: Float = 0.5f, //non so come usarla
+    var threshold: Float = 0.7f, //non so come usarla
     val context: Context,
     val imageClassifierListener: ClassifierListener?,
     val fruitAndVegetableArray: List<String>
@@ -24,13 +24,18 @@ class ImageClassifierHelper(
         }
     }
     fun classifyBitmap(bitmap: Bitmap) {
+        Log.d("aaa", "entra nel modello")
         if (interpreter != null) {
             val output = Array(1) { FloatArray(fruitAndVegetableArray.size) } // Correggi la forma dell'array di output
             val input = preprocessBitmap(bitmap)
             interpreter!!.run(input, output) //sopra c'è il controllo che non sia null
             val maxIndex = output[0].indices.maxByOrNull { output[0][it] } ?: -1
             val resultString = fruitAndVegetableArray[maxIndex]
-            imageClassifierListener?.onResults(resultString)
+            Log.d("eee", fruitAndVegetableArray[maxIndex] + " " + output[0][maxIndex].toString())
+            if (output[0][maxIndex] > threshold)
+                imageClassifierListener?.onResults(resultString)
+            else
+                imageClassifierListener?.onResults("")
         }
     }
 
@@ -43,7 +48,7 @@ class ImageClassifierHelper(
 
     companion object {
         private const val TAG = "ImageClassifierHelper"
-        const val modelName = "model.tflite"
+        const val modelName = "model_metadata.tflite"
     }
 
     private fun loadModelFile(context: Context): MappedByteBuffer? {

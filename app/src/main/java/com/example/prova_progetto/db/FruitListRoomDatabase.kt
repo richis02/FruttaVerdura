@@ -59,12 +59,6 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
 
         }
         suspend fun populateDatabase(fruitVegDao : FruitVegetableDao, itemsListDao: ItemsListDao, crossRefDao: ListFruitCrossRefDao){
-
-            // Start the app with a clean database every time.
-            // Not needed if you only populate on creation.
-
-            //TODO: EVITARE DI AGGUINGERE OGNI VOLTA
-
             itemsListDao.deleteAllLists()
             fruitVegDao.deleteAllFruitVeg()
             crossRefDao.deleteAllFruitListCrossRef()
