@@ -42,4 +42,6 @@
     <string name="elimina">Elimina</string>
     <string name="conferma">Conferma</string>
 
+    <string name="aggiungi">Aggiungi alla lista</string>
+    <string name="vedi_dettagli">dettagli del frutto</string>
 </resources>

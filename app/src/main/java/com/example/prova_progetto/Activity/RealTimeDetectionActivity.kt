@@ -1,13 +1,10 @@
 package com.example.prova_progetto.Activity
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
-import android.util.Rational
-import android.util.Size
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
@@ -25,11 +22,13 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import com.example.prova_progetto.Adapter.FruitVegSearchAdapter
 import com.example.prova_progetto.ImageClassifierHelper
 import com.example.prova_progetto.R
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
+import com.example.prova_progetto.db.ListFruitsCrossRef
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -37,6 +36,8 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
 
     companion object {
         private const val TAG = "Image Classifier"
+        const val LIST_ID = "list_key"
+        const val LIST_NAME = "list_name"
     }
 
     private val fruitVegViewModel: FruitVegViewModel by viewModels {
@@ -66,7 +67,7 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.real_time_detection_activity)
+        setContentView(R.layout.activity_real_time_detection)
 
         val back: ImageView = findViewById(R.id.back_arrow)
         back.setOnClickListener {
@@ -75,6 +76,35 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
 
         tvResult = findViewById(R.id.tv_result)
         btnResult = findViewById(R.id.btn_result)
+
+        val listId = intent.getLongExtra(LIST_ID, -1L).takeIf { it != -1L }
+        if(listId == null)
+            btnResult.text = R.string.vedi_dettagli.toString()
+        else
+            btnResult.text = R.string.aggiungi.toString()
+
+        btnResult.setOnClickListener { v ->
+            if (listId == null){
+                val fruit_name = tvResult.text
+                val intent = Intent(v.context, FruitDetailsActivity::class.java)
+                intent.putExtra(FruitVegSearchAdapter.ItemListViewHolder.FRUIT_KEY, fruit_name)
+                v.context.startActivity(intent)
+            } else {
+                val listFruitCrossRef = ListFruitsCrossRef(
+                        listId = listId,
+                        fruitId = tvResult.text.toString(),
+                        quantity = 1
+                    )
+                //so che id sarà id valido quindi posso usare !!
+                fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef)
+
+                val list_name = intent.getStringExtra(LIST_NAME)
+                val intent = Intent(v.context, AllFruitVegOfListActivity::class.java)
+                intent.putExtra(LIST_ID, listId)
+                intent.putExtra(LIST_NAME, list_name)
+                v.context.startActivity((intent))
+            }
+        }
 
         fruitVegViewModel.allFruitVegNames.observe(this, Observer { fruitVegNames ->
             fruitVegNames?.let {

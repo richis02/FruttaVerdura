@@ -119,13 +119,11 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
             adapter.updateSelectedItems(indexesToDelete)
         }
 
-        //TODO: ATTENZIONE DA MODIFICARE
-        cameraButton.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraButton.setOnClickListener { v ->
+            val intent = Intent(v.context, RealTimeDetectionActivity::class.java)
             intent.putExtra(LIST_KEY, listId)
-            if(intent.resolveActivity(packageManager) != null){
-                startActivityForResult(intent, REQUEST_CAMERA_PERMISSION)
-            }
+            intent.putExtra(LIST_NAME, listTitle)
+            v.context.startActivity(intent)
         }
 
         cercaButton.setOnClickListener { v ->
@@ -260,6 +258,7 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
 
     companion object {
         const val LIST_KEY = "list_key"
+        const val LIST_NAME = "list_name"
         const val IS_DELETING = "is_deleting"
         const val INDEXES_TO_DELETE = "indexes_to_delete"
         const val CUSTOM_DIALOG = "custom_dialog"
