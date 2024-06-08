@@ -1,5 +1,6 @@
 package com.example.prova_progetto.Activity
 
+import android.app.ActionBar.LayoutParams
 import android.app.Dialog
 import com.example.prova_progetto.Adapter.FruitVegOfListAdapter
 import android.content.Intent
@@ -8,6 +9,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -185,6 +187,8 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         }
 
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setGravity(Gravity.BOTTOM)
+        dialog.window!!.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
 
         val tvQuantity: TextView = dialog.findViewById(R.id.tv_quantity)
         tvQuantity.text = quantity.toString()
@@ -192,7 +196,9 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         val btnDecrease: Button = dialog.findViewById(R.id.btn_decrease)
 
         val tvMessage: TextView = dialog.findViewById(R.id.message)
-        tvMessage.text = getString(R.string.message_modify)
+        tvMessage.text = getString(R.string.message_modify_selection)
+        val tvMessageTitle: TextView = dialog.findViewById(R.id.title_dialog)
+        tvMessageTitle.text = getString(R.string.message_modify)
 
         btnIncrease.setOnClickListener {
             quantity++

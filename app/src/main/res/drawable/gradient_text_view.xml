@@ -2,8 +2,8 @@
     <corners
         android:topLeftRadius="100000dp"
         android:topRightRadius="100000dp"
-        android:bottomLeftRadius="500dp"
-        android:bottomRightRadius="500dp"
+        android:bottomLeftRadius="100000dp"
+        android:bottomRightRadius="100000dp"
         />
     <gradient
         android:endColor="#00000000"

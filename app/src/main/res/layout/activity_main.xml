@@ -11,7 +11,9 @@
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" >
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.07"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/app_image"
@@ -179,13 +181,6 @@
 
     </LinearLayout>
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_0.04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03967168" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal_0.09"
         android:layout_width="wrap_content"
@@ -215,6 +210,19 @@
         app:layout_constraintGuide_percent="0.89" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_0.07"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_0.05"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -227,20 +235,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.40" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_0.66"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66" />
 
     <ImageView
         android:id="@+id/imageView2"

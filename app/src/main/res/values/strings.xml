@@ -8,8 +8,10 @@
     <string name="title">FRUTTA E VERDURA</string>
     <string name="add_new_list">Titolo nuova lista</string>
 
-    <string name="message_add">Seleziona la quantità da aggiungere</string>
-    <string name="message_modify">Modifica la quantità</string>
+    <string name="message_add">Aggiungi quantità</string>
+    <string name="message_modify">Modifica quantità</string>
+    <string name="message_add_selection">Seleziona la quantità da aggiungere</string>
+    <string name="message_modify_selection">Seleziona la quantità da modificare</string>
 
     <string name="all_list">Liste</string>
     <string name="search_item">Cerca</string>
@@ -36,6 +38,9 @@
     <string name="carbo">Carboidrati</string>
     <string name="lipids">Lipidi</string>
     <string name="fibers">Fibre</string>
+
+    <string name="confirm">Conferma</string>
+    <string name="cancel">Annulla</string>
 
 
 
