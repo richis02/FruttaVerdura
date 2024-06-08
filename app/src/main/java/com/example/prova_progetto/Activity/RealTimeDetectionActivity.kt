@@ -20,6 +20,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.prova_progetto.Adapter.FruitVegSearchAdapter
@@ -47,7 +48,8 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
     private lateinit var imageClassifierHelper: ImageClassifierHelper
     private lateinit var bitmapBuffer: Bitmap
     private lateinit var tvResult: TextView
-    private lateinit var btnResult: Button
+    private lateinit var btnResult : Button
+    private lateinit var cardView: CardView
     private lateinit var viewFinder: PreviewView
 
     private var preview: Preview? = null
@@ -58,31 +60,30 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
 
-    override fun onDestroy() {
-        super.onDestroy()
-        // Shut down our background executor
-        cameraExecutor.shutdown()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_real_time_detection)
 
+        tvResult = findViewById(R.id.tv_result)
+        cardView  = findViewById(R.id.cw_result)
+        btnResult = findViewById(R.id.btn_result)
+        viewFinder = findViewById(R.id.view_camera)
+
         val back: ImageView = findViewById(R.id.back_arrow)
+
         back.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        tvResult = findViewById(R.id.tv_result)
-        btnResult = findViewById(R.id.btn_result)
-
+        // Se la classificazione è richiesta da una items_list
         val listId = intent.getLongExtra(LIST_ID, -1L).takeIf { it != -1L }
         if(listId == null)
-            btnResult.text = R.string.vedi_dettagli.toString()
+            btnResult.text = "Dettagli"//Le R.string non funzionavano
         else
-            btnResult.text = R.string.aggiungi.toString()
+            btnResult.text = "Aggiungi"
 
+        // Quando l'utente conferma la classificazione del frutto/verdura
         btnResult.setOnClickListener { v ->
             if (listId == null){
                 val fruit_name = tvResult.text
@@ -106,6 +107,7 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
             }
         }
 
+        // Labels
         fruitVegViewModel.allFruitVegNames.observe(this, Observer { fruitVegNames ->
             fruitVegNames?.let {
                 imageClassifierHelper =
@@ -113,7 +115,6 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
             }
         })
 
-        viewFinder = findViewById(R.id.view_camera)
         viewFinder.post {
             setUpCamera()
         }
@@ -121,10 +122,34 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
+    override fun onPause() {
+        super.onPause()
+        // Rilascia le risorse della camera e dell'analizzatore
+        cameraProvider?.unbindAll()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Verifica se cameraProvider è già inizializzato
+        if (cameraProvider == null) {
+            setUpCamera()
+        } else {
+            bindCameraUseCases()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Shut down our background executor
+        cameraExecutor.shutdown()
+    }
+
+
     // Initialize CameraX, and prepare to bind the camera use cases
     private fun setUpCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener(
+            // Viene eseguito quando ListenableFuture è completato
             {
                 // CameraProvider
                 cameraProvider = cameraProviderFuture.get()
@@ -213,9 +238,9 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
         runOnUiThread {
             // Show result on bottom sheet
             if(results == "")
-                btnResult.visibility = View.GONE
+                cardView.visibility = View.GONE
             else
-                btnResult.visibility = View.VISIBLE
+                cardView.visibility = View.VISIBLE
             tvResult.text = results
         }
     }
