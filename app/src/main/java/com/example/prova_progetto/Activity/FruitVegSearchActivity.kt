@@ -25,12 +25,12 @@ import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
 import com.example.prova_progetto.db.ListFruitsCrossRef
 
-
 class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
-
+    //variabili per la gestione del dialog che permette di aggiungere una quantità di un determinato frutto
+    //le dichiaro globali per permettere il salvataggio dello stato
     private lateinit var dialog: Dialog
     private var isShowCustomDialog: Boolean = false
-    private lateinit var idFruitCustomDialog: String
+    private var idFruitCustomDialog: String = ""
     private var quantityCustomDialog: Int = 1
 
     private lateinit var recyclerView: RecyclerView
@@ -46,17 +46,22 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        //gestione della freccia per tornare indietro
         val back: ImageView = findViewById(R.id.back_arrow)
         back.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        /*prendo l'id della lista. Ci sono 2 casi:
+        se id = null --> l'intent arriva dal main e quindi sul click di un frutto dovrò mostrare detailActivity
+        se id > 0 --> l'intent arriva da allFruitVegOfListActivity e quindi dovrò permettere l'aggiunta di un frutto
+        sulla lista id*/
         listId = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
 
         val searchView: SearchView = findViewById(R.id.search)
+
         recyclerView = findViewById(R.id.recycler_search)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         adapter = FruitVegSearchAdapter(this)
         recyclerView.adapter = adapter
 
@@ -87,8 +92,9 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
     }
 
     override fun onItemClick(id: String, quantity: Int?) {
+        //gestione dell'evento onClick
+        //vedi commenti sopra per capire cosa fare se id = null o != da null
         if(listId != null) {
-            //siamo certi che listId sia diverso da null
             idFruitCustomDialog = id
             showCustomDialog()
         }
@@ -108,6 +114,7 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
         annullaButton.setOnClickListener {
             isShowCustomDialog = false
+            quantityCustomDialog = 1
             dialog.dismiss()
         }
         
@@ -117,6 +124,7 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
             // In caso di frutto già presente viene aggiornata la quantità
             fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef)
             isShowCustomDialog = false
+            quantityCustomDialog = 1
             dialog.dismiss()
         }
         
@@ -125,31 +133,34 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         dialog.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
 
         val tvQuantity: TextView = dialog.findViewById(R.id.tv_quantity)
-        val btnIncrease: Button = dialog.findViewById(R.id.btn_increase)
-        val btnDecrease: Button = dialog.findViewById(R.id.btn_decrease)
+        tvQuantity.text = quantityCustomDialog.toString()
+
 
         val tvMessage: TextView = dialog.findViewById(R.id.message)
         tvMessage.text = getString(R.string.message_add_selection)
+
         val tvMessageTitle: TextView = dialog.findViewById(R.id.title_dialog)
         tvMessageTitle.text = getString(R.string.message_add)
 
-        tvQuantity.text = quantityCustomDialog.toString()
-
+        val btnIncrease: Button = dialog.findViewById(R.id.btn_increase)
         btnIncrease.setOnClickListener {
             quantityCustomDialog++
             tvQuantity.text = quantityCustomDialog.toString()
         }
 
+        val btnDecrease: Button = dialog.findViewById(R.id.btn_decrease)
         btnDecrease.setOnClickListener {
             if (quantityCustomDialog > 1) {
                 quantityCustomDialog--
                 tvQuantity.text = quantityCustomDialog.toString()
             }
         }
+
         dialog.show()
     }
 
     override fun onDestroy() {
+        //gestione del custom dialog quando l'activity viene distrutta
         super.onDestroy()
         if(isShowCustomDialog)
             dialog.dismiss()

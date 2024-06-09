@@ -11,18 +11,18 @@ import com.example.prova_progetto.R
 
 class MainActivity : ComponentActivity() {
 
-    private val REQUEST_CAMERA_PERMISSION: Int = 123
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //gestione dei permessi per la fotocamera
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED)
         {
             requestCameraPermission()
         }
         else{
-            setContentView(R.layout.test_main)
+            //se i permessi sono già stati concessi in passato setto il layout e creo gli eventi per i bottoni
+            setContentView(R.layout.activity_main)
             setAllEvent()
         }
     }
@@ -65,6 +65,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    //metodo privato per la gestione di click su bottoni
     private fun setAllEvent(){
         val camera: ConstraintLayout = findViewById(R.id.open_camera)
         camera.setOnClickListener {v ->
@@ -85,4 +86,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    companion object {
+        //valore intero per gestire i permessi della fotocamera
+        private const val REQUEST_CAMERA_PERMISSION: Int = 123
+    }
 }

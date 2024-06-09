@@ -52,7 +52,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/add_list"
                 android:layout_marginEnd="8dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:inputType="textNoSuggestions|textVisiblePassword"
+                android:maxLines="1"/>
 
             <ImageView
                 android:id="@+id/add_list"

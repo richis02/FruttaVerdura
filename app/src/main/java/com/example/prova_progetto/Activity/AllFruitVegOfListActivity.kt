@@ -257,7 +257,7 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
 
     companion object {
         const val LIST_KEY = "list_key"
-        const val LIST_NAME = "list_name"
+        const val LIST_NAME = "list_name "
         const val IS_DELETING = "is_deleting"
         const val INDEXES_TO_DELETE = "indexes_to_delete"
         const val CUSTOM_DIALOG = "custom_dialog"
