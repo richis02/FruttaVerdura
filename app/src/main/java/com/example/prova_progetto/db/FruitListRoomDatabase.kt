@@ -66,7 +66,6 @@ public abstract class FruitListRoomDatabase: RoomDatabase() {
 
         }
 
-        //TODO: RENDERLO PRIVATO E POPOLARE SOLO ALLA CREAZIONE
          suspend fun populateDatabaseFromCSV(context: Context, fruitVegDao: FruitVegetableDao) {
 
              fruitVegDao.deleteAllFruitVeg()

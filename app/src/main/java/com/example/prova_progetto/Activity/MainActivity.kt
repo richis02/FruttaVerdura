@@ -3,23 +3,11 @@ package com.example.prova_progetto.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.graphics.Bitmap
-import android.provider.MediaStore
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
 import android.Manifest
-import android.content.Context
-import androidx.activity.viewModels
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.prova_progetto.R
-import com.example.prova_progetto.db.FruitListRoomDatabase
-import com.example.prova_progetto.db.FruitVegApplication
-import com.example.prova_progetto.db.FruitVegViewModel
-import com.example.prova_progetto.db.FruitVegViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 

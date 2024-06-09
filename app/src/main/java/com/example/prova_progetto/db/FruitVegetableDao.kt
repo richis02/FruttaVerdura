@@ -8,8 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FruitVegetableDao {
-    //TODO: FILTRO SULLA DATA
-    @Query("SELECT * FROM fruit_veg WHERE fruit_veg_name = :fruitVegId") //TODO: FORSE HA SENSO FARLO RISPETTO ALL'ID
+    @Query("SELECT * FROM fruit_veg WHERE fruit_veg_name = :fruitVegId")
     fun getFruitvegById(fruitVegId: String): Flow<FruitVegetable>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

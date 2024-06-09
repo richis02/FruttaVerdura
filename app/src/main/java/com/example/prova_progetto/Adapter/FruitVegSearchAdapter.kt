@@ -1,6 +1,5 @@
 package com.example.prova_progetto.Adapter
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,12 +30,6 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
         private val imgView: ImageView = itemView.findViewById(R.id.item_image)
-        //todo: da fare la grafica e recuperare ConstraintLayout
-
-        //private val imgResId : R.drawable
-          //  get() {
-            //    return imgResId
-            //}
 
         // Per una questione di efficenza è stata definita una mappa, questo è possibile perchè
         // la dimensione del dataset è ridotta

@@ -7,14 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 
 class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel() {
 
     // Variabili membro LiveData fanno da cache e vengono aggiornate in caso di cambiamento
-
     val allFruitVeg: LiveData<List<FruitVegetable>> = repository.allFruitVeg.asLiveData()
 
     val allList: LiveData<List<ItemsList>> = repository.allList.asLiveData()

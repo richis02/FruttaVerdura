@@ -39,14 +39,12 @@ class ItemsListAdapter(private val listener: OnItemsListClickListener)
         notifyDataSetChanged()
     }
 
-    // Binda un testo con una textview
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
         private val layout: LinearLayout = itemView.findViewById(R.id.list_item)
 
 
         fun bind(itemList: ItemsList?, isSelected: Boolean) {
-            // Con let si gestisce il caso itemList = null
             itemList?.let{
                 listItemView.text = itemList.listTitle
             }

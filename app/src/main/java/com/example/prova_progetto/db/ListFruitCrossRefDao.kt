@@ -6,10 +6,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+
 @Dao
 interface ListFruitCrossRefDao {
-
-    //TODO: finire e sistemare
     @Query("SELECT fv.*, quantity, list_id FROM list_fruit_cross_ref as lfc JOIN fruit_veg AS fv ON lfc.fruit_id = fv.fruit_veg_name WHERE list_id= :listId")
     fun getFruitInfoByListId(listId: Long): Flow<List<FruitVegInfo>>
 
