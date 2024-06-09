@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/white" >
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" >
+        app:layout_constraintTop_toTopOf="@id/guideline_vertical_0.05"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_vertical_0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="4dp">
 
         <ImageView
             android:id="@+id/app_image"
@@ -19,7 +20,7 @@
             android:layout_height="51dp"
             android:contentDescription="@string/app_name"
             android:padding="5dp"
-            android:src="@drawable/icon"
+            android:src="@drawable/icon_app"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/app_image"
-            android:fontFamily="@font/montserratmedium"
+            android:fontFamily="@font/montserratbold"
             android:padding="5dp"
             android:text="@string/app_name"
             android:textColor="@color/green_text_icons"
@@ -185,7 +186,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03967168" />
+        app:layout_constraintGuide_percent="0.04" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal_0.11"
@@ -213,7 +214,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.890511" />
+        app:layout_constraintGuide_percent="0.90" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_0.05"
@@ -245,15 +246,14 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="254dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/webinar_bro"
-        android:visibility="visible"
+        android:src="@drawable/farming"
         app:layout_constraintEnd_toEndOf="@id/guideline_vertical_0.4"
         app:layout_constraintStart_toStartOf="@id/guideline_vertical_0.05"
         app:layout_constraintTop_toBottomOf="@id/relativeLayout"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.90"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:contentDescription="@string/contentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

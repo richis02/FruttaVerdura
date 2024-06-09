@@ -2,7 +2,10 @@ package com.example.prova_progetto.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -41,6 +44,31 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         }
 
         listTitleTv = findViewById(R.id.fruit_list_name)
+        listTitleTv.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                s?.let {
+                    val filtered = it.toString().filter { char -> char.isLetterOrDigit() }
+                    if (filtered != it.toString()) {
+                        listTitleTv.setText(filtered)
+                        listTitleTv.setSelection(filtered.length)
+                    }
+                }
+            }
+        })
+        listTitleTv.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                onAddList()
+                true
+            } else {
+                false
+            }
+        }
+
+
         val deleteBtn: Button = findViewById(R.id.delete_btn)
         val annullaBtn: Button = findViewById(R.id.annulla_btn)
         deleteBtn.setOnClickListener{
@@ -72,13 +100,7 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
         val addList: ImageView = findViewById(R.id.add_list)
 
-        addList.setOnClickListener {
-            if(listTitleTv.text.toString() != "") {
-                val newList = ItemsList(listTitle = listTitleTv.text.toString())
-                fruitVegViewModel.insertList(newList)
-                listTitleTv.text = null //tolgo il testo
-            }
-        }
+        addList.setOnClickListener { onAddList() }
 
 
         recyclerView = findViewById(R.id.recycler_list)
@@ -131,6 +153,15 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
         val adapter = (recyclerView.adapter as ItemsListAdapter)
         adapter.updateSelectedItems(indexesToDelete)
+    }
+
+
+    private fun onAddList(){
+        if(listTitleTv.text.toString() != "") {
+            val newList = ItemsList(listTitle = listTitleTv.text.toString())
+            fruitVegViewModel.insertList(newList)
+            listTitleTv.text = null //tolgo il testo
+        }
     }
 
     companion object{

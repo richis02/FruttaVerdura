@@ -71,7 +71,6 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
         viewFinder = findViewById(R.id.view_camera)
 
         val back: ImageView = findViewById(R.id.back_arrow)
-
         back.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
