@@ -7,24 +7,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/main_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.09"
-        app:layout_constraintLeft_toLeftOf="parent"
-
-        android:text="Inizia lo\nShopping"
-        android:fontFamily="@font/montserratmedium"
-        android:textSize="38dp"
-        android:elevation="7dp"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        >
-
-    </TextView>
-
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"

@@ -28,8 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.CameraActivity" />
-        <activity android:name=".Activity.AllListActivity" />
+        <activity android:name=".Activity.AllListActivity"
+                android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Activity.FruitVegSearchActivity" />
         <activity android:name=".Activity.FruitDetailsActivity" />
         <activity android:name=".Activity.AllFruitVegOfListActivity" />
