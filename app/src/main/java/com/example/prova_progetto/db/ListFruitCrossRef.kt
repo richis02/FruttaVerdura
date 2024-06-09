@@ -3,8 +3,6 @@ package com.example.prova_progetto.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
-
 @Entity(
     tableName = "list_fruit_cross_ref",
     primaryKeys = ["list_id","fruit_id"],

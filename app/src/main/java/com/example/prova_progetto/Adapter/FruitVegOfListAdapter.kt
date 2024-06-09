@@ -110,8 +110,6 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
                     .inflate(R.layout.fruit_veg_of_list_item, parent, false)
                 return ItemListViewHolder(view)
             }
-
-            const val FRUIT_KEY = "fruit_key"
         }
     }
 

@@ -4,11 +4,9 @@ import android.app.ActionBar.LayoutParams
 import android.app.Dialog
 import com.example.prova_progetto.Adapter.FruitVegOfListAdapter
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.Gravity
 import android.view.View
 import android.view.Window
@@ -25,15 +23,11 @@ import com.example.prova_progetto.db.FruitVegViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prova_progetto.Adapter.ItemsListAdapter
 import com.example.prova_progetto.OnFruitVegClickListener
 import com.example.prova_progetto.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
-
-    private val REQUEST_CAMERA_PERMISSION: Int = 123
-
     private lateinit var dialog: Dialog
     private var qntCustomDialogForTV: Int? = null
     private var idCustomDialog: String = ""

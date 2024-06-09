@@ -11,20 +11,13 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prova_progetto.Adapter.FruitVegOfListAdapter
 import com.example.prova_progetto.Adapter.ItemsListAdapter
 import com.example.prova_progetto.OnItemsListClickListener
 import com.example.prova_progetto.R
-import com.example.prova_progetto.db.FruitListRoomDatabase
 import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
-import com.example.prova_progetto.db.FruitVegetable
 import com.example.prova_progetto.db.ItemsList
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-
 
 class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
@@ -142,7 +135,6 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
     companion object{
         const val LIST_KEY = "list_key"
         const val LIST_NAME = "list_name"
-
         const val IS_DELETING = "is_deleting"
         const val INDEXES_TO_DELETE = "indexes_to_delete"
         const val NEW_LIST_NAME = "new_list_name"
