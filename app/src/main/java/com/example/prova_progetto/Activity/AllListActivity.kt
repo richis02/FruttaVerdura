@@ -78,6 +78,7 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         }
 
         val addList: ImageView = findViewById(R.id.add_list)
+
         addList.setOnClickListener {
             if(listTitleTv.text.toString() != "") {
                 val newList = ItemsList(listTitle = listTitleTv.text.toString())
