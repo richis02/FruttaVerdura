@@ -29,4 +29,7 @@
     <color name="gray_test">#CAC4C4</color>
     <color name="grey">#DDDDDD</color>
 
+    <color name="main_green_light">#E9FFD0</color>
+    <color name="main_red_light">#FFB4A6</color>
+    <color name="main_yellow_light">#FFEAC0</color>
 </resources>

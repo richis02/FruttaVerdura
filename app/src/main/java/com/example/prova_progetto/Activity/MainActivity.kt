@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
             requestCameraPermission()
         }
         else{
-            setContentView(R.layout.activity_main)
+            setContentView(R.layout.test_main)
             setAllEvent()
         }
     }

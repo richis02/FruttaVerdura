@@ -99,7 +99,7 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
                 if (isSelected) {
                     layout.setBackgroundResource(R.drawable.red_border) // Rimuove il background
                 } else {
-                    layout.setBackgroundResource(R.drawable.white_dashed_border)
+                    layout.setBackgroundResource(R.drawable.main_green_border)
                 }
             }
         }

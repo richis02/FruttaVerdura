@@ -92,14 +92,14 @@
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal">
 
             <Button
                 android:id="@+id/btn_annulla"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
                 android:background="@drawable/button_dialog_background_left"
@@ -113,7 +113,7 @@
 
             <Button
                 android:id="@+id/btn_conferma"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/confirm"
                 android:background="@drawable/button_dialog_background"
