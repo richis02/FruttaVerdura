@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
             else
             {
                 //permessi ok
-                setContentView(R.layout.activity_main)
+                setContentView(R.layout.test_main)
                 setAllEvent()
             }
         }

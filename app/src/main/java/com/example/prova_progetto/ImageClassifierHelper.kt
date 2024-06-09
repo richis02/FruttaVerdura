@@ -48,7 +48,7 @@ class ImageClassifierHelper(
 
     companion object {
         private const val TAG = "ImageClassifierHelper"
-        const val modelName = "model_metadata.tflite"
+        const val modelName = "mio_modello.tflite"
     }
 
     private fun loadModelFile(context: Context): MappedByteBuffer? {
