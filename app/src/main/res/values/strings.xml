@@ -54,4 +54,6 @@
     <string name="vedi_dettagli">dettagli del frutto</string>
     <string name="gestisci_liste">Gestisci le liste</string>
 
+    <string name="nutrition_value">%1$s g</string>
+
 </resources>
