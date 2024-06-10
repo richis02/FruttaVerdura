@@ -48,7 +48,7 @@ class ImageClassifierHelper(
 
     companion object {
         private const val TAG = "ImageClassifierHelper"
-        const val modelName = "mio_modello.tflite"
+        const val modelName = "model_kaggle_2.tflite"
     }
 
     private fun loadModelFile(context: Context): MappedByteBuffer? {
@@ -64,7 +64,7 @@ class ImageClassifierHelper(
     }
 
     private fun preprocessBitmap(bitmap: Bitmap): Array<Array<Array<FloatArray>>> {
-        val imageSize = 224  // Modifica in base al tuo modello
+        val imageSize = 224
         val resizedBitmap = Bitmap.createScaledBitmap(bitmap, imageSize, imageSize, true)
         val input = Array(1) { Array(imageSize) { Array(imageSize) { FloatArray(3) } } }
         for (y in 0 until imageSize) {
