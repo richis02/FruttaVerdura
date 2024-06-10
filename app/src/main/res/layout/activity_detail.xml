@@ -39,7 +39,6 @@
             android:background="@drawable/gradient_text_view"
             android:fontFamily="@font/montserratbold"
             android:gravity="center"
-            android:text="Frutto"
             android:textColor="@color/light_yellow_green"
             android:textSize="50sp"
             app:layout_constraintBottom_toTopOf="@id/dettagli_nutrizionali"

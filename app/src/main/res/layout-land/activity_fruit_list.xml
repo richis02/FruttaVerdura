@@ -14,7 +14,8 @@
             android:src="@drawable/baseline_arrow_back_ios_new_24"
             app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.04"
             app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.12"
-            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"/>
+            app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
+            android:contentDescription="@string/contentDescription"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,6 +56,7 @@
         app:fabSize="normal"
         app:fabCustomSize="80dp"
         android:padding="16dp"
+        android:contentDescription="@string/contentDescription"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -68,7 +70,8 @@
         android:layout_marginBottom="10dp"
         app:elevation="2dp"
         app:borderWidth="1dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:contentDescription="@string/contentDescription"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_camera"
@@ -82,7 +85,8 @@
         app:backgroundTint="@color/white"
         app:elevation="2dp"
         app:borderWidth="1dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:contentDescription="@string/contentDescription"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_rimuovi"
@@ -96,7 +100,8 @@
         android:layout_marginEnd="10dp"
         app:elevation="2dp"
         app:borderWidth="1dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:contentDescription="@string/contentDescription"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_elimina_linear"
@@ -114,7 +119,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/green_background"
             android:textColor="@color/white"
-            android:text="Elimina"
+            android:text="@string/elimina"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_annulla"
             tools:ignore="MissingConstraints" />
@@ -125,7 +130,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/green_background"
             android:textColor="@color/white"
-            android:text="Annulla"
+            android:text="@string/cancel"
             app:layout_constraintStart_toEndOf="@id/btn_elimina"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints" />

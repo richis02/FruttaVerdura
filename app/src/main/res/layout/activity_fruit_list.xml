@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/green_background"
             android:textColor="@color/white"
-            android:text="Annulla"
+            android:text="@string/cancel"
             app:layout_constraintStart_toEndOf="@id/btn_elimina"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints" />
