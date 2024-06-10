@@ -49,4 +49,6 @@
 
     <string name="aggiungi">Aggiungi alla lista</string>
     <string name="vedi_dettagli">dettagli del frutto</string>
+    <string name="gestisci_liste">Gestisci le liste</string>
+
 </resources>
