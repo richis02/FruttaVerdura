@@ -38,7 +38,7 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
     private lateinit var dialog: Dialog
     private var listNewNameId: Long = -1
     private var listNewName: String = ""
-    private lateinit var etNewName: EditText
+    private var etNewName: EditText? = null
 
     private lateinit var listTitleTv: EditText
     private var isDeleting: Boolean = false
@@ -199,9 +199,9 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         dialog.setContentView(R.layout.dialog_custom)
 
         etNewName = dialog.findViewById(R.id.et_new_name_list)
-        etNewName.visibility = View.VISIBLE
+        etNewName!!.visibility = View.VISIBLE
         Log.v("QAZ", "Set su tv: ${listNewName}")
-        etNewName.setText(listNewName)
+        etNewName!!.setText(listNewName)
 
         val linearLayout: LinearLayout = dialog.findViewById(R.id.modify_quantity)
         linearLayout.visibility = View.GONE
@@ -216,13 +216,15 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
         val confermaButton: Button = dialog.findViewById(R.id.btn_conferma)
         confermaButton.setOnClickListener {
-            listNewName = etNewName.text.toString()
+            listNewName = etNewName!!.text.toString()
             if(listNewName != "") {
                 //qui listId e listName sono diversi da null ma il compilatore impone il controllo
-                listNewNameId?.let { it1 -> listNewName?.let { it2 ->
-                    fruitVegViewModel.updateListTitle(it1, it2
-                    )
-                } }
+                listNewNameId.let { it1 ->
+                    listNewName.let { it2 ->
+                        fruitVegViewModel.updateListTitle(it1, it2
+                        )
+                    }
+                }
                 isShowCustomDialog = false
                 listNewNameId = -1
                 listNewName = ""
@@ -260,7 +262,7 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         outState.putString(NEW_LIST_NAME, listTitleTv.text.toString())
         outState.putBoolean(CUSTOM_DIALOG, isShowCustomDialog)
         outState.putLong(LIST_KEY, listNewNameId)
-        outState.putString(UPDATE_LIST_NAME, etNewName.text.toString())
+        outState.putString(UPDATE_LIST_NAME, etNewName?.text?.toString() ?: ""  )
         super.onSaveInstanceState(outState)
     }
 }

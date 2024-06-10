@@ -23,7 +23,7 @@ class FruitVegSearchAdapter (private val listener: OnFruitVegClickListener) : Li
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
-        holder.itemView.setOnClickListener { listener.onItemClick(current.fruitVegName, null) }
+        holder.itemView.setOnClickListener { listener.onItemClick(current.fruitVegName, null, current.img) }
         holder.bind(current)
     }
 

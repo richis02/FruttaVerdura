@@ -32,6 +32,8 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
     private var isShowCustomDialog: Boolean = false
     private var idFruitCustomDialog: String = ""
     private var quantityCustomDialog: Int = 1
+    private var imgCustomDialog : String = ""
+
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FruitVegSearchAdapter
@@ -86,16 +88,18 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
                 listId = it.getLong(ID_LIST)
                 quantityCustomDialog = it.getInt(QUANTITY_CUSTOM_DIALOG)
                 idFruitCustomDialog = it.getString(ID_FRUIT_CUSTOM_DIALOG).toString()
+                imgCustomDialog = it.getString(AllFruitVegOfListActivity.IMG_NAME) ?: ""
                 showCustomDialog()
             }
         }
     }
 
-    override fun onItemClick(id: String, quantity: Int?) {
+    override fun onItemClick(id: String, quantity: Int?, icon : String) {
         //gestione dell'evento onClick
         //vedi commenti sopra per capire cosa fare se id = null o != da null
         if(listId != null) {
             idFruitCustomDialog = id
+            imgCustomDialog = icon
             showCustomDialog()
         }
         else {
@@ -110,6 +114,11 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_custom)
+
+        // Imposta icona immagine nel dialog
+        val imgFruit : ImageView = dialog.findViewById(R.id.title_image)
+        val imgRes = resources.getIdentifier(imgCustomDialog, "drawable", packageName)
+        imgFruit.setImageResource(imgRes)
         
         val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
         annullaButton.setOnClickListener {
@@ -173,6 +182,7 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         outState.putInt(QUANTITY_CUSTOM_DIALOG, quantityCustomDialog)
         outState.putString(ID_FRUIT_CUSTOM_DIALOG, idFruitCustomDialog)
         outState.putLong(ID_LIST, listId ?: -1)
+        outState.putString(AllFruitVegOfListActivity.IMG_NAME, imgCustomDialog)
         super.onSaveInstanceState(outState)
     }
 
@@ -181,5 +191,6 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         const val QUANTITY_CUSTOM_DIALOG = "quantity_custom_dialog"
         const val ID_FRUIT_CUSTOM_DIALOG = "id_fruit_custom_dialog"
         const val ID_LIST = "id_list"
+        const val IMG_NAME = "img_name"
     }
 }

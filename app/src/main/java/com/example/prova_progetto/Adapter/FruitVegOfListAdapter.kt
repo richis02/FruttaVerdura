@@ -27,7 +27,7 @@ class FruitVegOfListAdapter(private val listener: OnFruitVegClickListener) : Lis
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val current = getItem(position)
         holder.itemView.setOnClickListener {
-            listener.onItemClick(current.fruitVeg.fruitVegName, current.quantity)
+            listener.onItemClick(current.fruitVeg.fruitVegName, current.quantity, current.fruitVeg.img)
         }
         holder.bind(current, selectedItems.contains(current.fruitVeg.fruitVegName))
     }

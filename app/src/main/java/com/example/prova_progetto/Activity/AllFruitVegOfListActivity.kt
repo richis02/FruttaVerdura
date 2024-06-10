@@ -32,6 +32,7 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
     private var qntCustomDialogForTV: Int? = null
     private var idCustomDialog: String = ""
     private var qntCustomDialogForQuery: Int? = null
+    private var imgCustomDialog : String = ""
 
     private var isDeleting: Boolean = false
     private var isShowCustomDialog: Boolean = false
@@ -160,16 +161,18 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
                     }
                 qntCustomDialogForTV = it.getInt(QUANTITY_CUSTOM_DIALOG_FOR_TV)
                 qntCustomDialogForQuery = it.getInt(QUANTITY_CUSTOM_DIALOG_FOR_QUERY)
+                imgCustomDialog = it.getString(IMG_NAME) ?: ""
                 showCustomDialog()
             }
         }
     }
 
-    override fun onItemClick(id: String, quantity: Int?) {
+    override fun onItemClick(id: String, quantity: Int?, icon : String) {
         if (!isDeleting) {
             idCustomDialog = id
             qntCustomDialogForQuery = quantity
             qntCustomDialogForTV = quantity
+            imgCustomDialog = icon
             showCustomDialog()
         } else {
             val index = indexesToDelete.indexOf(id)
@@ -191,6 +194,12 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_custom)
 
+        // Imposta icona immagine nel dialog
+        val imgFruit : ImageView = dialog.findViewById(R.id.title_image)
+        val imgRes = resources.getIdentifier(imgCustomDialog, "drawable", packageName)
+        imgFruit.setImageResource(imgRes)
+
+        //
         val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
         annullaButton.setOnClickListener {
             isShowCustomDialog = false
@@ -252,17 +261,19 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         outState.putString(ID_FRUIT, idCustomDialog)
         outState.putInt(QUANTITY_CUSTOM_DIALOG_FOR_TV, qntCustomDialogForTV ?: -1)
         outState.putLong(LIST_KEY, listId!!)
+        outState.putString(IMG_NAME, imgCustomDialog)
         super.onSaveInstanceState(outState)
     }
 
     companion object {
         const val LIST_KEY = "list_key"
-        const val LIST_NAME = "list_name "
+        const val LIST_NAME = "list_name"
         const val IS_DELETING = "is_deleting"
         const val INDEXES_TO_DELETE = "indexes_to_delete"
         const val CUSTOM_DIALOG = "custom_dialog"
         const val QUANTITY_CUSTOM_DIALOG_FOR_QUERY = "quantity_custom_dialog_for_query"
         const val QUANTITY_CUSTOM_DIALOG_FOR_TV = "quantity_custom_dialog_for_tv"
         const val ID_FRUIT = "id_fruit"
+        const val IMG_NAME = "img_name"
     }
 }
