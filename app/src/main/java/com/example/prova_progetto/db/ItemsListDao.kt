@@ -1,6 +1,5 @@
 package com.example.prova_progetto.db
 
-import android.icu.text.CaseMap.Title
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

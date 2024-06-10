@@ -26,13 +26,13 @@ class FruitDetailsActivity: ComponentActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        val fruit_name: String? = intent.getStringExtra("fruit_key")
+        val fruitName: String? = intent.getStringExtra("fruit_key")
 
         val tvNome: TextView = findViewById(R.id.title_fruit)
-        tvNome.text = fruit_name
+        tvNome.text = fruitName
 
-        fruit_name?.let {
-            fruitVegViewModel.getFruitVeg(fruit_name).observe(this, Observer {fruit ->
+        fruitName?.let {
+            fruitVegViewModel.getFruitVeg(fruitName).observe(this, Observer { fruit ->
                 fruit?.let{
                     val imageResourceId = resources.getIdentifier(
                         it.photo, "drawable",
@@ -40,7 +40,7 @@ class FruitDetailsActivity: ComponentActivity() {
                     )
                     val image: ImageView = findViewById(R.id.fruit_image)
                     if (imageResourceId != 0) // Verifico che l'ID della risorsa sia valido
-                        image.setImageResource(imageResourceId);
+                        image.setImageResource(imageResourceId)
 
                     val tvEnergyJ: TextView = findViewById(R.id.number_of_energy_j)
                     tvEnergyJ.text = "${it.energyJoule}"

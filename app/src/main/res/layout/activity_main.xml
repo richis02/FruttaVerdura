@@ -102,7 +102,7 @@
                 app:layout_constraintEnd_toStartOf="@id/all_list_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/green_background"
+                android:tint="@color/green_background"
                 />
 
             <TextView
@@ -154,7 +154,7 @@
                     android:id="@+id/imageView"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    app:tint="@color/white"
+                    android:tint="@color/white"
                     android:contentDescription="@string/contentDescription"
                     android:src="@drawable/main_camera_viewfinder"
                     app:layout_constraintBottom_toTopOf="@id/textView"
@@ -207,7 +207,7 @@
                     android:id="@+id/lente"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    app:tint="@color/green_background"
+                    android:tint="@color/green_background"
                     android:contentDescription="@string/contentDescription"
                     android:src="@drawable/mai_search"
                     app:layout_constraintBottom_toTopOf="@id/cerca"
