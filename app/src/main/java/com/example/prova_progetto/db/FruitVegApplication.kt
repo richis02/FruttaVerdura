@@ -6,8 +6,8 @@ import kotlinx.coroutines.SupervisorJob
 
 class FruitVegApplication: Application() {
 
-    val applicationScope = CoroutineScope(SupervisorJob())
+    private val applicationScope = CoroutineScope(SupervisorJob())
 
-    val database by lazy { FruitListRoomDatabase.getDatabase(this, applicationScope) }
+    private val database by lazy { FruitListRoomDatabase.getDatabase(this, applicationScope) }
     val repository by lazy { FruitListRepository(database.fruitVegDao(), database.itemsListDao(), database.listFruitCrossRefDao()) }
 }

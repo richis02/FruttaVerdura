@@ -47,8 +47,11 @@
     <string name="conferma">Conferma</string>
     <string name="confirm">Conferma</string>
     <string name="cancel">Annulla</string>
+    <string name="cancella">Cancella</string>
 
 
     <string name="aggiungi">Aggiungi alla lista</string>
     <string name="vedi_dettagli">dettagli del frutto</string>
+    <string name="gestisci_liste">Gestisci le liste</string>
+
 </resources>

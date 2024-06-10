@@ -5,15 +5,12 @@
             <stroke
                 android:color="@color/green_background"
                 android:width="1dp"
-
                 />
-
             <solid android:color="#D9FFFFFF"
                 android:bottom="5dp"
                 android:left="5dp"
                 android:right="5dp"
                 android:top="5dp" />
-
         </shape>
     </item>
 </layer-list>

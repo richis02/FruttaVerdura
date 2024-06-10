@@ -14,7 +14,7 @@ import java.io.InputStreamReader
 
 
 @Database(entities = [FruitVegetable::class, ItemsList::class, ListFruitsCrossRef::class], version = 24, exportSchema = false)
-public abstract class FruitListRoomDatabase: RoomDatabase() {
+abstract class FruitListRoomDatabase: RoomDatabase() {
     abstract fun fruitVegDao() : FruitVegetableDao
     abstract fun itemsListDao() : ItemsListDao
     abstract fun listFruitCrossRefDao() : ListFruitCrossRefDao

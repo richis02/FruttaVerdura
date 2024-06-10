@@ -10,7 +10,7 @@ import org.tensorflow.lite.Interpreter
 
 
 class ImageClassifierHelper(
-    var threshold: Float = 0.6f,
+    private var threshold: Float = 0.6f,
     val context: Context,
     val imageClassifierListener: ClassifierListener?,
     val fruitAndVegetableArray: List<String>
