@@ -5,32 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="5dp">
-    <LinearLayout
+
+    <ImageView
+        android:id="@+id/back_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/title_bar"
+        android:layout_gravity="center"
+        android:src="@drawable/baseline_arrow_back_ios_new_24"
         app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02"
         app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.07"
-        app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03" >
+        app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03" />
 
-        <ImageView
-            android:id="@+id/back_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/baseline_arrow_back_ios_new_24" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_nome_lista"
+        android:fontFamily="@font/montserratbold"
+        android:textColor="@color/green_text_icons"
+        android:textSize="20sp"
+        android:text="@string/nth_list_name"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_nome_lista"
-            android:fontFamily="@font/montserratbold"
-            android:textColor="@color/green_text_icons"
-            android:textSize="20sp"
-            android:layout_marginStart="20sp"
-            android:text="@string/nth_list_name"/>
-
-    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_fruit_of_list"
