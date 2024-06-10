@@ -235,12 +235,10 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
     @SuppressLint("NotifyDataSetChanged")
     override fun onResults(results: String?) {
         runOnUiThread {
-            // Show result on bottom sheet
-            if(results == "")
-                cardView.visibility = View.GONE
-            else
-                cardView.visibility = View.VISIBLE
-            tvResult.text = results
+            if(results != "") {
+                if (cardView.visibility == View.GONE) cardView.visibility = View.VISIBLE
+                tvResult.text = results
+            }
         }
     }
 }
