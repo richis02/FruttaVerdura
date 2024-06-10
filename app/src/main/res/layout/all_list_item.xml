@@ -25,6 +25,7 @@
         android:fontFamily="@font/montserratmedium"
         android:text="@string/nth_list_name"
         android:textColor="@color/green_text_icons"
+        android:layout_gravity="center_vertical"
         android:textSize="20sp" />
 
     <View

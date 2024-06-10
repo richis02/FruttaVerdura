@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding = "10dp">
@@ -21,6 +20,7 @@
             android:padding="9dp">
 
             <ImageView
+                android:id="@+id/title_image"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src = "@drawable/baseline_edit_24"
@@ -52,6 +52,7 @@
             android:paddingBottom="16dp" />
 
         <LinearLayout
+            android:id="@+id/modify_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -87,6 +88,15 @@
                 android:fontFamily="@font/montserratbold"
                 android:background="@drawable/circular_button"/>
         </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_new_name_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/modify_name_list"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

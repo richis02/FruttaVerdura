@@ -1,5 +1,6 @@
 package com.example.prova_progetto.db
 
+import android.icu.text.CaseMap.Title
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -20,4 +21,7 @@ interface ItemsListDao {
 
     @Query("DELETE FROM items_list")
     suspend fun deleteAllLists()
+
+    @Query("UPDATE items_list SET list_title = :newTitleList WHERE items_list_id = :itemsListId")
+    suspend fun updateListById(itemsListId: Long, newTitleList: String)
 }

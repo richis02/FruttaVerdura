@@ -1,14 +1,23 @@
 package com.example.prova_progetto.Activity
 
+import android.app.ActionBar
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -21,8 +30,15 @@ import com.example.prova_progetto.db.FruitVegApplication
 import com.example.prova_progetto.db.FruitVegViewModel
 import com.example.prova_progetto.db.FruitVegViewModelFactory
 import com.example.prova_progetto.db.ItemsList
+import com.example.prova_progetto.db.ListFruitsCrossRef
 
 class AllListActivity: ComponentActivity(), OnItemsListClickListener {
+
+    private var isShowCustomDialog: Boolean = false
+    private lateinit var dialog: Dialog
+    private var listNewNameId: Long = -1
+    private var listNewName: String = ""
+    private lateinit var etNewName: EditText
 
     private lateinit var listTitleTv: EditText
     private var isDeleting: Boolean = false
@@ -131,6 +147,13 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
                 deleteBtn.setText(R.string.conferma)
                 annullaBtn.visibility = View.VISIBLE
             }
+
+            if(it.getBoolean(CUSTOM_DIALOG)){
+                listNewName = it.getString(UPDATE_LIST_NAME) ?: ""
+                Log.v("QAZ", "Recupero stato: ${listNewName}")
+                listNewNameId = it.getLong(LIST_KEY)
+                showCustomDialog()
+            }
         }
     }
 
@@ -155,6 +178,11 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         adapter.updateSelectedItems(indexesToDelete)
     }
 
+    override fun onUpdateTitleClick(id: Long) {
+        listNewNameId = id
+        showCustomDialog()
+    }
+
 
     private fun onAddList(){
         if(listTitleTv.text.toString() != "") {
@@ -164,18 +192,75 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         }
     }
 
+    private fun showCustomDialog() {
+        isShowCustomDialog = true
+        dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_custom)
+
+        etNewName = dialog.findViewById(R.id.et_new_name_list)
+        etNewName.visibility = View.VISIBLE
+        Log.v("QAZ", "Set su tv: ${listNewName}")
+        etNewName.setText(listNewName)
+
+        val linearLayout: LinearLayout = dialog.findViewById(R.id.modify_quantity)
+        linearLayout.visibility = View.GONE
+
+        val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
+        annullaButton.setOnClickListener {
+            isShowCustomDialog = false
+            listNewNameId = -1
+            listNewName = ""
+            dialog.dismiss()
+        }
+
+        val confermaButton: Button = dialog.findViewById(R.id.btn_conferma)
+        confermaButton.setOnClickListener {
+            listNewName = etNewName.text.toString()
+            if(listNewName != "") {
+                //qui listId e listName sono diversi da null ma il compilatore impone il controllo
+                listNewNameId?.let { it1 -> listNewName?.let { it2 ->
+                    fruitVegViewModel.updateListTitle(it1, it2
+                    )
+                } }
+                isShowCustomDialog = false
+                listNewNameId = -1
+                listNewName = ""
+                dialog.dismiss()
+            }
+        }
+
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setGravity(Gravity.BOTTOM)
+        dialog.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
+
+        dialog.show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //distruggo il dialog quando l'attività viene distrutta in modo da non aver problemi
+        if(isShowCustomDialog)
+            dialog.dismiss()
+    }
+
     companion object{
         const val LIST_KEY = "list_key"
         const val LIST_NAME = "list_name"
         const val IS_DELETING = "is_deleting"
         const val INDEXES_TO_DELETE = "indexes_to_delete"
         const val NEW_LIST_NAME = "new_list_name"
+        const val CUSTOM_DIALOG = "custom_dialog"
+        const val UPDATE_LIST_NAME = "update_list_name"
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean(IS_DELETING, isDeleting)
         outState.putLongArray(INDEXES_TO_DELETE, indexesToDelete.toLongArray())
         outState.putString(NEW_LIST_NAME, listTitleTv.text.toString())
+        outState.putBoolean(CUSTOM_DIALOG, isShowCustomDialog)
+        outState.putLong(LIST_KEY, listNewNameId)
+        outState.putString(UPDATE_LIST_NAME, etNewName.text.toString())
         super.onSaveInstanceState(outState)
     }
 }

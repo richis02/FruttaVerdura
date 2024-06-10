@@ -48,6 +48,11 @@ class FruitListRepository(
     }
 
     @WorkerThread
+    suspend fun updateListTitleById(itemsListId: Long, newTitleList: String){
+        itemsListDao.updateListById(itemsListId, newTitleList)
+    }
+
+    @WorkerThread
     suspend fun deleteFruitVegById(fruitVegId : String) {
         fruitVegDao.deleteFruitVegById(fruitVegId)
     }
