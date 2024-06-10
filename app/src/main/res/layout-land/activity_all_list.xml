@@ -15,7 +15,8 @@
                 android:src="@drawable/baseline_arrow_back_ios_new_24"
                 app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.04"
                 app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.12"
-                app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"/>
+                app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
+                android:contentDescription="@string/contentDescription"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,8 +42,9 @@
             <EditText
                 android:id="@+id/fruit_list_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="@string/add_new_list"
+                android:inputType="text"
                 android:layout_gravity="center"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/green_background"
                 android:textColor="@color/white"
-                android:text="Cancella"
+                android:text="@string/cancella"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/annulla_btn"
                 tools:ignore="MissingConstraints" />
@@ -99,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/green_background"
                 android:textColor="@color/white"
-                android:text="Annulla"
+                android:text="@string/cancel"
                 app:layout_constraintStart_toEndOf="@id/delete_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:visibility="gone"

@@ -23,7 +23,6 @@
             android:fontFamily="@font/montserratbold"
             android:textColor="@color/green_text_icons"
             android:textSize="20sp"
-            android:layout_marginStart="20sp"
             android:text="@string/nth_list_name"
             app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.04"
             app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.12"
@@ -38,11 +37,9 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@id/btn_elimina_linear"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
         app:layout_constraintRight_toRightOf="@id/guideline_vertical_0.97"
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_0.12"
-        app:layout_constraintVertical_bias="0.0"
         />
 
 

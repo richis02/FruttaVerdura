@@ -14,7 +14,8 @@
         android:src="@drawable/baseline_arrow_back_ios_new_24"
         app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02"
         app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.07"
-        app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03" />
+        app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
+        android:contentDescription="@string/contentDescription" />
 
     <TextView
         android:layout_width="wrap_content"
