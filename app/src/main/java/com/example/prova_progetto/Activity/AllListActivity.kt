@@ -218,13 +218,7 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         confermaButton.setOnClickListener {
             listNewName = etNewName!!.text.toString()
             if(listNewName != "") {
-                //qui listId e listName sono diversi da null ma il compilatore impone il controllo
-                listNewNameId.let { it1 ->
-                    listNewName.let { it2 ->
-                        fruitVegViewModel.updateListTitle(it1, it2
-                        )
-                    }
-                }
+                fruitVegViewModel.updateListTitle(listNewNameId, listNewName)
                 isShowCustomDialog = false
                 listNewNameId = -1
                 listNewName = ""
