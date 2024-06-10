@@ -80,6 +80,10 @@ class FruitVegViewModel(private val repository: FruitListRepository) : ViewModel
     fun updateQuantity(fruitId: String, listId: Long, quantity: Int) = viewModelScope.launch {
         repository.updateQuantity(fruitId, listId, quantity)
     }
+
+    fun updateListTitle(itemsListId: Long, newTitleList: String) = viewModelScope.launch {
+        repository.updateListTitleById(itemsListId, newTitleList)
+    }
 }
 
 class FruitVegViewModelFactory(private val repository: FruitListRepository) : ViewModelProvider.Factory {

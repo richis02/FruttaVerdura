@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -19,6 +20,7 @@ class ItemsListAdapter(private val listener: OnItemsListClickListener)
 ) {
 
     private val selectedItems: MutableSet<Long> = mutableSetOf()
+    private lateinit var editName: ImageView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         return ItemListViewHolder.create(parent)
@@ -29,6 +31,12 @@ class ItemsListAdapter(private val listener: OnItemsListClickListener)
         holder.itemView.setOnClickListener {
             listener.onItemClick(current.itemsListId, current.listTitle)
         }
+
+        editName = holder.itemView.findViewById(R.id.modify_list_name)
+        editName.setOnClickListener {
+            listener.onUpdateTitleClick(current.itemsListId)
+        }
+
         holder.bind(current, selectedItems.contains(current.itemsListId))
     }
 
@@ -42,7 +50,6 @@ class ItemsListAdapter(private val listener: OnItemsListClickListener)
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val listItemView: TextView = itemView.findViewById(R.id.list_text_view)
         private val layout: LinearLayout = itemView.findViewById(R.id.list_item)
-
 
         fun bind(itemList: ItemsList?, isSelected: Boolean) {
             itemList?.let{

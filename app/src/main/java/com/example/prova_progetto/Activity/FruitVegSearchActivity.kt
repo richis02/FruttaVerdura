@@ -132,6 +132,8 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         dialog.window!!.setGravity(Gravity.BOTTOM)
         dialog.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
 
+        //val ivTitle: ImageView = dialog.findViewById(R.id.title_image)
+
         val tvQuantity: TextView = dialog.findViewById(R.id.tv_quantity)
         tvQuantity.text = quantityCustomDialog.toString()
 
