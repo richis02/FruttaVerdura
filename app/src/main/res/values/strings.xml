@@ -54,5 +54,7 @@
     <string name="vedi_dettagli">dettagli del frutto</string>
     <string name="gestisci_liste">Gestisci le liste</string>
 
+    <string name="nutrition_value">%1$s g</string>
+
     <string name="toast_insert_fruit">Frutta o Verdura inserita correttamente nella lista</string>
 </resources>

@@ -16,7 +16,7 @@
                 app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.02"
                 app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_0.07"
                 app:layout_constraintLeft_toLeftOf="@id/guideline_vertical_0.03"
-                android:contentDescription="@string/contentDescription"/>
+                android:contentDescription="@string/contentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/guideline_horizontal_0.09"
                 android:src="@drawable/baseline_add_24"
-                android:contentDescription="@string/errore" />
+                android:contentDescription="@string/errore"/>
 
         </LinearLayout>
 
@@ -92,7 +92,7 @@
                 android:id="@+id/delete_btn"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/green_background"
+                android:background="@drawable/ripple_effect_green"
                 android:textColor="@color/white"
                 android:text="@string/cancella"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
                 android:id="@+id/annulla_btn"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/green_background"
+                android:background="@drawable/ripple_effect_green"
                 android:textColor="@color/white"
                 android:text="@string/cancel"
                 app:layout_constraintStart_toEndOf="@id/delete_btn"
