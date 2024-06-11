@@ -19,6 +19,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,9 +56,17 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         setContentView(R.layout.activity_all_list)
 
         val back: ImageView = findViewById(R.id.back_arrow)
-        back.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+        back.setOnClickListener {v ->
+            val intent = Intent(v.context, MainActivity::class.java)
+            v.context.startActivity(intent)
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@AllListActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+        })
 
         listTitleTv = findViewById(R.id.fruit_list_name)
         listTitleTv.addTextChangedListener(object : TextWatcher {
@@ -117,7 +126,6 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         val addList: ImageView = findViewById(R.id.add_list)
 
         addList.setOnClickListener { onAddList() }
-
 
         recyclerView = findViewById(R.id.recycler_list)
         adapter = ItemsListAdapter(this)
@@ -205,6 +213,10 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
         val linearLayout: LinearLayout = dialog.findViewById(R.id.modify_quantity)
         linearLayout.visibility = View.GONE
+        val tvMessage: TextView = dialog.findViewById(R.id.message)
+        tvMessage.visibility = View.GONE
+        val tvMessageTitle: TextView = dialog.findViewById(R.id.title_dialog)
+        tvMessageTitle.visibility = View.GONE
 
         val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
         annullaButton.setOnClickListener {
