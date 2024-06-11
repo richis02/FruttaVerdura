@@ -124,6 +124,7 @@ class RealTimeDetectionActivity : ComponentActivity(), ImageClassifierHelper.Cla
     override fun onPause() {
         super.onPause()
         // Rilascia le risorse della camera e dell'analizzatore
+        cardView.visibility = View.GONE
         cameraProvider?.unbindAll()
     }
 

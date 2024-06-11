@@ -2,7 +2,6 @@ package com.example.prova_progetto
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
 import java.io.FileInputStream
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
@@ -10,7 +9,7 @@ import org.tensorflow.lite.Interpreter
 
 
 class ImageClassifierHelper(
-    private var threshold: Float = 0.6f,
+    private var threshold: Float = 0.9f,
     val context: Context,
     val imageClassifierListener: ClassifierListener?,
     val fruitAndVegetableArray: List<String>
@@ -19,19 +18,14 @@ class ImageClassifierHelper(
     private var interpreter: Interpreter? = null
     init {
         interpreter = loadModelFile(context)?.let { Interpreter(it) }
-        for (x in fruitAndVegetableArray){
-            Log.e("QWE", x)
-        }
     }
     fun classifyBitmap(bitmap: Bitmap) {
-        Log.d("aaa", "entra nel modello")
         if (interpreter != null) {
             val output = Array(1) { FloatArray(fruitAndVegetableArray.size) } // Correggi la forma dell'array di output
             val input = preprocessBitmap(bitmap)
             interpreter!!.run(input, output) //sopra c'è il controllo che non sia null
             val maxIndex = output[0].indices.maxByOrNull { output[0][it] } ?: -1
             val resultString = fruitAndVegetableArray[maxIndex]
-            Log.d("eee", fruitAndVegetableArray[maxIndex] + " " + output[0][maxIndex].toString())
             if (output[0][maxIndex] > threshold)
                 imageClassifierListener?.onResults(resultString)
             else
@@ -47,8 +41,7 @@ class ImageClassifierHelper(
     }
 
     companion object {
-        private const val TAG = "ImageClassifierHelper"
-        const val modelName = "model_kaggle_2.tflite"
+        const val modelName = "fruitVegClassifyModel.tflite"
     }
 
     private fun loadModelFile(context: Context): MappedByteBuffer? {

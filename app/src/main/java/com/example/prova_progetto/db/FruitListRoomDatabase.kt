@@ -80,7 +80,6 @@ abstract class FruitListRoomDatabase: RoomDatabase() {
                 var nextLine: Array<String>?
 
                 while (reader.readNext().also { nextLine = it } != null) {
-                    Log.d("ggg",nextLine!![0])
 
                     val entity = FruitVegetable(
                         fruitVegName = nextLine!![0],
