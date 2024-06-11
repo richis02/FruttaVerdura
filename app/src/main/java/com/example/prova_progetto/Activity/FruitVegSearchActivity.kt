@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -132,6 +133,7 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
             val listFruitCrossRef = ListFruitsCrossRef(listId = listId!!, fruitId = idFruitCustomDialog, quantity = quantityCustomDialog)
             // In caso di frutto già presente viene aggiornata la quantità
             fruitVegViewModel.insertFruitListCrossRef(listFruitCrossRef)
+            Toast.makeText(this, R.string.toast_insert_fruit, Toast.LENGTH_SHORT).show()
             isShowCustomDialog = false
             quantityCustomDialog = 1
             dialog.dismiss()
@@ -140,8 +142,6 @@ class FruitVegSearchActivity : ComponentActivity(), OnFruitVegClickListener {
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window!!.setGravity(Gravity.BOTTOM)
         dialog.window!!.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT)
-
-        //val ivTitle: ImageView = dialog.findViewById(R.id.title_image)
 
         val tvQuantity: TextView = dialog.findViewById(R.id.tv_quantity)
         tvQuantity.text = quantityCustomDialog.toString()
