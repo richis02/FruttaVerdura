@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
@@ -50,9 +51,17 @@ class AllFruitVegOfListActivity : ComponentActivity(), OnFruitVegClickListener{
         setContentView(R.layout.activity_fruit_list)
 
         val back: ImageView = findViewById(R.id.back_arrow)
-        back.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+        back.setOnClickListener {v ->
+            val intent = Intent(v.context, AllListActivity::class.java)
+            v.context.startActivity(intent)
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@AllFruitVegOfListActivity, AllListActivity::class.java)
+                startActivity(intent)
+            }
+        })
 
         listId = intent.getLongExtra("list_key", -1L).takeIf { it != -1L }
 

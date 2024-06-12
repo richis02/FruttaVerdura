@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.Window
@@ -19,6 +18,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,9 +55,17 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
         setContentView(R.layout.activity_all_list)
 
         val back: ImageView = findViewById(R.id.back_arrow)
-        back.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+        back.setOnClickListener {v ->
+            val intent = Intent(v.context, MainActivity::class.java)
+            v.context.startActivity(intent)
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@AllListActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+        })
 
         listTitleTv = findViewById(R.id.fruit_list_name)
         listTitleTv.addTextChangedListener(object : TextWatcher {
@@ -67,7 +75,20 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
             override fun afterTextChanged(s: Editable?) {
                 s?.let {
-                    val filtered = it.toString().filter { char -> char.isLetterOrDigit() }
+                    //il nome delle liste può contenere solo spazi, lettere e numeri
+                    //non consentiamo caratteri speciali e a capo
+                    var filtered = it.toString().filter { char -> char.isLetterOrDigit() || char == ' ' }
+
+                    //non permettiamo di avere 2 spazi consecutivi
+                    while (filtered.contains("  ")) {
+                        filtered = filtered.replace("  ", " ")
+                    }
+
+                    //la lunghezza del nome è max 20
+                    if (filtered.length > 20) {
+                        filtered = filtered.substring(0, 20)
+                    }
+
                     if (filtered != it.toString()) {
                         listTitleTv.setText(filtered)
                         listTitleTv.setSelection(filtered.length)
@@ -118,7 +139,6 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
         addList.setOnClickListener { onAddList() }
 
-
         recyclerView = findViewById(R.id.recycler_list)
         adapter = ItemsListAdapter(this)
         recyclerView.adapter = adapter
@@ -150,7 +170,6 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
             if(it.getBoolean(CUSTOM_DIALOG)){
                 listNewName = it.getString(UPDATE_LIST_NAME) ?: ""
-                Log.v("QAZ", "Recupero stato: ${listNewName}")
                 listNewNameId = it.getLong(LIST_KEY)
                 showCustomDialog()
             }
@@ -200,11 +219,43 @@ class AllListActivity: ComponentActivity(), OnItemsListClickListener {
 
         etNewName = dialog.findViewById(R.id.et_new_name_list)
         etNewName!!.visibility = View.VISIBLE
-        Log.v("QAZ", "Set su tv: ${listNewName}")
         etNewName!!.setText(listNewName)
+
+        etNewName!!.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                s?.let {
+                    //il nome delle liste può contenere solo spazi, lettere e numeri
+                    //non consentiamo caratteri speciali e a capo
+                    var filtered = it.toString().filter { char -> char.isLetterOrDigit() || char == ' ' }
+
+                    //non permettiamo di avere 2 spazi consecutivi
+                    while (filtered.contains("  ")) {
+                        filtered = filtered.replace("  ", " ")
+                    }
+
+                    //la lunghezza del nome è max 20
+                    if (filtered.length > 20) {
+                        filtered = filtered.substring(0, 20)
+                    }
+
+                    if (filtered != it.toString()) {
+                        etNewName!!.setText(filtered)
+                        etNewName!!.setSelection(filtered.length)
+                    }
+                }
+            }
+        })
 
         val linearLayout: LinearLayout = dialog.findViewById(R.id.modify_quantity)
         linearLayout.visibility = View.GONE
+        val tvMessage: TextView = dialog.findViewById(R.id.message)
+        tvMessage.visibility = View.GONE
+        val tvMessageTitle: TextView = dialog.findViewById(R.id.title_dialog)
+        tvMessageTitle.visibility = View.GONE
 
         val annullaButton: Button = dialog.findViewById(R.id.btn_annulla)
         annullaButton.setOnClickListener {
