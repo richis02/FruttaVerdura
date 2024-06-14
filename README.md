@@ -10,6 +10,7 @@ Il modello a volte può sbagliare in quanto è allenato su un dataset limitato e
 Per ottenere, quindi, un modello più performante sarebbe necessario migliorare il dataset o modificare i parametri della rete ed eseguirla per un numero maggiore di epoch.
 
 STRUTTURA DELL'APPLICAZIONE
+
 L’applicazione ha tre funzioni principali.
 a.    La prima funzione permette di visualizzare e gestire liste di frutta e verdura. 
 b.    La seconda ha lo scopo di visualizzare i principali valori nutrizionali dei prodotti.
