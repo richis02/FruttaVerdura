@@ -15,7 +15,6 @@ L’applicazione ha tre funzioni principali.
 a.    La prima funzione permette di visualizzare e gestire liste di frutta e verdura. 
 b.    La seconda ha lo scopo di visualizzare i principali valori nutrizionali dei prodotti.
 c.    Infine c’è la possibilità di riconoscere un frutto tramite la fotocamera per vederne i valori nutrizionali o per aggiungerlo alla lista corrente.
-![image](https://github.com/richis02/FruttaVerdura/assets/90187218/58a1726b-de72-4e16-af3b-ab005ebc7035)
 
 Per quanto riguarda la funzione a.
 
