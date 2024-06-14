@@ -1,5 +1,5 @@
 Per comprendere al meglio Tensor Flow abbiamo scelto di sviluppare un’app che sfrutta la classificazione di immagini. In particolare abbiamo allenato un modello per il riconoscimento di alcuni tipi di frutta e verdura.
-L’applicazione funziona solo se si garantiscono i permessi alla fotocamera.
+L’applicazione funziona solo se si garantiscono i permessi alla fotocamera. E' stata testata principalmente con Android 12, ma dovrebbe funzionare comunque anche con versioni più recenti.
 Il modello è creato da noi e per svilupparlo abbiamo seguito questi passaggi:
 1.    Per prima cosa abbiamo individuato un dataset di immagini di frutta da cui abbiamo scaricato le immagini grazie all’API di Kaggle.
 2.    Il passo successivo è stato quello di creare uno script in python per processare i dati e allenare il modello.
