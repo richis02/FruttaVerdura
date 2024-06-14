@@ -1,7 +1,7 @@
 Per comprendere al meglio Tensor Flow abbiamo scelto di sviluppare un’app che sfrutta la classificazione di immagini. In particolare abbiamo allenato un modello per il riconoscimento di alcuni tipi di frutta e verdura.
 L’applicazione funziona solo se si garantiscono i permessi alla fotocamera.
 Il modello è creato da noi e per svilupparlo abbiamo seguito questi passaggi:
-1.    Per prima cosa abbiamo individuato un dataset di immagini di frutta, [18] da cui abbiamo scaricato le immagini grazie all’API di Kaggle.
+1.    Per prima cosa abbiamo individuato un dataset di immagini di frutta da cui abbiamo scaricato le immagini grazie all’API di Kaggle.
 2.    Il passo successivo è stato quello di creare uno script in python per processare i dati e allenare il modello.
         Abbiamo implementato il modello con la libreria Keras di Tensor Flow, utilizzando il transfer learning per adattare il modello MobileNetV2 al nostro caso.
 3.    Abbiamo eseguito lo script su Google Colab sfruttando la GPU messa a disposizione dal runtime.
@@ -23,7 +23,7 @@ Cliccando su una lista si possono vedere i prodotti al suo interno.
 	
 In questa schermata è possibile aggiungere elementi alla lista. Per farlo bisogna cliccare sul bottone “più” e successivamente sul simbolo “cerca”.
 Si apre una schermata in cui è possibile scegliere un elemento e la rispettiva quantità da aggiungere.
-Nel caso si scelga di aggiungere di aggiungere un frutto già presente la quantità viene sommata a quella che già c’era.
+Nel caso si scelga di aggiungere un frutto già presente la quantità viene sommata a quella che già c’era.
 Tramite “Toast” viene segnalato se il frutto è stato aggiunto correttamente.
 E’ possibile aggiungere un frutto alla lista anche cliccando su “fotocamera”.
 Nella sezione fotocamera (verrà analizzata in seguito) che si aprirà basterà inquadrare un frutto e dopo il riconoscimento da parte del modello cliccare su “aggiungi”.
@@ -52,7 +52,3 @@ Questo elemento viene preso in considerazione solo se supera il valore di thresh
 In caso affermativo viene mostrato il risultato e un bottone per compiere l’azione descritta qualche riga sopra.
 
 Le icone dell’app di Fruitify sono state prese da Flat Icon, Freepik, Pexels.
-
-
-
-
