@@ -43,6 +43,7 @@ Una volta individuato il prodotto che si sta cercando è possibile cliccarlo per
 
 
 Per quanto riguarda la funzione c.
+
 Si accede a questa schermata cliccando su “foto” dalla home page o, come descritto in precedenza, nella fase di aggiunta di un frutto ad una lista.
 Nel caso ci si acceda dalla home, dopo aver individuato un frutto viene richiamata l’activity corrispondente al frutto individuato.
 Si tratta della parte principale della nostra app in quanto implementa il modello da noi creato con tensor flow. 
